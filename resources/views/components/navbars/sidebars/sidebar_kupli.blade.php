@@ -467,7 +467,8 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
-            <a class="btn bg-gradient-primary w-100" href="{{view('livewire.auth.logout')}}" target="_blank">
+            <a class="btn bg-gradient-primary w-100"
+                href="https://www.creative-tim.com/product/material-dashboard-laravel-livewire" target="_blank">
                 <span class="m-2"><i class="fas fa-door-open"></i></span>
                 Log Keluar
             </a>
