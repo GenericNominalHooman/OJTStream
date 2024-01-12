@@ -7,7 +7,12 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
             <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-2 font-weight-bold text-white">OJTStream</span>
+            <span class="ms-2 font-weight-bold text-white">{{auth()->user()->name}}</span>
+            <span class="ml-2 font-weight-light text-white">|
+                @foreach (auth()->user()->getRoles() as $role)
+                    {{$role}}<br>
+                @endforeach
+            </span>
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -56,7 +61,7 @@
                 </li>
             </section>
 
-            {{-- KUPLI SIDEBAR BEGIN --}}
+            {{-- PENYELARAS PROGRAM SIDEBAR BEGIN --}}
             <section>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
@@ -148,51 +153,28 @@
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
-                        Penyelaras Program</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-list"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Senarai Penyelaras Program</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Lantik Pensyarah Penilai</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan OJT
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan Janji Temu
                     </h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
                         href="{{ route('tables') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-folder"></i>
+                            <i class="fas fa-calendar"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Pengurusan Dokumen OJT</span>
+                        <span class="nav-link-text ms-1">Senarai Janji Temu</span>
                     </a>
                 </li>
             </section>
-            {{-- KUPLI SIDEBAR END --}}
+            {{-- PENYELARAS PROGRAM SIDEBAR END --}}
 
         </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
-            <a class="btn bg-gradient-primary w-100"
-                href="https://www.creative-tim.com/product/material-dashboard-laravel-livewire" target="_blank">
+            <a href="javascript:;" class="nav-link text-body font-weight-bold px-0 btn bg-gradient-primary w-100 text-white">
                 <span class="m-2"><i class="fas fa-door-open"></i></span>
-                Log Keluar
+                <livewire:auth.logout/>
             </a>
         </div>
     </div>
