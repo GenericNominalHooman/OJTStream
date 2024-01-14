@@ -9,9 +9,11 @@
             <img src="{{ asset('assets') }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-2 font-weight-bold text-white">{{auth()->user()->name}}</span>
             <span class="ml-2 font-weight-light text-white">|
-                @foreach (auth()->user()->getRoles() as $role)
-                    {{$role}}<br>
-                @endforeach
+                <ul class="m-0">
+                    @foreach (auth()->user()->getRoles() as $role)
+                    <li>{{$role}}</li>
+                    @endforeach
+                </ul>
             </span>
         </a>
     </div>
@@ -195,15 +197,6 @@
             {{-- PENYELARAS PROGRAM SIDEBAR BEGIN --}}
             @if (auth()->user()->isPenyelarasProgram())
             <section>
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'user-management' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('user-management') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">User Management</span>
-                    </a>
-                </li> --}}
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
                         Pelajar
@@ -306,24 +299,6 @@
                         <span class="nav-link-text ms-1">Senarai Janji Temu</span>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'virtual-reality' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('virtual-reality') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">view_in_ar</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Virtual Reality</span>
-                    </a>
-                </li> --}}
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'rtl' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('rtl') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-                        </div>
-                        <span class="nav-link-text ms-1">RTL</span>
-                    </a>
-                </li> --}}
             </section>
             @endif
             {{-- PENYELARAS PROGRAM SIDEBAR END --}}
@@ -331,15 +306,6 @@
             {{-- PENSYARAH PENILAI OJT SIDEBAR BEGIN --}}
             @if (auth()->user()->isPensyarahPenilaiOJT())
             <section>
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'user-management' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('user-management') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">User Management</span>
-                    </a>
-                </li> --}}
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
                         Pelajar
@@ -376,24 +342,6 @@
                         <span class="nav-link-text ms-1">Senarai Janji Temu</span>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'virtual-reality' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('virtual-reality') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">view_in_ar</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Virtual Reality</span>
-                    </a>
-                </li> --}}
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'rtl' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('rtl') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-                        </div>
-                        <span class="nav-link-text ms-1">RTL</span>
-                    </a>
-                </li> --}}
             </section>
             @endif
             {{-- PENSYARAH PENILAI OJT SIDEBAR END --}}
@@ -401,15 +349,6 @@
             {{-- PENSYARAH PENILAI SIDEBAR BEGIN --}}
             @if (auth()->user()->isPensyarahPenilai())
             <section>
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'user-management' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('user-management') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">User Management</span>
-                    </a>
-                </li> --}}
                 {{-- Prevent displaying pengurusan pelajar twice if user is also a PPO --}}
                 @if(!auth()->user()->isPensyarahPenilaiOJT())
                     <li class="nav-item mt-3">
