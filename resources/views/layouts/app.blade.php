@@ -35,6 +35,39 @@
         <x-plugins></x-plugins>
     </div>
     @else
+    
+    {{-- SIDEBAR BEGIN --}}
+        {{-- PELAJAR SIDEBAR BEGIN --}}
+            @if (in_array("Pelajar", auth()->user()->getRoles()))
+                <x-navbars.sidebars.sidebar_pelajar></x-navbars.sidebars.sidebar_pelajar>
+            @endif
+        {{-- PELAJAR SIDEBAR ENDS --}}
+        
+        {{-- PENSYARAH PENILAI OJT SIDEBAR BEGIN --}}
+            @if (in_array("Pensyarah Penilai OJT", auth()->user()->getRoles()))
+                <x-navbars.sidebars.sidebar_pensyarah_penilai_ojt></x-navbars.sidebars.sidebar_pensyarah_penilai_ojt>
+            @endif
+        {{-- PENSYARAH PENILAI OJT SIDEBAR ENDS --}}
+        
+        {{-- PENSYARAH PENILAI SIDEBAR BEGIN --}}
+            @if (in_array("Pensyarah Penilai", auth()->user()->getRoles()))
+                <x-navbars.sidebars.sidebar_pensyarah_penilai></x-navbars.sidebars.sidebar_pensyarah_penilai>
+            @endif
+        {{-- PENSYARAH PENILAI SIDEBAR ENDS --}}
+        
+        {{-- PENYELARAS PROGRAM SIDEBAR BEGIN --}}
+            @if (in_array("Penyelaras Program", auth()->user()->getRoles()))
+                <x-navbars.sidebars.sidebar_penyelaras_program></x-navbars.sidebars.sidebar_penyelaras_program>
+            @endif
+        {{-- PENYELARAS PROGRAM SIDEBAR ENDS --}}
+
+        {{-- KUPLI SIDEBAR BEGIN --}}
+            @if (in_array("Kupli", auth()->user()->getRoles()))
+                <x-navbars.sidebars.sidebar_kupli></x-navbars.sidebars.sidebar_kupli>
+            @endif
+        {{-- KUPLI SIDEBAR ENDS --}}
+    {{-- SIDEBAR ENDS --}}
+
     <x-navbars.sidebars.sidebar></x-navbars.sidebars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <x-navbars.navs.auth></x-navbars.navs.auth>
