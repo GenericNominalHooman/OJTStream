@@ -178,7 +178,7 @@ The `App/Http/Livewire/Auth/ResetPassword.php` helps the user reset the password
 ### User Profile
 The profile can be accessed by a logged in user by clicking "**User Profile**" from the sidebar or adding **/user-profile** in the url. The user can add information like phone number, location, description or change the name and email.
 
-The `App/Http/Livewire/ExampleLaravel/UserProfile.php` handles the user's profile information.
+The `App/Http/Livewire/OJTStream/UserProfile.php` handles the user's profile information.
 
 ```
     public function update()
@@ -224,7 +224,7 @@ You can access the dashboard either by using the "**Dashboard**" link in the lef
 |   |   |   |     Register.php
 |   |   |   |     ResetPassword.php
 |   |   |   | 
-|   |   |   +---ExampleLaravel 
+|   |   |   +---OJTStream 
 |   |   |   |     UserManagement.php
 |   |   |   |     UserProfile.php
 |   |   |   |
