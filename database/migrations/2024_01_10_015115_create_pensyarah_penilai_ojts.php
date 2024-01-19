@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pensyarah__penilais', function (Blueprint $table) {
+        Schema::create('pensyarah_penilai_ojts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pensyarah__penilais');
+        Schema::dropIfExists('pensyarah_penilai_ojts');
     }
 };

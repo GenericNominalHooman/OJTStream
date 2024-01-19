@@ -8,6 +8,6 @@ class UserManagement extends Component
 {
     public function render()
     {
-        return view('livewire.ojtstream.user-management');
+        return view('livewire.o-j-t-stream.user-management');
     }
 }

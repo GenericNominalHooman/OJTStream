@@ -9,5 +9,5 @@ class Pensyarah_Penilai_OJT extends Model
 {
     use HasFactory;
 
-    protected $table = 'pensyarah_penilai_ojt';
+    protected $table = 'pensyarah_penilai_ojts';
 }
