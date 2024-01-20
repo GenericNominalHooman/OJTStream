@@ -51,6 +51,9 @@ class UserSeeder extends Seeder
             "name" => "Pelajar 1",
             "email" => "pelajar_1@email.com",
             "password" => ("password"),
+            "location" => "Taman Chepor Impian, Laluan 15",
+            "phone" => "01127135691",
+            "about" => "A 2DVMKPD student developing OJTStream as an FYP",
         ]);
     }
 }

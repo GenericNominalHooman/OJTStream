@@ -24,7 +24,6 @@ return new class extends Migration
             
             $table->string('program')->nullable(false);
             $table->date('cohort')->nullable(false);
-            $table->string('address')->nullable(false);
 
             // Chronic illness
             $table->boolean('heart_disease')->default(false);
@@ -61,7 +60,6 @@ return new class extends Migration
             
             $table->dropColumn('program');
             $table->dropColumn('cohort');
-            $table->dropColumn('address');
 
             // Chronic illness
             $table->dropColumn('heart_disease');

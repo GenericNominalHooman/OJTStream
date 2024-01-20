@@ -112,10 +112,9 @@
                             </div>
 
                             <div class="mb-3 col-md-6">
-
                                 <label class="form-label">Nombor Telefon</label>
                                 <input wire:model.lazy="user.phone" type="text" class="form-control border border-2 p-2">
-                                @error('user.phone')
+                                @error('user.email_verified_at')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
@@ -123,8 +122,8 @@
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Nombor Kad Pengenalan</label>
-                                <input wire:model.lazy="user.location" type="text" class="form-control border border-2 p-2">
-                                @error('user.location')
+                                <input wire:model.lazy="pelajar.nric_number" type="text" class="form-control border border-2 p-2">
+                                @error('pelajar.nric_number')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>

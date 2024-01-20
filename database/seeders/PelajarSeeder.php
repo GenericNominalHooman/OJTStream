@@ -16,7 +16,6 @@ class PelajarSeeder extends Seeder
         Pelajar::factory()->create([
             "user_id" => 105,
             "matrix_number" => "AKV0222KA009",
-            "contact" => "01127135691",
             "course" =>	"KPD",
             "block" =>	"A",
             "dorm" => "201",	
@@ -31,7 +30,6 @@ class PelajarSeeder extends Seeder
             "facebook_url" => "",
             "github_url" => "",
             "program" => "KPD",
-            "address" => "Taman Chepor Impian\, Laluan 15",
             "heart_disease" => false,
             "asthma" => false,
             "diabetes" => false,

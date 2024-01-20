@@ -3,12 +3,13 @@
 namespace App\Http\Livewire\OJTStream;
 
 use App\Models\User;
+use App\Models\Pelajar;
 use Livewire\Component;
 
 class UserProfile extends Component
 {
-
     public User $user;
+    public Pelajar $pelajar;
     public $roles = [];
     public $activeTab = 'biodata'; // Variable to track which tab is opened
 
@@ -27,6 +28,14 @@ class UserProfile extends Component
     {
         $this->user = auth()->user();
         $this->roles = $this->user->getRoles();
+
+        // PELAJAR SECTION BEGIN
+        if($this->user->isPelajar()){
+            $this->pelajar = $this->user->Pelajar;
+            // dd($this->pelajar);
+            // dd($this->user);
+        }
+        // PELAJAR SECTION ENDS
     }
 
     public function updated($propertyName)
