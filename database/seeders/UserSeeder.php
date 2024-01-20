@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
             "password" => ("password"),
             "location" => "Taman Chepor Impian, Laluan 15",
             "phone" => "01127135691",
-            "about" => "A 2DVMKPD student developing OJTStream as an FYP",
+            // "about" => "A 2DVMKPD student developing OJTStream as an FYP",
         ]);
     }
 }

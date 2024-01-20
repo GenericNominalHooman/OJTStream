@@ -21,7 +21,6 @@ class PelajarSeeder extends Seeder
             "dorm" => "201",	
             "study_type" =>	"DVM",
             "semester" =>	4,
-            "gender" 	=> "Male",
             "status" =>	"Belum_OJT",
             "nric_number" => "040916080159",
             "guardian" => "NUR ZHAFIRAH AQILAH BINTI MUHAMMAD",

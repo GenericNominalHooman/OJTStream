@@ -25,7 +25,6 @@ return new class extends Migration
             $table->enum('dorm', ['201', '202', '203', '204','301', '302', '303', '304']);
             $table->enum('study_type', ['DVM', 'SVM'])->default('SVM')->nullable(false);
             $table->integer('semester')->nullable(false);
-            $table->enum('gender', ['Male', 'Female']);
             
             $table->enum('status', ['Belum_OJT', 'Sedang_OJT', 'Selesai_OJT'])->default('Belum_OJT');
             $table->date('date_started')->nullable();

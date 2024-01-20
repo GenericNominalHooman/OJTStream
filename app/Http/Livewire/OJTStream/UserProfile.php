@@ -15,13 +15,20 @@ class UserProfile extends Component
 
     protected function rules()
     {
+        // PELAJAR SECTION BEGIN
         return [
             'user.name' => 'required',
             'user.email' => 'required|email|unique:users,email,' . $this->user->id,
             'user.phone' => 'required|max:10',
             'user.about' => 'required:max:150',
-            'user.location' => 'required'
+            'user.location' => 'required',
+            'pelajar.nric_number' => 'required',
+            'pelajar.guardian' => 'required',
+            'pelajar.guardian_telephone_number' => 'required',
+            'pelajar.study_type'=> 'required',
+            'pelajar.program'=> 'required',
         ];
+        // PELAJAR SECTION ENDS
     }
 
     public function mount()

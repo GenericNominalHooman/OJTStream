@@ -131,8 +131,8 @@
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Nama Penjaga</label>
-                                <input wire:model.lazy="user.location" type="text" class="form-control border border-2 p-2">
-                                @error('user.location')
+                                <input wire:model.lazy="pelajar.guardian" type="text" class="form-control border border-2 p-2">
+                                @error('pelajar.guardian')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
@@ -140,8 +140,8 @@
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Nombot Telefon Penjaga</label>
-                                <input wire:model.lazy="user.location" type="text" class="form-control border border-2 p-2">
-                                @error('user.location')
+                                <input wire:model.lazy="pelajar.guardian_telephone_number" type="text" class="form-control border border-2 p-2">
+                                @error('pelajar.guardian_telephone_number')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
@@ -158,8 +158,8 @@
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Program</label>
-                                <input wire:model.lazy="user.location" type="text" class="form-control border border-2 p-2">
-                                @error('user.location')
+                                <input wire:model.lazy="pelajar.program" type="text" class="form-control border border-2 p-2">
+                                @error('pelajar.program')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
