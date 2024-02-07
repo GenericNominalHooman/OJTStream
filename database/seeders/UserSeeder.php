@@ -45,14 +45,27 @@ class UserSeeder extends Seeder
             "password" => ("password")
         ]);
 
-        // Pelajar
+        // Pelajar AKV0222KA009
         User::factory()->create([
             "id" => 105,
             "name" => "Pelajar 1",
             "email" => "pelajar_1@email.com",
             "password" => ("password"),
             "location" => "Taman Chepor Impian, Laluan 15",
-            "phone" => "01127135691",
+            "phone" => "1127135691",
+            "gender" => "male",
+            // "about" => "A 2DVMKPD student developing OJTStream as an FYP",
+        ]);
+
+        // Pelajar AKV0222KA010
+        User::factory()->create([
+            "id" => 106,
+            "name" => "Pelajar 2",
+            "email" => "pelajar_2@email.com",
+            "password" => ("password"),
+            "location" => "Taman Chepor Impian, Laluan 15",
+            "phone" => "1127135691",
+            "gender" => "male",
             // "about" => "A 2DVMKPD student developing OJTStream as an FYP",
         ]);
     }

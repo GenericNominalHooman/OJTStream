@@ -35,7 +35,33 @@ class PelajarSeeder extends Seeder
             "osteoporosis" => false,
 
             // Foreign keys
-            "company_id" => 1,
+            "pensyarah_penilai_id" => 1,
+            "pensyarah_penilai_ojt_id" => 1,
+            "penyelaras_program_id" => 1,
+        ]);
+
+        Pelajar::factory()->create([
+            "user_id" => 106,
+            "matrix_number" => "AKV0222KA010",
+            "course" =>	"KPD",
+            "block" =>	"A",
+            "dorm" => "201",	
+            "study_type" =>	"DVM",
+            "semester" =>	4,
+            "status" =>	"Belum_OJT",
+            "nric_number" => "040916080159",
+            "guardian" => "NUR ZHAFIRAH AQILAH BINTI MUHAMMAD",
+            "guardian_telephone_number" => "0165190476",
+            "linkedin_url" => "",
+            "facebook_url" => "",
+            "github_url" => "",
+            "program" => "KPD",
+            "heart_disease" => false,
+            "asthma" => false,
+            "diabetes" => false,
+            "osteoporosis" => false,
+
+            // Foreign keys
             "pensyarah_penilai_id" => 1,
             "pensyarah_penilai_ojt_id" => 1,
             "penyelaras_program_id" => 1,

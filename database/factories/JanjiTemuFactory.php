@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Company>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JanjiTemu>
  */
-class CompanyFactory extends Factory
+class JanjiTemuFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,7 @@ class CompanyFactory extends Factory
         return [
             "created_at" => now(),
             "updated_at" => now(),
-            "comp_email" => $this->faker->email(),
+            "visit_at" => now(),
         ];
     }
 }

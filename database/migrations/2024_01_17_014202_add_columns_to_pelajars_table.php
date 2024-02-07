@@ -30,6 +30,7 @@ return new class extends Migration
             $table->boolean('asthma')->default(false);
             $table->boolean('diabetes')->default(false);
             $table->boolean('osteoporosis')->default(false);
+            $table->boolean('slipped_disc')->default(false);
 
             // Pensyarah penilai
             $table->foreignId('pensyarah_penilai_id')->constrained()->onDelete('cascade')->nullable(true);
@@ -66,6 +67,7 @@ return new class extends Migration
             $table->dropColumn('asthma');
             $table->dropColumn('diabetes');
             $table->dropColumn('osteoporosis');
+            $table->dropColumn('slipped_disc');
 
             // Pensyarah penilai
             $table->dropForeign('pelajars_pensyarah_penilai_id_foreign');

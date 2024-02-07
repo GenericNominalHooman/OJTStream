@@ -17,9 +17,6 @@ return new class extends Migration
                      ->references('id')->on('users')
                      ->onDelete('cascade'); // set cascade deletion
             $table->string('matrix_number', 12)->nullable(false)->unique();
-            $table->foreignId('company_id')
-                    ->nullable()
-                    ->constrained('companies');
             $table->enum('course', ['KPD', 'KSK', 'MTK', 'BPP', 'HBP', 'BAK', 'WTP']);
             $table->enum('block', ['A', 'B', 'C', 'D', 'E', 'F', 'G']);
             $table->enum('dorm', ['201', '202', '203', '204','301', '302', '303', '304']);

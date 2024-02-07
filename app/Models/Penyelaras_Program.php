@@ -10,4 +10,8 @@ class Penyelaras_Program extends Model
     use HasFactory;
 
     protected $table = "penyelaras_programs";
+
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
 }
