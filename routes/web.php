@@ -10,7 +10,6 @@ use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\OJTStream\UserManagement;
 use App\Http\Livewire\OJTStream\UserProfile;
 use App\Http\Livewire\Notifications;
-use App\Http\Livewire\PengurusanDokumen;
 use App\Http\Livewire\Profile;
 use App\Http\Livewire\RTL;
 use App\Http\Livewire\StaticSignIn;
@@ -57,7 +56,4 @@ Route::get('virtual-reality', VirtualReality::class)->name('virtual-reality');
 Route::get('static-sign-in', StaticSignIn::class)->name('static-sign-in');
 Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
 Route::get('rtl', RTL::class)->name('rtl');
-
-// PELAJAR SPECIFIC PAGE
-Route::get("pengurusan-dokumen", PengurusanDokumen::class)->name("pelajar pengurusan dokumen");
 });
