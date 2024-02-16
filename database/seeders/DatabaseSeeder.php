@@ -10,6 +10,7 @@ use Database\Seeders\JanjiTemusSeeder;
 use Database\Seeders\PelajarsCompanySeeder;
 use Database\Seeders\JanjiTemuPelajarSeeder;
 use Database\Seeders\PensyarahPenilaiSeeder;
+use Database\Seeders\DokumenOJTPelajarSeeder;
 use Database\Seeders\PelajarJanjiTemusSeeder;
 use Database\Seeders\PenyelarasProgramSeeder;
 use Database\Seeders\PensyarahPenilaiOJTSeeder;
@@ -42,6 +43,7 @@ class DatabaseSeeder extends Seeder
             PelajarJanjiTemusSeeder::class,
             PelajarsCompanySeeder::class,
             DokumenOJTSeeder::class,
+            DokumenOJTPelajarSeeder::class,
         ]);
     }
 }

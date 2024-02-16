@@ -53,4 +53,8 @@ class Pelajar extends Model
     public function Pelajars_Company(){
         return $this->hasOne(PelajarsCompany::class, "pelajar_id", "user_id");
     }
+
+    public function Dokumen_OJT_Pelajar(){
+        return $this->hasMany(DokumenOJTPelajar::class, "pelajar_id", "user_id");
+    }
 }

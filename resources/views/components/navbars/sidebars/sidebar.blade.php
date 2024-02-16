@@ -386,8 +386,8 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan OJT</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'pelajar pengurusan dokumen' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('pelajar pengurusan dokumen') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-folder"></i>
                         </div>

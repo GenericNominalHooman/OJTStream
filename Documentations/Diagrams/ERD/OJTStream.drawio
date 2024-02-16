@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-02-07T04:31:43.884Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.0.2 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="4_t5g6HaUQfBn30GsjY8" version="23.0.2" type="device">
+<mxfile host="Electron" modified="2024-02-16T01:34:13.556Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.0.2 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="2WP2qsrJyDbHHy9NPz4E" version="23.0.2" type="device">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="1311" dy="1892" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+    <mxGraphModel dx="1061" dy="1741" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -884,13 +884,13 @@
         <mxCell id="j3ZGtN7tVCaf0foLIAE4-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=ERmandOne;endFill=0;startArrow=ERmandOne;startFill=0;" parent="1" source="HYn5PhLY5ar_pRgKZnjV-42" target="j3ZGtN7tVCaf0foLIAE4-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lJj1WskNyrHOyFp57u2X-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="j3ZGtN7tVCaf0foLIAE4-38" target="HYn5PhLY5ar_pRgKZnjV-48">
+        <mxCell id="lJj1WskNyrHOyFp57u2X-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="j3ZGtN7tVCaf0foLIAE4-38" target="HYn5PhLY5ar_pRgKZnjV-48" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="j3ZGtN7tVCaf0foLIAE4-38" value="dokumen_ojts is the table for the template documents to be completed - Editable by KUPLI" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;" parent="1" vertex="1">
           <mxGeometry x="890" y="290" width="140" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="j3ZGtN7tVCaf0foLIAE4-39" value="dokumen_ojt_pelajars&amp;nbsp;is pelajar&#39;s uploads based on dokumen_pelajars table - Editable by pelajar" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;" parent="1" vertex="1">
+        <mxCell id="j3ZGtN7tVCaf0foLIAE4-39" value="dokumen_ojt_pelajars&amp;nbsp;is document assign date&amp;nbsp;and pelajar&#39;s uploads based on dokumen_pelajars table - Editable by pelajar" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;" parent="1" vertex="1">
           <mxGeometry x="1235" y="590" width="160" height="160" as="geometry" />
         </mxCell>
       </root>
