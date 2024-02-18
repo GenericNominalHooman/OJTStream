@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\JanjiTemu;
+use App\Models\SkopKerja;
 use app\Models\Pensyarah_Penilai_OJT;
 use Faker\Extension\CompanyExtension;
 use Illuminate\Database\Eloquent\Model;
@@ -52,5 +53,9 @@ class Pelajar extends Model
 
     public function Pelajars_Company(){
         return $this->hasOne(PelajarsCompany::class, "pelajar_id", "user_id");
+    }
+
+    public function Skop_Kerja(){
+        return $this->hasOne(SkopKerja::class, "id", "skop_kerja_id");
     }
 }

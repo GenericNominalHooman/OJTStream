@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CompanySeeder;
 use Database\Seeders\PelajarSeeder;
+use Database\Seeders\SkopKerjaSeeder;
 use Database\Seeders\JanjiTemusSeeder;
 use Database\Seeders\PelajarsCompanySeeder;
 use Database\Seeders\JanjiTemuPelajarSeeder;
@@ -36,12 +37,12 @@ class DatabaseSeeder extends Seeder
             PensyarahPenilaiSeeder::class,
             PenyelarasProgramSeeder::class,
             KupliSeeder::class,
+            SkopKerjaSeeder::class,
             PelajarSeeder::class,
             JanjiTemusSeeder::class,
             JanjiTemuPelajarSeeder::class,
             PelajarJanjiTemusSeeder::class,
             PelajarsCompanySeeder::class,
-            DokumenOJTSeeder::class,
         ]);
     }
 }

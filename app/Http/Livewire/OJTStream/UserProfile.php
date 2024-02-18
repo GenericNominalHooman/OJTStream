@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\OJTStream;
 
+use App\Models\SkopKerja;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\JanjiTemu;
@@ -10,10 +11,15 @@ use App\Models\PelajarsCompany;
 use Livewire\Component;
 use App\Models\Pensyarah_Penilai;
 use App\Models\Pensyarah_Penilai_OJT;
+use Livewire\WithFileUploads;
 
 class UserProfile extends Component
 {
-    public User $user;
+    public User $user;    
+    public $roles = [];
+    public $activeTab = 'biodata'; // Variable to track which tab is opened
+    
+    // PELAJAR PROEPRTIES BEGIN
     public Pelajar $pelajar;
     public User $pensyarah_penilai_ojt;
     public User $pensyarah_penilai;
@@ -22,8 +28,8 @@ class UserProfile extends Component
     public JanjiTemu $janji_temu_2;
     public PelajarsCompany $pelajars_company;
     public Company $company;
-    public $roles = [];
-    public $activeTab = 'biodata'; // Variable to track which tab is opened
+    public SkopKerja $skop_kerja;
+    // PELAJAR PROEPRTIES ENDS
 
     protected function rules()
     {
@@ -52,7 +58,7 @@ class UserProfile extends Component
                 'pelajar.matrix_number'=> 'required',
                 'pelajar.semester'=> 'required',
                 'pelajar.cohort'=> 'required',
-                'file' => 'file|max:1024', // Adjust the max size as needed           
+                'file' => 'file|mime:doc,docx,pdf|max:1024',
 
                 // PENSYARAH PENILAI OJT VALUES
                 'pensyarah_penilai_ojt.name' => 'required',
@@ -111,9 +117,9 @@ class UserProfile extends Component
             $this->pensyarah_penilai_ojt = $this->pelajar->Pensyarah_Penilai_OJT->User;
             $this->pensyarah_penilai = $this->pelajar->Pensyarah_Penilai->User;
             $this->pelajars_company = $this->pelajar->Pelajars_Company;
-            // dd($this->pelajars_company);
             $this->company = $this->pelajars_company->Company;
             $this->penyelaras_program_user = $this->pelajar->Penyelaras_Program->User;
+            $this->skop_kerja = $this->pelajar->Skop_Kerja;
             if($this->pelajar->Janji_Temu_1 != null){
                 $this->janji_temu_1 = $this->pelajar->Janji_Temu_1;
             }
