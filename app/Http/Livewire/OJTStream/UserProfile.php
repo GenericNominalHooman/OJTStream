@@ -15,6 +15,7 @@ use Livewire\WithFileUploads;
 
 class UserProfile extends Component
 {
+    use WithFileUploads;
     public User $user;    
     public $roles = [];
     public $activeTab = 'biodata'; // Variable to track which tab is opened
@@ -58,7 +59,6 @@ class UserProfile extends Component
                 'pelajar.matrix_number'=> 'required',
                 'pelajar.semester'=> 'required',
                 'pelajar.cohort'=> 'required',
-                'file' => 'file|mime:doc,docx,pdf|max:1024',
 
                 // PENSYARAH PENILAI OJT VALUES
                 'pensyarah_penilai_ojt.name' => 'required',
@@ -97,6 +97,7 @@ class UserProfile extends Component
                 'company.ojt_supervisor' => 'required|max:64',
                 'company.students_deployed_count' => 'required|integer',
                 'company.comp_email' => 'required|integer',
+                'skop_kerja.document_path' => 'file|mimes:pdf,doc,docx', // READD MAX SIZE IN PRODUCTION
                 
                 // PELAJAR-COMPANY VALUES
                 'pelajars_company.role' => 'required',
@@ -142,7 +143,7 @@ class UserProfile extends Component
     public function update()
     {
         $this->validate();
-        
+
         $profileUpdated = false;
         for($i=0; $i<sizeof($this->roles); $i++){
             if(in_array("Pelajar", $this->user->getRoles())){
@@ -151,9 +152,10 @@ class UserProfile extends Component
                 $this->user->save();
                 $this->pelajar->save();
                 $profileUpdated = true;
-                if ($this->file) {
-                    // Process the file upload
-                    $filename = $this->file->store('organisasi_latihan/job_description', 'public');
+                if ($this->skop_kerja_input) {
+                    // Process the skop_kerja_input upload
+                    $this->skop_kerja->document_path = $this->file->store('organisasi_latihan/job_description', 'local');
+                    $this->skop_kerja->document_name = "KVOJT01";
                     // You can now use $filename to save the path to the file in the database or perform other actions
                 }            
                 // PELAJAR SECTION ENDS

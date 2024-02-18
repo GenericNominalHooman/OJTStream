@@ -637,9 +637,9 @@
 
                         <div class="mb-3 col-md-12">
 
-                            <label for="fileInput">Skop Kerja</label>
-                            <input wire:model="file" type="file" class="form-control" id="fileInput">
-                            @error('file')
+                            <label for="skop_kerja.document_path">Skop Kerja</label>
+                            <input wire:model="skop_kerja.document_path" type="file" class="form-control" id="skop_kerja.document_path">
+                            @error('skop_kerja.document_path')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>

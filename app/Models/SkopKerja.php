@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SkopKerja extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "document_path",
+        "document_name",
+    ];
 }
