@@ -14,6 +14,7 @@ class PensyarahPenilaiSeeder extends Seeder
     public function run(): void
     {
         Pensyarah_Penilai::factory()->create([
+            "id" => 1,
             "user_id" => 104,
         ]);
     }

@@ -14,6 +14,7 @@ class PensyarahPenilaiOJTSeeder extends Seeder
     public function run(): void
     {
        Pensyarah_Penilai_OJT::factory()->create([
+            "id" => 1,
             "user_id" => 103,
        ]);
     }

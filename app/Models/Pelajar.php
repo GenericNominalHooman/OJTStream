@@ -58,4 +58,8 @@ class Pelajar extends Model
     public function Skop_Kerja(){
         return $this->hasOne(SkopKerja::class, "id", "skop_kerja_id");
     }
+
+    public function getPelajarDirectory(){
+        return "Pelajar_".$this->matrix_number;
+    }
 }
