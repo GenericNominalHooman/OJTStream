@@ -60,7 +60,7 @@ Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
 Route::get('rtl', RTL::class)->name('rtl');
 
 // PELAJAR ROUTES BEGIN
-// Route::get('lawatan-ppo', LawatanPPO::class)->name('lawatan ppo');
+Route::get('lawatan-ppo', LawatanPPO::class)->name('lawatan ppo');
 Route::get('pengurusan-dokumen', PengurusanDokumen::class)->name('pelajar pengurusan dokumen');
 Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDokumen::class)->name('pelajar penyuntingan dokumen');
 // PELAJAR ROUTES ENDS
