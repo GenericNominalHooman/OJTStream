@@ -16,7 +16,6 @@ class PelajarSeeder extends Seeder
         Pelajar::factory()->create([
             "user_id" => 105,
             "matrix_number" => "AKV0222KA009",
-            "course" =>	"KPD",
             "block" =>	"A",
             "dorm" => "201",	
             "study_type" =>	"DVM",
@@ -38,12 +37,12 @@ class PelajarSeeder extends Seeder
             "pensyarah_penilai_id" => 1,
             "pensyarah_penilai_ojt_id" => 1,
             "penyelaras_program_id" => 1,
+            "skop_kerja_id" => 1,
         ]);
 
         Pelajar::factory()->create([
             "user_id" => 106,
             "matrix_number" => "AKV0222KA010",
-            "course" =>	"KPD",
             "block" =>	"A",
             "dorm" => "201",	
             "study_type" =>	"DVM",
@@ -65,6 +64,7 @@ class PelajarSeeder extends Seeder
             "pensyarah_penilai_id" => 1,
             "pensyarah_penilai_ojt_id" => 1,
             "penyelaras_program_id" => 1,
+            "skop_kerja_id" => 2,
         ]);
     }
 }

@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Storage;
+    use Carbon\Carbon;
+@endphp
 {{-- PELAJAR SECTION BEGIN --}}
 @if (in_array("Pelajar", auth()->user()->getRoles()))
 <div class="container-fluid px-2 px-md-4">
@@ -318,19 +322,13 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Lawatan OJT 1</label>
-                            <input disabled wire:model.lazy="janji_temu_1.visit_at" type="datetime" class="form-control border border-2 p-2">
-                            @error('janji_temu_1.visit_at')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$janji_temu_1->visit_at}}" type="datetime" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Lawatan OJT 2</label>
-                            <input disabled wire:model.lazy="janji_temu_2.visit_at" type="datetime" class="form-control border border-2 p-2">
-                            @error('janji_temu_2.visit_at')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$janji_temu_2->visit_at}}" type="datetime" class="form-control border border-2 p-2">
                         </div>
                         
                         <div class="row">
@@ -347,28 +345,19 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Pensyarah Penilai(PP)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai.name" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai.name')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai_ojt->name}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai.phone" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai.phone')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai->phone}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai.email" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai.email')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai->email}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         {{-- PENSYARAH PENILAI SECTION ENDS --}}
@@ -383,28 +372,19 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Penyelaras Program</label>
-                            <input disabled wire:model.lazy="penyelaras_program_user.name" type="text" class="form-control border border-2 p-2">
-                            @error('penyelaras_program_user.name')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$penyelaras_program_user->name}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nombor Telefon Penyelaras Program</label>
-                            <input disabled wire:model.lazy="penyelaras_program_user.phone" type="text" class="form-control border border-2 p-2">
-                            @error('penyelaras_program_user.phone')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$penyelaras_program_user->phone}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Emel Penyelaras Program</label>
-                            <input disabled wire:model.lazy="penyelaras_program_user.email" type="text" class="form-control border border-2 p-2">
-                            @error('penyelaras_program_user.email')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$penyelaras_program_user->email}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         {{-- PENYELARAS PROGRAM SECTION ENDS --}}
@@ -451,28 +431,19 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai_ojt.name" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai_ojt.name')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai_ojt->name}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nombor Telefon Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai_ojt.phone" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai_ojt.phone')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai_ojt->phone}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Emel Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai_ojt.email" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai_ojt.email')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai_ojt->email}}" type="text" class="form-control border border-2 p-2">
                         </div>
                         
                         <div class="row">
@@ -489,28 +460,19 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Pensyarah Penilai(PP)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai.name" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai.name')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai->name}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai.phone" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai.phone')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai->phone}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
-                            <input disabled wire:model.lazy="pensyarah_penilai.email" type="text" class="form-control border border-2 p-2">
-                            @error('pensyarah_penilai.email')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input disabled value="{{$pensyarah_penilai->email}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         {{-- PENSYARAH PENILAI SECTION ENDS --}}
@@ -559,7 +521,7 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Organisasi Latihan</label>
-                            <input wire:model.lazy="company.comp_name" type="email" class="form-control border border-2 p-2">
+                            <input wire:model.lazy="company.comp_name" type="text" class="form-control border border-2 p-2">
                             @error('company.comp_name')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
@@ -637,11 +599,20 @@
 
                         <div class="mb-3 col-md-12">
 
-                            <label for="fileInput">Skop Kerja</label>
-                            <input wire:model="file" type="file" class="form-control" id="fileInput">
-                            @error('file')
+                            <label for="skop_kerja_input">Skop Kerja</label>
+                            <input wire:model="skop_kerja_input" type="file" class="form-control" id="skop_kerja_input">
+                            @error('skop_kerja_input')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-12">
+                            @if (Storage::disk("local")->exists($this->skop_kerja->document_path))
+                                <p class="text text-success">Skop Kerja Telah Dimuat Naik({{Carbon::parse($this->skop_kerja->updated_at)->format("d/m/Y - h:i")}})</p>
+                            @else
+                                <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
+                            @endif
+                            <button type="button" class="btn btn-primary" wire:click='downloadSkopKerja()' @if (!(Storage::disk("local")->exists($this->skop_kerja->document_path))) disabled @endif>Muat Turun Skop Kerja</button>
                         </div>
                     </div>
 

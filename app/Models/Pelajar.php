@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\JanjiTemu;
+use App\Models\SkopKerja;
 use app\Models\Pensyarah_Penilai_OJT;
 use Faker\Extension\CompanyExtension;
 use Illuminate\Database\Eloquent\Model;
@@ -56,5 +57,13 @@ class Pelajar extends Model
 
     public function Dokumen_OJT_Pelajar(){
         return $this->hasMany(DokumenOJTPelajar::class, "pelajar_id", "user_id");
+    }
+    
+    public function Skop_Kerja(){
+        return $this->hasOne(SkopKerja::class, "id", "skop_kerja_id");
+    }
+
+    public function getPelajarDirectory(){
+        return "Pelajar_".$this->matrix_number;
     }
 }

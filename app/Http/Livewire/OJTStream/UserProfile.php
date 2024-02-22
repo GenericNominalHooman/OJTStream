@@ -4,16 +4,25 @@ namespace App\Http\Livewire\OJTStream;
 
 use App\Models\User;
 use App\Models\Company;
-use App\Models\JanjiTemu;
 use App\Models\Pelajar;
-use App\Models\PelajarsCompany;
 use Livewire\Component;
+use App\Models\JanjiTemu;
+use App\Models\SkopKerja;
+use Livewire\WithFileUploads;
+use App\Models\PelajarsCompany;
 use App\Models\Pensyarah_Penilai;
+use Illuminate\Support\Facades\File;
 use App\Models\Pensyarah_Penilai_OJT;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfile extends Component
 {
-    public User $user;
+    use WithFileUploads;
+    public User $user;    
+    public $roles = [];
+    public $activeTab = 'biodata'; // Variable to track which tab is opened
+    
+    // PELAJAR PROEPRTIES BEGIN
     public Pelajar $pelajar;
     public User $pensyarah_penilai_ojt;
     public User $pensyarah_penilai;
@@ -22,79 +31,101 @@ class UserProfile extends Component
     public JanjiTemu $janji_temu_2;
     public PelajarsCompany $pelajars_company;
     public Company $company;
-    public $roles = [];
-    public $activeTab = 'biodata'; // Variable to track which tab is opened
+    public SkopKerja $skop_kerja;
+    public $skop_kerja_input;
+    // PELAJAR PROEPRTIES ENDS
 
     protected function rules()
     {
         // PELAJAR SECTION BEGIN
+        // RETURN DIFFERENT RULES FOR DIFFERENT TYPE OF UPLOADS
+        // RETURN DIFFERENT RULES FOR DIFFERENT TYPE OF UPLOADS
+        // RETURN DIFFERENT RULES FOR DIFFERENT TYPE OF UPLOADS
         if($this->user->isPelajar()){
-            return [
-                // PELAJAR BIODATA VALUES
-                'user.name' => 'required',
-                'user.email' => 'required|email|unique:users,email,' . $this->user->id,
-                'user.phone' => 'required|max:10',
-                'user.gender' => 'required',
-                'user.location' => 'required',
-                'pelajar.nric_number' => 'required',
-                'pelajar.guardian' => 'required',
-                'pelajar.guardian_telephone_number' => 'required',
-                'pelajar.linkedin_url' => 'nullable|url',
-                'pelajar.facebook_url' => 'nullable|url',
-                'pelajar.github_url' => 'nullable|url',
-                'pelajar.study_type'=> 'required',
-                'pelajar.program'=> 'required',
-                'pelajar.heart_disease'=> 'nullable',
-                'pelajar.asthma'=> 'nullable',
-                'pelajar.diabetes'=> 'nullable',
-                'pelajar.osteoporosis'=> 'nullable',
-                'pelajar.slipped_disc'=> 'nullable',
-                'pelajar.matrix_number'=> 'required',
-                'pelajar.semester'=> 'required',
-                'pelajar.cohort'=> 'required',
-                'file' => 'file|max:1024', // Adjust the max size as needed           
-
-                // PENSYARAH PENILAI OJT VALUES
-                'pensyarah_penilai_ojt.name' => 'required',
-                'pensyarah_penilai_ojt.email' => 'required|email|unique:users,email,' . $this->user->id,
-                'pensyarah_penilai_ojt.phone' => 'required|max:10',
-                'pensyarah_penilai_ojt.gender' => 'required',
-                'pensyarah_penilai_ojt.about' => 'required:max:150',
-                'pensyarah_penilai_ojt.location' => 'required',
-                // LAWATAN OJT
-                'janji_temu_1.visit_at' => 'required',
-                'janji_temu_2.visit_at' => 'required',
-                
-                // PENSYARAH PENILAI VALUES
-                'pensyarah_penilai.name' => 'required',
-                'pensyarah_penilai.email' => 'required|email|unique:users,email,' . $this->user->id,
-                'pensyarah_penilai.phone' => 'required|max:10',
-                'pensyarah_penilai.gender' => 'required',
-                'pensyarah_penilai.about' => 'required:max:150',
-                'pensyarah_penilai.location' => 'required',
-
-                // PENYELARS PROGRAM VALUES
-                'penyelaras_program_user.name' => 'required',
-                'penyelaras_program_user.email' => 'required|email|unique:users,email,' . $this->user->id,
-                'penyelaras_program_user.phone' => 'required|max:10',
-                'penyelaras_program_user.gender' => 'required',
-                'penyelaras_program_user.about' => 'required:max:150',
-                'penyelaras_program_user.location' => 'required',
-
-                // COMPANY VALUES
-                'company.comp_type' => 'required|in:university,outside',
-                'company.comp_name' => 'required|max:32',
-                'company.comp_address_street' => 'max:255',
-                'company.comp_address_city' => 'max:255',
-                'company.comp_address_province' => 'max:255',
-                'company.comp_contact' => 'required|max:32',
-                'company.ojt_supervisor' => 'required|max:64',
-                'company.students_deployed_count' => 'required|integer',
-                'company.comp_email' => 'required|integer',
-                
-                // PELAJAR-COMPANY VALUES
-                'pelajars_company.role' => 'required',
-            ];
+            if($this->skop_kerja_input == null){ // Biodata Only Update
+                return [
+                    // PELAJAR BIODATA VALUES
+                    'user.name' => 'required',
+                    'user.email' => 'required|email|unique:users,email,' . $this->user->id,
+                    'user.phone' => 'required|max:10',
+                    'user.gender' => 'required',
+                    'user.location' => 'required',
+                    'pelajar.nric_number' => 'required',
+                    'pelajar.guardian' => 'required',
+                    'pelajar.guardian_telephone_number' => 'required',
+                    'pelajar.linkedin_url' => 'nullable|url',
+                    'pelajar.facebook_url' => 'nullable|url',
+                    'pelajar.github_url' => 'nullable|url',
+                    'pelajar.study_type'=> 'required',
+                    'pelajar.program'=> 'required',
+                    'pelajar.heart_disease'=> 'nullable',
+                    'pelajar.asthma'=> 'nullable',
+                    'pelajar.diabetes'=> 'nullable',
+                    'pelajar.osteoporosis'=> 'nullable',
+                    'pelajar.slipped_disc'=> 'nullable',
+                    'pelajar.matrix_number'=> 'required',
+                    'pelajar.semester'=> 'required',
+                    'pelajar.cohort'=> 'required',
+    
+                    // COMPANY VALUES
+                    'company.comp_type' => 'required',
+                    'company.comp_name' => 'required',
+                    'company.comp_address_street' => 'required',
+                    'company.comp_address_city' => 'required',
+                    'company.comp_address_province' => 'required',
+                    'company.comp_contact' => 'required',
+                    'company.ojt_supervisor' => 'required',
+                    'company.students_deployed_count' => 'required',
+                    'company.comp_email' => 'required',
+                    
+                    // PELAJAR-COMPANY VALUES
+                    'pelajars_company.role' => 'required',
+                ];
+            }else{ // Biodata And Skop Kerja Update
+                return [
+                    // PELAJAR BIODATA VALUES
+                    'user.name' => 'required',
+                    'user.email' => 'required|email|unique:users,email,' . $this->user->id,
+                    'user.phone' => 'required|max:10',
+                    'user.gender' => 'required',
+                    'user.location' => 'required',
+                    'pelajar.nric_number' => 'required',
+                    'pelajar.guardian' => 'required',
+                    'pelajar.guardian_telephone_number' => 'required',
+                    'pelajar.linkedin_url' => 'nullable|url',
+                    'pelajar.facebook_url' => 'nullable|url',
+                    'pelajar.github_url' => 'nullable|url',
+                    'pelajar.study_type'=> 'required',
+                    'pelajar.program'=> 'required',
+                    'pelajar.heart_disease'=> 'nullable',
+                    'pelajar.asthma'=> 'nullable',
+                    'pelajar.diabetes'=> 'nullable',
+                    'pelajar.osteoporosis'=> 'nullable',
+                    'pelajar.slipped_disc'=> 'nullable',
+                    'pelajar.matrix_number'=> 'required',
+                    'pelajar.semester'=> 'required',
+                    'pelajar.cohort'=> 'required',
+                    'skop_kerja_input' => 'file|mimes:pdf|required', // READD MAX SIZE IN PRODUCTION
+    
+                    // COMPANY VALUES
+                    'company.comp_type' => 'required',
+                    'company.comp_name' => 'required',
+                    'company.comp_address_street' => 'required',
+                    'company.comp_address_city' => 'required',
+                    'company.comp_address_province' => 'required',
+                    'company.comp_contact' => 'required',
+                    'company.ojt_supervisor' => 'required',
+                    'company.students_deployed_count' => 'required',
+                    'company.comp_email' => 'required',
+                    
+                    // PELAJAR-COMPANY VALUES
+                    'pelajars_company.role' => 'required',
+    
+                    // JOB SCOPE
+                    'skop_kerja.document_path' => 'required',
+                    'skop_kerja.document_name' => 'required',
+                ];
+            }
         }
         // PELAJAR SECTION ENDS
     }
@@ -111,9 +142,9 @@ class UserProfile extends Component
             $this->pensyarah_penilai_ojt = $this->pelajar->Pensyarah_Penilai_OJT->User;
             $this->pensyarah_penilai = $this->pelajar->Pensyarah_Penilai->User;
             $this->pelajars_company = $this->pelajar->Pelajars_Company;
-            // dd($this->pelajars_company);
             $this->company = $this->pelajars_company->Company;
             $this->penyelaras_program_user = $this->pelajar->Penyelaras_Program->User;
+            $this->skop_kerja = $this->pelajar->Skop_Kerja;
             if($this->pelajar->Janji_Temu_1 != null){
                 $this->janji_temu_1 = $this->pelajar->Janji_Temu_1;
             }
@@ -133,23 +164,34 @@ class UserProfile extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function uploadSkopKerja(){
+        $file_extension = $this->skop_kerja_input->getClientOriginalExtension();
+        $this->skop_kerja->document_name = "JOB_DESCRIPTION.".$file_extension;
+        $this->skop_kerja->document_path = $this->skop_kerja_input->storeAs($this->pelajar->getPelajarDirectory().'/ORGANISASI_LATIHAN', $this->skop_kerja->document_name, 'local');        
+        $this->skop_kerja->updated_at = now();        
+    }
+
     public function update()
     {
-        $this->validate();
+        // SAVE FILE IF USER IS UPLOADING SKOP KERJA
+        if($this->skop_kerja_input != null){
+            $this->uploadSkopKerja();
+        }
         
+        $this->validate();
+
         $profileUpdated = false;
         for($i=0; $i<sizeof($this->roles); $i++){
             if(in_array("Pelajar", $this->user->getRoles())){
                 // PELAJAR SECTION BEGIN
+                $profileUpdated = true;
                 // Saves pelajar user profile changes
                 $this->user->save();
                 $this->pelajar->save();
-                $profileUpdated = true;
-                if ($this->file) {
-                    // Process the file upload
-                    $filename = $this->file->store('organisasi_latihan/job_description', 'public');
-                    // You can now use $filename to save the path to the file in the database or perform other actions
-                }            
+                                
+                // SAVE FILE PATH TO DB
+                $this->skop_kerja->save();
+
                 // PELAJAR SECTION ENDS
             }elseif(in_array("Pensyarah Penilai OJT", $this->user->getRoles())){
 
@@ -158,7 +200,7 @@ class UserProfile extends Component
 
         // CHECK WHETHER ANY FIELD WAS UPDATED
         if($profileUpdated){
-            return back()->withStatus('Profile successfully updated.');
+            return back()->withStatus('Profile updated successfully.');
         }else{
             return back()->withStatus('Error occcured while updating the profile.');
         }
@@ -173,5 +215,13 @@ class UserProfile extends Component
     // Function for displaying appropiate tabs once clicked
     public function switchTab($tabName){
         $this->activeTab = $tabName;
+    }
+
+    public function downloadSkopKerja(){
+        if(Storage::disk("local")->exists($this->skop_kerja->document_path)){
+            return Storage::disk("local")->download($this->skop_kerja->document_path, $this->skop_kerja->document_name);
+        }else{
+            return redirect()->response("No file found", 404);
+        }
     }
 }
