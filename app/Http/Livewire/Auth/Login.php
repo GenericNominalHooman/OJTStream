@@ -37,7 +37,14 @@ class Login extends Component
         $this->login_type = $request->login_type;
 
         // Autofill login credentials for debugging
-        $this->fill(["no_matrik" => "AKV0222KA009", "password" => "password", "email" => "admin@mail.com"]);
+        switch ($this->login_type) {
+            case "pelajar":
+                $this->fill(["no_matrik" => "AKV0222KA009", "password" => "password"]);
+            case "kupli":
+                $this->fill(["email" => "kupli_1@email.com", "password" => "password"]);
+            case "pensyarah":
+            default:
+        }
     }
 
     public function store()

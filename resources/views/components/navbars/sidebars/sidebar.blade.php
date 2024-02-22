@@ -52,15 +52,6 @@
                         <span class="nav-link-text ms-1">Profil Pengguna</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'profile' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('profile') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profil</span>
-                    </a>
-                </li>
             </section>
 
             {{-- KUPLI SIDEBAR BEGIN --}}
@@ -395,12 +386,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'billing' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('billing') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'lawatan ppo' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('lawatan ppo') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-clipboard-check"></i>
+                            <i class="fas fa-calendar"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Penilaian OJT</span>
+                        <span class="nav-link-text ms-1">Lawatan PPO</span>
                     </a>
                 </li>
         
