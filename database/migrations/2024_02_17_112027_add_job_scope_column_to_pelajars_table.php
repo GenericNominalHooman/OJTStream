@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pensyarah__penilais', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('pelajars', function (Blueprint $table) {
+            $table->foreignId("skop_kerja_id")->constrained("skop_kerjas", "id")->onDelete("cascade");
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pensyarah__penilais');
+        Schema::table('pelajars', function (Blueprint $table) {
+            $table->dropForeign("pelajars_skop_kerja_id_foreign");
+        });
     }
 };

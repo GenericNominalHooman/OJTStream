@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penyelaras__programs', function (Blueprint $table) {
+        Schema::create('skop_kerjas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->text("document_path")->nullable(false);
+            $table->text("document_name")->nullable(false);
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penyelaras__programs');
+        Schema::dropIfExists('skop_kerjas');
     }
 };

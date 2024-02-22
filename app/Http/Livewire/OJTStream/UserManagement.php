@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\ExampleLaravel;
+namespace App\Http\Livewire\OJTStream;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class UserManagement extends Component
 {
     public function render()
     {
-        return view('livewire.example-laravel.user-management');
+        return view('livewire.o-j-t-stream.user-management');
     }
 }

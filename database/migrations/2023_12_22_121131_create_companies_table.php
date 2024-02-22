@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('comp_address_city')->nullable();
             $table->string('comp_address_province')->nullable();
             $table->string('comp_contact', 32);
+            $table->string('comp_email');
+            // $table->string('job_description')->nullable();
 
             $table->string('ojt_supervisor', 64);
 
