@@ -17,7 +17,7 @@ $dokumens_pelajar = auth()->user()->Pelajar->Dokumen_OJT_Pelajar->where("dokumen
                             alt="user1">
                     </div>
                     <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{ $dokumen->document_name }}</h6>
+                        <h6 class="mb-0 text-sm">{{ pathinfo($dokumen->document_name, PATHINFO_FILENAME) }}</h6>
                         <p class="text-xs text-secondary mb-0">{{ $dokumen->document_description }}
                         </p>
                     </div>  
@@ -58,7 +58,9 @@ $dokumens_pelajar = auth()->user()->Pelajar->Dokumen_OJT_Pelajar->where("dokumen
                 <span class="text-secondary text-xs font-weight-bold">{{$submitted_at->format('d/m/Y')}}</span>
             </td>
             <td class="align-middle">
-                <a href="javascript:;"
+                <a href="{{route('pelajar penyuntingan dokumen', [
+                        'dokumenOJTPelajar' => $dokumen_pelajar,
+                    ])}}"
                     class="text-secondary font-weight-bold text-xs"
                     data-toggle="tooltip" data-original-title="Edit user">
                     Sunting
@@ -76,7 +78,7 @@ $dokumens_pelajar = auth()->user()->Pelajar->Dokumen_OJT_Pelajar->where("dokumen
                             alt="user1">
                     </div>
                     <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{ $dokumen->document_name }}</h6>
+                        <h6 class="mb-0 text-sm">{{ pathinfo($dokumen->document_name, PATHINFO_FILENAME) }}</h6>
                         <p class="text-xs text-secondary mb-0">{{ $dokumen->document_description }}
                         </p>
                     </div>
@@ -114,7 +116,9 @@ $dokumens_pelajar = auth()->user()->Pelajar->Dokumen_OJT_Pelajar->where("dokumen
                     class="text-secondary text-xs font-weight-bold">-</span>
             </td>
             <td class="align-middle">
-                <a href="javascript:;"
+                <a href="{{route('pelajar penyuntingan dokumen', [
+                        'dokumenOJTPelajar' => $dokumen_pelajar,
+                    ])}}"
                     class="text-secondary font-weight-bold text-xs"
                     data-toggle="tooltip" data-original-title="Edit user">
                     Sunting

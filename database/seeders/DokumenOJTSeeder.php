@@ -14,12 +14,12 @@ class DokumenOJTSeeder extends Seeder
     public function run(): void
     {
         DokumenOJT::factory()->create([
-            "document_name" => "KVOJT01",
+            "document_name" => "KVOJT01.pdf",
             "document_description" => "Dokumen biodata pelajar OJT",
         ]);
 
         DokumenOJT::factory()->create([
-            "document_name" => "KVOJT02",
+            "document_name" => "KVOJT02.pdf",
             "document_description" => "Dokumen aku janji",
         ]);
 

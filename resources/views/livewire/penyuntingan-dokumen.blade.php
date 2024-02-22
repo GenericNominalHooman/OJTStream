@@ -1,6 +1,6 @@
 @php
-    use Illuminate\Support\Facades\Storage;
-    use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 @endphp
 {{-- PELAJAR SECTION BEGIN --}}
 @if (in_array("Pelajar", auth()->user()->getRoles()))
@@ -20,7 +20,7 @@
             <div class="col-auto my-auto">
                 <div class="h-100">
                     <h5 class="mb-1">
-                        {{ $dokumenOJT->document_name }}
+                        {{ pathinfo($dokumenOJT->document_name, PATHINFO_FILENAME) }}
                     </h5>
                     <p class="mb-0 font-weight-normal text-sm">
                         {{$dokumenOJT->document_description}}
@@ -32,7 +32,14 @@
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">Dokumen KVOJT</h6>
+                        <div class="h-100">
+                            <h6 class="mb-1">
+                                Dokumen OJT
+                            </h6>
+                            <p class="mb-0 font-weight-normal text-sm">
+                                Dikemaskini pada: {{Carbon::parse($dokumenOJT->updated_at)->format("d/m/Y - h:iA")}}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,114 +66,79 @@
                     </div>
                 </div>
                 @endif
-                <form wire:submit.prevent='update'>
+                {{-- PELAJAR BEGIN --}}
 
-                    {{-- ORGANISASI LATIHAN BEGIN --}}
+                <div class="row">
+
+                    <div class="mb-3 col-12">
+                        <button wire:click='downloadKVOJT()' class="btn btn-success w-100">Muat Turun
+                            {{pathinfo($dokumenOJT->document_name, PATHINFO_FILENAME)}}</button>
+                    </div>
+
+                    <div class="mb-3 col-12">
+                        <div class="row">[Preview]</div>
+                    </div>
                     
+                </div>
+                <div class="row">
+
                     <div class="row">
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Organisasi Latihan</label>
-                            <input wire:model.lazy="company.comp_name" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_name')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                        <div class="col-md-8 d-flex align-items-center">
+                            <div class="h-100">
+                                <h6 class="mb-1">
+                                    Dokumen OJT Anda
+                                </h6>
+                                @if ($pelajarHasUploadKVOJT) 
+                                {{-- PELAJAR HAS UPLOAD KVOJT --}}
+                                    <p class="mb-0 font-weight-normal text-sm text-success">
+                                        Status muat naik: <b>Sudah dimuat naik</b>
+                                    </p>
+                                    <p class="mb-0 font-weight-normal text-sm text-success">
+                                        Dikemaskini pada: {{Carbon::parse($dokumenOJTPelajar->updated_at)->format("d/m/Y - h:iA")}}
+                                    </p>
+                                @else
+                                {{-- PELAJAR HASNT UPLOAD KVOJT --}}
+                                    <p class="mb-0 font-weight-normal text-sm text-danger">
+                                        Status muat naik: <b>Belum dimuat naik</b>
+                                    </p>
+                                    <p class="mb-0 font-weight-normal text-sm text-danger">
+                                        Tarikh hantar: {{Carbon::parse($dokumenOJTPelajar->deadline_date)->format("d/m/Y - h:iA")}}
+                                    </p>
+                                @endif
+                            </div>
                         </div>
+                    </div>    
 
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Telefon</label>
-                            <input wire:model.lazy="company.comp_contact" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_contact')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Penyelia Organisasi</label>
-                            <input wire:model.lazy="company.ojt_supervisor" type="text" class="form-control border border-2 p-2">
-                            @error('company.ojt_supervisor')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Emel</label>
-                            <input wire:model.lazy="company.comp_email" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_email')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Jawatan Diperoleh</label>
-                            <input wire:model.lazy="pelajars_company.role" type="text" class="form-control border border-2 p-2">
-                            @error('pelajars_company.role')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Dokumen OJT Anda</h6>
+                    
+                    <form wire:submit.prevent="uploadKVOJT()" class="p-0 m-0">
+                        <div class="row col-12 container">
+                            <div class="mb-3 col-md-6">
+                                <button type="button" wire:click='downloadKVOJTPelajar()' class="btn btn-success w-100" @if (!$pelajarHasUploadKVOJT) disabled @endif>Muat Turun {{pathinfo($dokumenOJT->document_name, PATHINFO_FILENAME)}} Anda</button>
+                            </div>
+    
+                            <div class="mb-3 col-md-6">
+                                <button type="submit" class="btn btn-primary w-100" @if($kvojt_input == null) disabled @endif>Muat Naik {{pathinfo($dokumenOJT->document_name, PATHINFO_FILENAME)}}</button>
                             </div>
                         </div>
 
-                        <div class="mb-3 col-md-6">
+                        <div class="row">
 
-                            <label class="form-label">Alamat Syarikat: Negeri</label>
-                            <input wire:model.lazy="company.comp_address_province" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_address_province')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-                        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Syarikat: Jalan</label>
-                            <input wire:model.lazy="company.comp_address_street" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_address_street')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-                        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Syarikat: Bandar</label>
-                            <input wire:model.lazy="company.comp_address_city" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_address_city')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            <input wire:model.lazy="kvojt_input" type="file" placeholder="Fail {{$dokumenOJT->document_name}} anda..." class="form-control border border-2 p-2">
+                            @error('kvojt_input')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
 
-                        <div class="mb-3 col-md-12">
+                    </form>
 
-                            <label for="skop_kerja_input">Skop Kerja</label>
-                            <input wire:model="skop_kerja_input" type="file" class="form-control" id="skop_kerja_input">
-                            @error('skop_kerja_input')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-12">
-                            @if (true)
-                                <p class="text text-success">Skop Kerja Telah Dimuat Naik</p>
-                            @else
-                                <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
-                            @endif
-                            <button type="button" class="btn btn-primary" wire:click='downloadSkopKerja()'>Muat Turun Skop Kerja</button>
-                        </div>
+                    <div class="mb-3 col-12">
+                        <div class="row">[Preview]</div>
                     </div>
+                    
+                </div>
 
-                    {{-- ORGANISASI LATIHAN ENDS --}}
+                {{-- PELAJAR ENDS --}}
 
-                    <button type="submit" class="btn bg-gradient-dark">Simpan</button>
-                </form>
             </div>
         </div>
     </div>

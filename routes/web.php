@@ -1,22 +1,24 @@
 <?php
 
-use App\Http\Livewire\Auth\ForgotPassword;
-use App\Http\Livewire\Auth\Login;
-use App\Http\Livewire\Auth\Register;
-use App\Http\Livewire\Auth\ResetPassword;
-use App\Http\Livewire\Billing;
-use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\OJTStream\UserManagement;
-use App\Http\Livewire\OJTStream\UserProfile;
-use App\Http\Livewire\Notifications;
-use App\Http\Livewire\Profile;
 use App\Http\Livewire\RTL;
+use GuzzleHttp\Middleware;
+use App\Http\Livewire\Tables;
+use App\Http\Livewire\Billing;
+use App\Http\Livewire\Profile;
+use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
-use App\Http\Livewire\Tables;
+use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Notifications;
 use App\Http\Livewire\VirtualReality;
-use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\PengurusanDokumen;
+use App\Http\Livewire\Auth\ResetPassword;
+use App\Http\Livewire\Auth\ForgotPassword;
+use App\Http\Livewire\PenyuntinganDokumen;
+use App\Http\Livewire\OJTStream\UserProfile;
+use App\Http\Livewire\OJTStream\UserManagement;
 
 
 /*
@@ -56,4 +58,7 @@ Route::get('virtual-reality', VirtualReality::class)->name('virtual-reality');
 Route::get('static-sign-in', StaticSignIn::class)->name('static-sign-in');
 Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
 Route::get('rtl', RTL::class)->name('rtl');
+
+Route::get('pengurusan-dokumen', PengurusanDokumen::class)->name('pelajar pengurusan dokumen');
+Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDokumen::class)->name('pelajar penyuntingan dokumen');
 });

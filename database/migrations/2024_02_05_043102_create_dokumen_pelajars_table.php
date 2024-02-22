@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dokumen_ojts', function (Blueprint $table) {
             $table->id();
             $table->string("document_name");
-            $table->string("document_url");
+            $table->string("document_path");
             $table->string("document_description");
             $table->enum("document_type", ["pengisian", "infomasi"])->default("pengisian");
             $table->foreignId("kupli_id")->constrained()->onDelete("cascade");
