@@ -71,8 +71,9 @@ Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDoku
 
 // KUPLI ROUTE BEGIN
 Route::get('kupli/pengurusan-dokumen', KupliPengurusanDokumen::class)->name('kupli pengurusan dokumen');
-Route::get('kupli/pengurusan-dokumen/{dokumen_ojt:id}/sunting', KupliPenyuntinganDokumen::class)->name('kupli penyuntingan dokumen');
 Route::get('kupli/pengurusan-dokumen/tambah', PenyuntinganDokumenTambah::class)->name('kupli penyuntingan dokumen tambah');
+Route::get('kupli/pengurusan-dokumen/{dokumen_ojt:id}/sunting', KupliPenyuntinganDokumen::class)->name('kupli penyuntingan dokumen');
+// Route::delete('kupli/pengurusan-dokumen/{dokumen_ojt:id}/hapus', KupliPenyuntinganDokumen::class);
 Route::get('kupli/pelajar/senarai', SenaraiPelajar::class)->name('kupli senarai pelajar');
 // KUPLI ROUTE ENDS
 });
