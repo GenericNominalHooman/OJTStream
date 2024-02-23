@@ -58,4 +58,9 @@ class PenyuntinganDokumen extends Component
         // FLASH MESSAGE
         return redirect()->route("kupli pengurusan dokumen")->with("status", "Successfully updated {$this->dokumen_ojt->document_name}");
     }
+
+    public function deleteKVOJT(){
+        $this->dokumen_ojt->delete();
+        return redirect()->route("kupli pengurusan dokumen")->with("status", "Successfully deleted {$this->dokumen_ojt->document_name}");
+    }
 }

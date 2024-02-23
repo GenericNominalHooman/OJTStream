@@ -85,12 +85,16 @@ use Carbon\Carbon;
                         </div>
 
                         <div class="row col-12 container">
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-4">
                                 <button type="button" wire:click='downloadKVOJT()' class="btn btn-success w-100">Muat Turun {{pathinfo($dokumen_ojt->document_name, PATHINFO_FILENAME)}}</button>
                             </div>
     
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-4">
                                 <button type="submit" class="btn btn-primary w-100">Kemaskini {{pathinfo($dokumen_ojt->document_name, PATHINFO_FILENAME)}}</button>
+                            </div>
+
+                            <div class="mb-3 col-md-4">
+                                <button type="button" wire:click='deleteKVOJT()' class="btn btn-danger w-100">Hapus {{pathinfo($dokumen_ojt->document_name, PATHINFO_FILENAME)}}</button>
                             </div>
                         </div>
 
