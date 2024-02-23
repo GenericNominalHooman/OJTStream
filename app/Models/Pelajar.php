@@ -55,6 +55,10 @@ class Pelajar extends Model
         return $this->hasOne(PelajarsCompany::class, "pelajar_id", "user_id");
     }
 
+    public function Dokumen_OJT_Pelajar(){
+        return $this->hasMany(DokumenOJTPelajar::class, "pelajar_id", "user_id");
+    }
+    
     public function Skop_Kerja(){
         return $this->hasOne(SkopKerja::class, "id", "skop_kerja_id");
     }

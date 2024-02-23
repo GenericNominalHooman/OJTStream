@@ -612,7 +612,7 @@
                             @else
                                 <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
                             @endif
-                            <button type="button" class="btn btn-primary" wire:click='downloadSkopKerja()' @if (!(Storage::disk("local")->exists($this->skop_kerja->document_path))) disabled @endif>Muat Turun Skop Kerja</button>
+                            <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()' @if (!(Storage::disk("local")->exists($this->skop_kerja->document_path))) disabled @endif>Muat Turun Skop Kerja</button>
                         </div>
                     </div>
 

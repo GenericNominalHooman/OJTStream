@@ -52,15 +52,6 @@
                         <span class="nav-link-text ms-1">Profil Pengguna</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'profile' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('profile') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profil</span>
-                    </a>
-                </li>
             </section>
 
             {{-- KUPLI SIDEBAR BEGIN --}}
@@ -72,8 +63,8 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli senarai pelajar' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli senarai pelajar') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-list"></i>
                         </div>
@@ -182,8 +173,8 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli pengurusan dokumen' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli pengurusan dokumen') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-folder"></i>
                         </div>
@@ -386,8 +377,8 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan OJT</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'pelajar pengurusan dokumen' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('pelajar pengurusan dokumen') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-folder"></i>
                         </div>
@@ -395,12 +386,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'billing' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('billing') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'lawatan ppo' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('lawatan ppo') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-clipboard-check"></i>
+                            <i class="fas fa-calendar"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Penilaian OJT</span>
+                        <span class="nav-link-text ms-1">Lawatan PPO</span>
                     </a>
                 </li>
         
