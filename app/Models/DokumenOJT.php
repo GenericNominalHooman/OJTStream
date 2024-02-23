@@ -10,4 +10,11 @@ class DokumenOJT extends Model
     use HasFactory;
 
     protected $table = "dokumen_ojts";
+
+    protected $fillable = [
+        "document_name",
+        "document_description",
+        "document_type",
+        "document_path",
+    ];
 }

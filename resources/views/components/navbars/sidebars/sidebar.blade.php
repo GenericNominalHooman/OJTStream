@@ -63,8 +63,8 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli senarai pelajar' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli senarai pelajar') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-list"></i>
                         </div>
@@ -173,8 +173,8 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli pengurusan dokumen' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli pengurusan dokumen') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-folder"></i>
                         </div>

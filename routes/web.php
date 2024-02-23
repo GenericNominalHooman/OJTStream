@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\PengurusanDokumen;
 use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Auth\ForgotPassword;
+use App\Http\Livewire\Kupli\PengurusanDokumen as KupliPengurusanDokumen;
+use App\Http\Livewire\Kupli\PenyuntinganDokumen as KupliPenyuntinganDokumen;
+use App\Http\Livewire\Kupli\PenyuntinganDokumenTambah;
+use App\Http\Livewire\Kupli\SenaraiPelajar;
 use App\Http\Livewire\PenyuntinganDokumen;
 use App\Http\Livewire\OJTStream\UserProfile;
 use App\Http\Livewire\OJTStream\UserManagement;
@@ -64,4 +68,11 @@ Route::get('lawatan-ppo', LawatanPPO::class)->name('lawatan ppo');
 Route::get('pengurusan-dokumen', PengurusanDokumen::class)->name('pelajar pengurusan dokumen');
 Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDokumen::class)->name('pelajar penyuntingan dokumen');
 // PELAJAR ROUTES ENDS
+
+// KUPLI ROUTE BEGIN
+Route::get('kupli/pengurusan-dokumen', KupliPengurusanDokumen::class)->name('kupli pengurusan dokumen');
+Route::get('kupli/pengurusan-dokumen/{dokumen_ojt:id}/sunting', KupliPenyuntinganDokumen::class)->name('kupli penyuntingan dokumen');
+Route::get('kupli/pengurusan-dokumen/tambah', PenyuntinganDokumenTambah::class)->name('kupli penyuntingan dokumen tambah');
+Route::get('kupli/pelajar/senarai', SenaraiPelajar::class)->name('kupli senarai pelajar');
+// KUPLI ROUTE ENDS
 });
