@@ -20,6 +20,8 @@ use App\Http\Livewire\Kupli\PengurusanDokumen as KupliPengurusanDokumen;
 use App\Http\Livewire\Kupli\PenyuntinganDokumen as KupliPenyuntinganDokumen;
 use App\Http\Livewire\Kupli\PenyuntinganDokumenTambah;
 use App\Http\Livewire\Kupli\SenaraiPelajar;
+use App\Http\Livewire\Kupli\SuntingPelajar;
+use App\Http\Livewire\Kupli\TambahPelajar;
 use App\Http\Livewire\PenyuntinganDokumen;
 use App\Http\Livewire\OJTStream\UserProfile;
 use App\Http\Livewire\OJTStream\UserManagement;
@@ -70,10 +72,14 @@ Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDoku
 // PELAJAR ROUTES ENDS
 
 // KUPLI ROUTE BEGIN
+// PENGURUSAN DOKUMEN
 Route::get('kupli/pengurusan-dokumen', KupliPengurusanDokumen::class)->name('kupli pengurusan dokumen');
 Route::get('kupli/pengurusan-dokumen/tambah', PenyuntinganDokumenTambah::class)->name('kupli penyuntingan dokumen tambah');
 Route::get('kupli/pengurusan-dokumen/{dokumen_ojt:id}/sunting', KupliPenyuntinganDokumen::class)->name('kupli penyuntingan dokumen');
-// Route::delete('kupli/pengurusan-dokumen/{dokumen_ojt:id}/hapus', KupliPenyuntinganDokumen::class);
+
+// PENGURUSAN PELAJAR
 Route::get('kupli/pelajar/senarai', SenaraiPelajar::class)->name('kupli senarai pelajar');
+Route::get('kupli/pelajar/tambah', TambahPelajar::class)->name('kupli tambah pelajar');
+Route::get('kupli/pelajar/{pelajar:user_id}/sunting', SuntingPelajar::class)->name('kupli sunting pelajar');
 // KUPLI ROUTE ENDS
 });

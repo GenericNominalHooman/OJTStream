@@ -19,7 +19,13 @@ class CompanyFactory extends Factory
         return [
             "created_at" => now(),
             "updated_at" => now(),
-            "comp_email" => $this->faker->email(),
+            "email" => $this->faker->email(),
+            "telephone_number" => $this->faker->phoneNumber(),
+            "address" => $this->faker->address(),
+            "name" => $this->faker->company(),
+            "type" => $this->faker->randomElement(["private", "public"]),
+            "ojt_supervisor" => $this->faker->name(),
+            "students_deployed_count" => 0,
         ];
     }
 }

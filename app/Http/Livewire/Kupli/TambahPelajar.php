@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\OJTStream;
+namespace App\Http\Livewire\Kupli;
 
 use App\Models\User;
 use App\Models\Company;
@@ -10,12 +10,8 @@ use App\Models\JanjiTemu;
 use App\Models\SkopKerja;
 use Livewire\WithFileUploads;
 use App\Models\PelajarsCompany;
-use App\Models\Pensyarah_Penilai;
-use Illuminate\Support\Facades\File;
-use App\Models\Pensyarah_Penilai_OJT;
-use Illuminate\Support\Facades\Storage;
 
-class UserProfile extends Component
+class TambahPelajar extends Component
 {
     use WithFileUploads;
     public User $user;    
@@ -23,9 +19,9 @@ class UserProfile extends Component
     public $activeTab = 'biodata'; // Variable to track which tab is opened
     
     // PELAJAR PROEPRTIES BEGIN
-    public Pelajar $pelajar;
-    public User $pensyarah_penilai_ojt;
-    public User $pensyarah_penilai;
+    public $pelajar;
+    public $pensyarah_penilai_ojt;
+    public $pensyarah_penilai;
     public User $penyelaras_program_user;
     public JanjiTemu $janji_temu_1;
     public JanjiTemu $janji_temu_2;
@@ -38,7 +34,6 @@ class UserProfile extends Component
     protected function rules()
     {
         // PELAJAR SECTION BEGIN
-        // RETURN DIFFERENT RULES FOR DIFFERENT TYPE OF UPLOADS
         if($this->user->isPelajar()){
             if($this->skop_kerja_input == null){ // Biodata Only Update
                 return [
@@ -66,13 +61,15 @@ class UserProfile extends Component
                     'pelajar.cohort'=> 'required',
     
                     // COMPANY VALUES
-                    'company.type' => 'required',
-                    'company.name' => 'required',
-                    'company.address' => 'required',
-                    'company.telephone_number' => 'required',
+                    'company.comp_type' => 'required',
+                    'company.comp_name' => 'required',
+                    'company.comp_address_street' => 'required',
+                    'company.comp_address_city' => 'required',
+                    'company.comp_address_province' => 'required',
+                    'company.comp_contact' => 'required',
                     'company.ojt_supervisor' => 'required',
                     'company.students_deployed_count' => 'required',
-                    'company.email' => 'required',
+                    'company.comp_email' => 'required',
                     
                     // PELAJAR-COMPANY VALUES
                     'pelajars_company.role' => 'required',
@@ -104,15 +101,15 @@ class UserProfile extends Component
                     'skop_kerja_input' => 'file|mimes:pdf|required', // READD MAX SIZE IN PRODUCTION
     
                     // COMPANY VALUES
-                    'company.type' => 'required',
-                    'company.name' => 'required',
-                    'company.address' => 'required',
+                    'company.comp_type' => 'required',
+                    'company.comp_name' => 'required',
+                    'company.comp_address_street' => 'required',
                     'company.comp_address_city' => 'required',
                     'company.comp_address_province' => 'required',
-                    'company.telephone_number' => 'required',
+                    'company.comp_contact' => 'required',
                     'company.ojt_supervisor' => 'required',
                     'company.students_deployed_count' => 'required',
-                    'company.email' => 'required',
+                    'company.comp_email' => 'required',
                     
                     // PELAJAR-COMPANY VALUES
                     'pelajars_company.role' => 'required',
@@ -131,28 +128,23 @@ class UserProfile extends Component
         $this->user = auth()->user();
         $this->roles = $this->user->getRoles();
 
-        // PELAJAR SECTION BEGIN
-        if($this->user->isPelajar()){
-            // SETS DATA TO BE USED
-            $this->pelajar = $this->user->Pelajar;
-            $this->pensyarah_penilai_ojt = $this->pelajar->Pensyarah_Penilai_OJT->User;
-            $this->pensyarah_penilai = $this->pelajar->Pensyarah_Penilai->User;
-            $this->pelajars_company = $this->pelajar->Pelajars_Company;
-            $this->company = $this->pelajars_company->Company;
-            $this->penyelaras_program_user = $this->pelajar->Penyelaras_Program->User;
-            $this->skop_kerja = $this->pelajar->Skop_Kerja;
-            if($this->pelajar->Janji_Temu_1 != null){
-                $this->janji_temu_1 = $this->pelajar->Janji_Temu_1;
-            }
-            if($this->pelajar->Janji_Temu_2 != null){
-                $this->janji_temu_2 = $this->pelajar->Janji_Temu_2;
-            }
-
-            // Sets pelajar record to update instead of insertion
-            $this->pelajar->user_id = $this->user->id;
-
+        // SETS DATA TO BE USED
+        $this->pelajar = $this->user->Pelajar;
+        $this->pensyarah_penilai_ojt = $this->pelajar->Pensyarah_Penilai_OJT->User;
+        $this->pensyarah_penilai = $this->pelajar->Pensyarah_Penilai->User;
+        $this->pelajars_company = $this->pelajar->Pelajars_Company;
+        $this->company = $this->pelajars_company->Company;
+        $this->penyelaras_program_user = $this->pelajar->Penyelaras_Program->User;
+        $this->skop_kerja = $this->pelajar->Skop_Kerja;
+        if($this->pelajar->Janji_Temu_1 != null){
+            $this->janji_temu_1 = $this->pelajar->Janji_Temu_1;
         }
-        // PELAJAR SECTION ENDS
+        if($this->pelajar->Janji_Temu_2 != null){
+            $this->janji_temu_2 = $this->pelajar->Janji_Temu_2;
+        }
+
+        // Sets pelajar record to update instead of insertion
+        $this->pelajar->user_id = $this->user->id;
     }
 
     public function updated($propertyName)
@@ -202,12 +194,6 @@ class UserProfile extends Component
         }
     }
 
-    public function render()
-    {
-        // Rediret based on user roles    
-        return view('livewire.o-j-t-stream.user-profile');
-    }
-
     // Function for displaying appropiate tabs once clicked
     public function switchTab($tabName){
         $this->activeTab = $tabName;
@@ -219,5 +205,10 @@ class UserProfile extends Component
         }else{
             return redirect()->response("No file found", 404);
         }
+    }
+
+    public function render()
+    {
+        return view('livewire.kupli.tambah-pelajar');
     }
 }

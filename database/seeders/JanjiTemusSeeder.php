@@ -15,12 +15,10 @@ class JanjiTemusSeeder extends Seeder
     {
         JanjiTemu::factory()->create([
             "pensyarah_penilai_ojt_id" => 1,
-            "visit_type" => "Lawatan PPO 1",
         ]);
 
         JanjiTemu::factory()->create([
             "pensyarah_penilai_ojt_id" => 1,
-            "visit_type" => "Lawatan PPO 2",
             "visit_at" => now()->addMonths(5),
         ]);
     }

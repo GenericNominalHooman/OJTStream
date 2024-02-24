@@ -3,7 +3,6 @@
     use Carbon\Carbon;
 @endphp
 {{-- PELAJAR SECTION BEGIN --}}
-@if (in_array("Pelajar", auth()->user()->getRoles()))
 <div class="container-fluid px-2 px-md-4">
     <div class="page-header min-height-300 border-radius-xl mt-4"
         style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
@@ -521,8 +520,8 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Organisasi Latihan</label>
-                            <input wire:model.lazy="company.name" type="text" class="form-control border border-2 p-2">
-                            @error('company.name')
+                            <input wire:model.lazy="company.comp_name" type="text" class="form-control border border-2 p-2">
+                            @error('company.comp_name')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -530,8 +529,8 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nombor Telefon</label>
-                            <input wire:model.lazy="company.telephone_number" type="text" class="form-control border border-2 p-2">
-                            @error('company.telephone_number')
+                            <input wire:model.lazy="company.comp_contact" type="text" class="form-control border border-2 p-2">
+                            @error('company.comp_contact')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -548,8 +547,8 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Emel</label>
-                            <input wire:model.lazy="company.email" type="text" class="form-control border border-2 p-2">
-                            @error('company.email')
+                            <input wire:model.lazy="company.comp_email" type="text" class="form-control border border-2 p-2">
+                            @error('company.comp_email')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -563,15 +562,40 @@
                             @enderror
                         </div>
 
+
+                        <div class="row">
+                            <div class="col-md-8 d-flex align-items-center">
+                                <h6 class="mb-3">Alamat Syarikat</h6>
+                            </div>
+                        </div>
+
                         <div class="mb-3 col-md-6">
 
-                            <label class="form-label">Alamat Syarikat: </label>
-                            <input wire:model.lazy="company.address" type="text" class="form-control border border-2 p-2">
-                            @error('company.address')
+                            <label class="form-label">Alamat Syarikat: Negeri</label>
+                            <input wire:model.lazy="company.comp_address_province" type="text" class="form-control border border-2 p-2">
+                            @error('company.comp_address_province')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
                         
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Alamat Syarikat: Jalan</label>
+                            <input wire:model.lazy="company.comp_address_street" type="text" class="form-control border border-2 p-2">
+                            @error('company.comp_address_street')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+                        
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Alamat Syarikat: Bandar</label>
+                            <input wire:model.lazy="company.comp_address_city" type="text" class="form-control border border-2 p-2">
+                            @error('company.comp_address_city')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
                         <div class="mb-3 col-md-12">
 
                             <label for="skop_kerja_input">Skop Kerja</label>
@@ -599,5 +623,4 @@
         </div>
     </div>
 </div>
-@endif
 {{-- PELAJAR SECTION ENDS --}}

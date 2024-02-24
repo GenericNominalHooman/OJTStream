@@ -14,14 +14,11 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             
-            $table->enum('comp_type', ['university', 'outside'])->default('university');
-            $table->string('comp_name', 32);
-            $table->string('comp_address_street')->nullable();
-            $table->string('comp_address_city')->nullable();
-            $table->string('comp_address_province')->nullable();
-            $table->string('comp_contact', 32);
-            $table->string('comp_email');
-            // $table->string('job_description')->nullable();
+            $table->enum('type', ['public', 'private'])->default('private');
+            $table->string('name', 32);
+            $table->string('address')->nullable();
+            $table->string('telephone_number', 32);
+            $table->string('email');
 
             $table->string('ojt_supervisor', 64);
 

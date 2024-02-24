@@ -36,6 +36,20 @@ class UserSeeder extends Seeder
             "email" => "pensyarah_penilai_ojt_1@email.com",
             "password" => ("password")
         ]);
+        
+        User::factory()->create([
+            "id" => 107,
+            "name" => "Pensyarah Penilai OJT 2",
+            "email" => "pensyarah_penilai_ojt_2@email.com",
+            "password" => ("password")
+        ]);
+
+        User::factory()->create([
+            "id" => 108,
+            "name" => "Pensyarah Penilai OJT 3",
+            "email" => "pensyarah_penilai_ojt_3@email.com",
+            "password" => ("password")
+        ]);
 
         // PP
         User::factory()->create([

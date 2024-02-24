@@ -17,5 +17,16 @@ class PensyarahPenilaiOJTSeeder extends Seeder
             "id" => 1,
             "user_id" => 103,
        ]);
+
+
+       Pensyarah_Penilai_OJT::factory()->create([
+            "id" => 2,
+            "user_id" => 107,
+        ]);
+
+       Pensyarah_Penilai_OJT::factory()->create([
+            "id" => 3,
+            "user_id" => 108,
+        ]);
     }
 }

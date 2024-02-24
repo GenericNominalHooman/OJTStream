@@ -33,13 +33,16 @@ return new class extends Migration
             $table->boolean('slipped_disc')->default(false);
 
             // Pensyarah penilai
-            $table->foreignId('pensyarah_penilai_id')->constrained()->onDelete('cascade')->nullable(true);
+            $table->bigInteger('pensyarah_penilai_id')->unsigned()->nullable(true);
+            $table->foreign('pensyarah_penilai_id')->references("id")->on("pensyarah_penilais")->nullOnDelete();
             
             // Pensyarah penilai ojt
-            $table->foreignId('pensyarah_penilai_ojt_id')->constrained()->onDelete('cascade')->nullable(true);
-
+            $table->bigInteger('pensyarah_penilai_ojt_id')->unsigned()->nullable(true);
+            $table->foreign('pensyarah_penilai_ojt_id')->references("id")->on("pensyarah_penilai_ojts")->nullOnDelete();
+            
             // Penyeleras program
-            $table->foreignId('penyelaras_program_id')->constrained()->onDelete('cascade')->nullable(true);
+            $table->bigInteger('penyelaras_program_id')->unsigned()->nullable(true);
+            $table->foreign('penyelaras_program_id')->references("id")->on("penyelaras_programs")->nullOnDelete();
         });
     }
 

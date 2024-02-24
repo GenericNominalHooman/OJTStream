@@ -14,9 +14,14 @@ class Pelajar extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     // Other pelajar properties to be verified
-    // ];
+    protected $fillable = [
+        "pensyarah_penilai_ojt_id",
+        "pensyarah_penilai_id",
+        "penyelaras_program_id",
+        "janji_temu_1",
+        "janji_temu_2",
+    ];
+    
     protected $primaryKey = "user_id";
 
     public function User(){
@@ -35,10 +40,6 @@ class Pelajar extends Model
         return $this->hasOne(Penyelaras_Program::class, "id", "penyelaras_program_id");
     }
 
-    public function Company(){
-        return $this->hasOne(Company::class, "id", "company_id");
-    }
-
     public function Janji_Temu_1(){
         return $this->hasOne(JanjiTemu::class, "id", "janji_temu_1");
     }
@@ -47,8 +48,8 @@ class Pelajar extends Model
         return $this->hasOne(JanjiTemu::class, "id", "janji_temu_2");
     }
 
-    public function Janji_Temus(){
-        return $this->hasMany(JanjiTemu::class, "pensyarah_penilai_ojt_id", "pensyarah_penilai_ojt_id");
+    public function JanjiTemusPelajar(){
+        return $this->hasMany(JanjiTemusPelajar::class, "pelajar_id", "user_id");
     }
 
     public function Pelajars_Company(){

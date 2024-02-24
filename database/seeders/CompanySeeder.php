@@ -13,17 +13,17 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        Company::factory()->create([
-            "comp_type" => "university",
-            "comp_name" => "Company Name 1",
-            "comp_address_street" => "Company St 1",
-            "comp_address_city" => "Company City 1",
-            "comp_address_province" => "Province 1",
-            "comp_contact" => "11111",
-            "ojt_supervisor" => "Mr ABC",
-            "students_deployed_count" => 1,
-            "created_at" => now(),
-            "updated_at" => now(),
-        ]);
+        Company::factory()->times(3)->create();
+        // $table->enum('type', ['public', 'private'])->default('private');
+        // $table->string('name', 32);
+        // $table->string('address')->nullable();
+        // $table->string('telephone', 32);
+        // $table->string('email');
+
+        // $table->string('ojt_supervisor', 64);
+
+        // $table->integer('students_deployed_count')->default(0);
+        // $table->timestamps();
+
     }
 }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger("pelajar_id")->unsigned();
             $table->foreign('pelajar_id')->references('user_id')->on('pelajars')->onDelete('cascade');
+            $table->enum("visit_type", ["Lawatan PPO 1", "Lawatan PPO 2"])->nullable(false);
             $table->bigInteger("janji_temu_id")->unsigned();
             $table->foreign('janji_temu_id')->references('id')->on('janji_temus')->onDelete('cascade');
 

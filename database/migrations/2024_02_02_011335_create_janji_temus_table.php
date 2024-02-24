@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('janji_temus', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("pensyarah_penilai_ojt_id")->unsigned();
-            $table->foreign('pensyarah_penilai_ojt_id')->references('id')->on('pensyarah_penilai_ojts')->onDelete('cascade');
-            $table->enum("visit_type", ["Lawatan PPO 1", "Lawatan PPO 2"])->nullable(false);
+            $table->bigInteger("pensyarah_penilai_ojt_id")->unsigned()->nullable(true);
+            $table->foreign('pensyarah_penilai_ojt_id')->references('id')->on('pensyarah_penilai_ojts')->onDelete("cascade");
             $table->dateTime("visit_at")->nullable(false);
             $table->timestamps();
         });
