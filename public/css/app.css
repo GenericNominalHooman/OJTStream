@@ -688,6 +688,9 @@ video {
 .grid {
   display: grid;
 }
+.hidden {
+  display: none;
+}
 .w-10 {
   width: 2.5rem;
 }

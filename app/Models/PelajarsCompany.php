@@ -13,4 +13,8 @@ class PelajarsCompany extends Model
     public function Company(){
         return $this->belongsTo(Company::class);
     }
+
+    protected $fillable = [
+        "company_id",
+    ];
 }

@@ -72,7 +72,7 @@ class TambahPelajar extends Component
                     'company.comp_email' => 'required',
                     
                     // PELAJAR-COMPANY VALUES
-                    'pelajars_company.role' => 'required',
+                    'pelajar_company.role' => 'required',
                 ];
             }else{ // Biodata And Skop Kerja Update
                 return [
@@ -112,7 +112,7 @@ class TambahPelajar extends Component
                     'company.comp_email' => 'required',
                     
                     // PELAJAR-COMPANY VALUES
-                    'pelajars_company.role' => 'required',
+                    'pelajar_company.role' => 'required',
     
                     // JOB SCOPE
                     'skop_kerja.document_path' => 'required',

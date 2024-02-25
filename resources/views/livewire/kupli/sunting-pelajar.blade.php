@@ -317,7 +317,7 @@ use Carbon\Carbon;
                         <div class="mb-3 col-12">
 
                             <label class="form-label">Penyelaras Program Pelajar</label>
-                            <select class="form-control" wire:model='penyelaras_program_input' wire:click='onPenyelerasProgramInputChange'>
+                            <select class="form-control" wire:model='penyelaras_program_input' wire:change='onPenyelerasProgramInputChange'>
                                 <option value="" selected disabled>Pilih...</option>
                                 @foreach ($penyelaras_program_all as $penyelaras_program_iterate)
                                 @php
@@ -341,7 +341,7 @@ use Carbon\Carbon;
                         <div class="mb-3 col-12">
 
                             <label class="form-label">Pensyarah Penilai Pelajar</label>
-                            <select class="form-control" wire:model='pensyarah_penilai_input' wire:click='onPensyarahPenilaiInputChange'>
+                            <select class="form-control" wire:model='pensyarah_penilai_input' wire:change='onPensyarahPenilaiInputChange'>
                                 <option value="" selected disabled>Pilih...</option>
                                 @foreach ($pensyarah_penilai_all as $pensyarah_penilai_iterate)
                                 @php
@@ -609,117 +609,73 @@ use Carbon\Carbon;
                 <form wire:submit.prevent='update'>
     
                     {{-- ORGANISASI LATIHAN BEGIN --}}
-    
+                    
                     <div class="row">
-                        
+
                         <div class="mb-3 col-md-6">
-    
+
                             <label class="form-label">Nama Organisasi Latihan</label>
                             <input wire:model.lazy="company.name" type="text" class="form-control border border-2 p-2">
                             @error('company.name')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
-    
+
                         <div class="mb-3 col-md-6">
-    
+
                             <label class="form-label">Nombor Telefon</label>
-                            <input wire:model.lazy="company.telephone_number" type="text"
-                                class="form-control border border-2 p-2">
+                            <input wire:model.lazy="company.telephone_number" type="text" class="form-control border border-2 p-2">
                             @error('company.telephone_number')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
-    
+
                         <div class="mb-3 col-md-6">
-    
+
                             <label class="form-label">Nama Penyelia Organisasi</label>
-                            <input wire:model.lazy="company.ojt_supervisor" type="text"
-                                class="form-control border border-2 p-2">
+                            <input wire:model.lazy="company.ojt_supervisor" type="text" class="form-control border border-2 p-2">
                             @error('company.ojt_supervisor')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
-    
+
                         <div class="mb-3 col-md-6">
-    
+
                             <label class="form-label">Alamat Emel</label>
-                            <input wire:model.lazy="company.comp_email" type="text"
-                                class="form-control border border-2 p-2">
-                            @error('company.comp_email')
+                            <input wire:model.lazy="company.email" type="text" class="form-control border border-2 p-2">
+                            @error('company.email')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
-    
+        
                         <div class="mb-3 col-md-6">
-    
+
                             <label class="form-label">Jawatan Diperoleh</label>
-                            <input wire:model.lazy="pelajars_company.role" type="text"
-                                class="form-control border border-2 p-2">
-                            @error('pelajars_company.role')
+                            <input wire:model.lazy="pelajar_company.role" type="text" class="form-control border border-2 p-2">
+                            @error('pelajar_company.role')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
-    
-    
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Alamat Syarikat</h6>
-                            </div>
-                        </div>
-    
+
                         <div class="mb-3 col-md-6">
-    
-                            <label class="form-label">Alamat Syarikat: Negeri</label>
-                            <input wire:model.lazy="company.comp_address_province" type="text"
-                                class="form-control border border-2 p-2">
-                            @error('company.comp_address_province')
+
+                            <label class="form-label">Alamat Syarikat: </label>
+                            <input wire:model.lazy="company.address" type="text" class="form-control border border-2 p-2">
+                            @error('company.address')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
-    
-                        <div class="mb-3 col-md-6">
-    
-                            <label class="form-label">Alamat Syarikat: Jalan</label>
-                            <input wire:model.lazy="company.comp_address_street" type="text"
-                                class="form-control border border-2 p-2">
-                            @error('company.comp_address_street')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-    
-                        <div class="mb-3 col-md-6">
-    
-                            <label class="form-label">Alamat Syarikat: Bandar</label>
-                            <input wire:model.lazy="company.comp_address_city" type="text"
-                                class="form-control border border-2 p-2">
-                            @error('company.comp_address_city')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-    
-                        <div class="mb-3 col-md-12">
-    
-                            <label for="skop_kerja_input">Skop Kerja</label>
-                            <input wire:model="skop_kerja_input" type="file" class="form-control" id="skop_kerja_input">
-                            @error('skop_kerja_input')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-    
+                        
                         <div class="mb-3 col-md-12">
                             @if (Storage::disk("local")->exists($this->skop_kerja->document_path))
-                            <p class="text text-success">Skop Kerja Telah Dimuat
-                                Naik({{Carbon::parse($this->skop_kerja->updated_at)->format("d/m/Y - h:i")}})</p>
+                                <p class="text text-success">Skop Kerja Telah Dimuat Naik({{Carbon::parse($this->skop_kerja->updated_at)->format("d/m/Y - h:i")}})</p>
                             @else
-                            <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
+                                <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
                             @endif
-                            <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()'
-                                @if(!(Storage::disk("local")->exists($this->skop_kerja->document_path))) disabled
-                                @endif>MuatTurun Skop Kerja</button>
+                            <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()' @if (!(Storage::disk("local")->exists($this->skop_kerja->document_path))) disabled @endif>Muat Turun Skop Kerja</button>
                         </div>
                     </div>
-    
+
                     {{-- ORGANISASI LATIHAN ENDS --}}
     
                     <button type="submit" class="btn bg-gradient-dark">Simpan</button>

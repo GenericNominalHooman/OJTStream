@@ -556,8 +556,8 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Jawatan Diperoleh</label>
-                            <input wire:model.lazy="pelajars_company.role" type="text" class="form-control border border-2 p-2">
-                            @error('pelajars_company.role')
+                            <input wire:model.lazy="pelajar_company.role" type="text" class="form-control border border-2 p-2">
+                            @error('pelajar_company.role')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>

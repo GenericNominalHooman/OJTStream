@@ -23,7 +23,31 @@
                         {{ auth()->user()->name }}
                     </h5>
                     <p class="mb-0 font-weight-normal text-sm">
-                        User ROles | OJT STATUS(OJT BEGIN DATE - OJT END DATE)
+                        <ul class="m-0 p-0">
+                            @foreach (auth()->user()->getRoles() as $user_role)
+                                <li>{{$user_role}}</li>    
+                            @endforeach
+                        </ul>
+                        @if ($pelajar_company != null)
+                           @if ($pelajar_company->ojt_begin_date != null)
+                                @php
+                                    $ojt_begin_date = Carbon::parse($pelajar_company->ojt_begin_date);
+                                    $ojt_end_date = Carbon::parse($pelajar_company->ojt_end_date);
+                                    $current_time = Carbon::parse(now());
+                                @endphp
+                                @if ($current_time->gt($ojt_begin_date))
+                                    @if ($current_time->gt($ojt_end_date))
+                                        {{-- TAMAT BEROJT --}}
+                                        <p>Tamat OJT({{$ojt_begin_date->format("d/m/Y")}} - {{$ojt_end_date->format("d/m/Y")}})</p>
+                                    @else
+                                        {{-- SEDANG BEROJT --}}
+                                        <p>Sedang Ber-OJT({{$ojt_begin_date->format("d/m/Y")}} - {{$ojt_end_date->format("d/m/Y")}})</p>
+                                    @endif
+                                @else
+                                    <p>Belum Ber-OJT({{$ojt_begin_date->format("d/m/Y")}} - {{$ojt_end_date->format("d/m/Y")}})</p>
+                                @endif
+                            @endif
+                        @endif
                     </p>
                 </div>
             </div>
@@ -89,12 +113,13 @@
                     </div>
                 </div>
                 @endif
-                <form wire:submit.prevent='update'>
+                <form wire:submit.prevent='updateBiodata'>
                     <div class="row">
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Email</label>
+                            <input wire:model.lazy="user.email" type="hidden" class="hidden">
                             <input wire:model.lazy="user.email" type="email" class="form-control border border-2 p-2">
                             @error('user.email')
                             <p class='text-danger inputerror'>{{ $message }} </p>
@@ -345,19 +370,19 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai_ojt->name}}" type="text" class="form-control border border-2 p-2">
+                            <input disabled value="{{$pensyarah_penilai_user->name}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->phone}}" type="text" class="form-control border border-2 p-2">
+                            <input disabled value="{{$pensyarah_penilai_user->phone}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->email}}" type="text" class="form-control border border-2 p-2">
+                            <input disabled value="{{$pensyarah_penilai_user->email}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         {{-- PENSYARAH PENILAI SECTION ENDS --}}
@@ -431,51 +456,24 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled value="{{$pensyarah_penilai_ojt->name}}" type="text" class="form-control border border-2 p-2">
+                            <input disabled value="{{$pensyarah_penilai_ojt_user->name}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nombor Telefon Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled value="{{$pensyarah_penilai_ojt->phone}}" type="text" class="form-control border border-2 p-2">
+                            <input disabled value="{{$pensyarah_penilai_ojt_user->phone}}" type="text" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Emel Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled value="{{$pensyarah_penilai_ojt->email}}" type="text" class="form-control border border-2 p-2">
+                            <input disabled value="{{$pensyarah_penilai_ojt_user->email}}" type="text" class="form-control border border-2 p-2">
                         </div>
                         
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Maklumat Pensyarah Penilai</h6>
-                            </div>
-                        </div>
-
                         {{-- ADD TARIKH LAWATAN1/2 --}}
 
                         {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
-                        {{-- PENSYARAH PENILAI SECTION BEGIN --}}
-        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->name}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->phone}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->email}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        {{-- PENSYARAH PENILAI SECTION ENDS --}}
                     </div>
                 </form>
             </div>
@@ -512,62 +510,74 @@
                     </div>
                 </div>
                 @endif
-                <form wire:submit.prevent='update'>
+                <form wire:submit.prevent='updateOrganisasi'>
 
                     {{-- ORGANISASI LATIHAN BEGIN --}}
                     
                     <div class="row">
 
+                        <div class="mb-3 col-12">
+
+                            <label class="form-label">Organisasi</label>
+                            <select class="form-control" wire:model='company_input' wire:change='onCompanyInputChange'>
+                                <option value="" selected disabled>Pilih...</option>
+                                @foreach ($company_all as $company_iterate)
+                                <option value="{{$company_iterate->id}}">
+                                    {{$company_iterate->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('company_input')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Organisasi Latihan</label>
-                            <input wire:model.lazy="company.name" type="text" class="form-control border border-2 p-2">
-                            @error('company.name')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input @if($pelajarHasCompanyPelajar) value="{{$company->name}}" @endif type="text" class="form-control border border-2 p-2" disabled>
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nombor Telefon</label>
-                            <input wire:model.lazy="company.telephone_number" type="text" class="form-control border border-2 p-2">
-                            @error('company.telephone_number')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input @if($pelajarHasCompanyPelajar) value="{{$company->telephone_number}}" @endif type="text" class="form-control border border-2 p-2" disabled>
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama Penyelia Organisasi</label>
-                            <input wire:model.lazy="company.ojt_supervisor" type="text" class="form-control border border-2 p-2">
-                            @error('company.ojt_supervisor')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input @if($pelajarHasCompanyPelajar) value="{{$company->ojt_supervisor}}" @endif type="text" class="form-control border border-2 p-2" disabled>
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Emel</label>
-                            <input wire:model.lazy="company.email" type="text" class="form-control border border-2 p-2">
-                            @error('company.email')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <input @if($pelajarHasCompanyPelajar) value="{{$company->email}}" @endif type="text" class="form-control border border-2 p-2" disabled>
                         </div>
         
                         <div class="mb-3 col-md-6">
 
-                            <label class="form-label">Jawatan Diperoleh</label>
-                            <input wire:model.lazy="pelajars_company.role" type="text" class="form-control border border-2 p-2">
-                            @error('pelajars_company.role')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
+                            <label class="form-label">Tarikh mula OJT</label>
+                            <input @if($pelajarHasCompanyPelajar) value="{{$pelajar_company->ojt_begin_date}}" @endif type="date" class="form-control border border-2 p-2" disabled>
+                        </div>
+                        
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Tarikh akhir OJT</label>
+                            <input @if($pelajarHasCompanyPelajar) value="{{$pelajar_company->ojt_end_date}}" @endif type="date" class="form-control border border-2 p-2" disabled>
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Alamat Syarikat: </label>
-                            <input wire:model.lazy="company.address" type="text" class="form-control border border-2 p-2">
-                            @error('company.address')
+                            <input @if($pelajarHasCompanyPelajar) value="{{$company->address}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                        </div>
+                        
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Jawatan Diperoleh</label>
+                            <input wire:model.lazy="pelajar_company.role" type="text" class="form-control border border-2 p-2">
+                            @error('pelajar_company.role')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -582,12 +592,15 @@
                         </div>
 
                         <div class="mb-3 col-md-12">
-                            @if (Storage::disk("local")->exists($this->skop_kerja->document_path))
-                                <p class="text text-success">Skop Kerja Telah Dimuat Naik({{Carbon::parse($this->skop_kerja->updated_at)->format("d/m/Y - h:i")}})</p>
-                            @else
+                            @if ($pelajarHasSkopKerja)
+                            {{-- PELAJAR HAS UPLOADED SKOP KERJA --}}
                                 <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
+                                <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()'>Muat Turun Skop Kerja</button>
+                            @else
+                                {{-- PELAJAR HASNT UPLOADED SKOP KERJA --}}
+                                <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
+                                <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()' disabled>Muat Turun Skop Kerja</button>
                             @endif
-                            <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()' @if (!(Storage::disk("local")->exists($this->skop_kerja->document_path))) disabled @endif>Muat Turun Skop Kerja</button>
                         </div>
                     </div>
 

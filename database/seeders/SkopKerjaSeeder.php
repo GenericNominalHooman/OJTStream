@@ -13,6 +13,14 @@ class SkopKerjaSeeder extends Seeder
      */
     public function run(): void
     {
-        SkopKerja::factory()->times(2)->create();
+        SkopKerja::factory()->create([
+            "document_name" => "JOB_DESCRIPTION.pdf",
+            "document_path" => "Pelajar_AKV0222KA009/ORGANISASI_LATIHAN/JOB_DESCRIPTION.pdf",
+        ]);
+
+        SkopKerja::factory()->create([
+            "document_name" => "JOB_DESCRIPTION.pdf",
+            "document_path" => "Pelajar_AKV0222KA010/ORGANISASI_LATIHAN/JOB_DESCRIPTION.pdf",
+        ]);
     }
 }

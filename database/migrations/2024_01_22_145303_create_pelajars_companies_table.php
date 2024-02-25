@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('pelajars_companies', function (Blueprint $table) {
             // PELAJAR
-            $table->id('pelajar_id');
+            $table->id('id');
+            $table->bigInteger('pelajar_id')->unsigned()->nullable(false);
             $table->string('role')->nullable(false);
             $table->foreign('pelajar_id')->references('user_id')->on('pelajars')->onDelete('cascade');
 
             // COMPANY
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
-            $table->date("ojt_begin_date")->nullable(false);
-            $table->date("ojt_end_date")->nullable(false);
+            $table->date("ojt_begin_date")->nullable(true);
+            $table->date("ojt_end_date")->nullable(true);
             $table->timestamps();
         });
     }

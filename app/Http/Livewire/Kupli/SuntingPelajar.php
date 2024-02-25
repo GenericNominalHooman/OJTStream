@@ -100,14 +100,12 @@ class SuntingPelajar extends Component
     
                     // COMPANY VALUES
                     'company.comp_type' => 'required',
-                    'company.comp_name' => 'required',
-                    'company.comp_address_street' => 'required',
-                    'company.comp_address_city' => 'required',
-                    'company.comp_address_province' => 'required',
-                    'company.comp_contact' => 'required',
+                    'company.name' => 'required',
+                    'company.address' => 'required',
+                    'company.telephone_number' => 'required',
                     'company.ojt_supervisor' => 'required',
                     'company.students_deployed_count' => 'required',
-                    'company.comp_email' => 'required',
+                    'company.email' => 'required',
                     
                     // PELAJAR-COMPANY VALUES
                     'pelajar_company.role' => 'required',
@@ -140,14 +138,12 @@ class SuntingPelajar extends Component
     
                     // COMPANY VALUES
                     'company.comp_type' => 'required',
-                    'company.comp_name' => 'required',
-                    'company.comp_address_street' => 'required',
-                    'company.comp_address_city' => 'required',
-                    'company.comp_address_province' => 'required',
-                    'company.comp_contact' => 'required',
+                    'company.name' => 'required',
+                    'company.address' => 'required',
+                    'company.telephone_number' => 'required',
                     'company.ojt_supervisor' => 'required',
                     'company.students_deployed_count' => 'required',
-                    'company.comp_email' => 'required',
+                    'company.email' => 'required',
                     
                     // PELAJAR-COMPANY VALUES
                     'pelajar_company.role' => 'required',
@@ -200,9 +196,9 @@ class SuntingPelajar extends Component
         // COMPANY
         $this->company_all = Company::get();
         $this->pelajar_company = $this->pelajar->Pelajars_Company;
-        dd($this->pelajar_company);
         $this->company = $this->pelajar_company->Company;
         $this->skop_kerja = $this->pelajar->Skop_Kerja;
+        dd($this->skop_kerja);
         
         // Sets pelajar record to update instead of insertion
         $this->pelajar->user_id = $this->user->id;

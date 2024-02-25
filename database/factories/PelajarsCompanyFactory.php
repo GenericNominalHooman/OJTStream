@@ -22,6 +22,7 @@ class PelajarsCompanyFactory extends Factory
             "ojt_begin_date" => now(),
             "ojt_end_date" => now()->addMonths(6),
             "role" => $this->faker->sentence(1)." Internship",
+            "pelajar_id" => 105,
         ];
     }
 }
