@@ -530,57 +530,61 @@
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
+                        @if ($pelajarHasCompanyPelajar)
+                            <div class="mb-3 col-md-6">
 
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Nama Organisasi Latihan</label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$company->name}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                            </div>
 
-                            <label class="form-label">Nama Organisasi Latihan</label>
-                            <input @if($pelajarHasCompanyPelajar) value="{{$company->name}}" @endif type="text" class="form-control border border-2 p-2" disabled>
-                        </div>
+                            <div class="mb-3 col-md-6">
 
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Nombor Telefon</label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$company->telephone_number}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                            </div>
 
-                            <label class="form-label">Nombor Telefon</label>
-                            <input @if($pelajarHasCompanyPelajar) value="{{$company->telephone_number}}" @endif type="text" class="form-control border border-2 p-2" disabled>
-                        </div>
+                            <div class="mb-3 col-md-6">
 
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Nama Penyelia Organisasi</label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$company->ojt_supervisor}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                            </div>
 
-                            <label class="form-label">Nama Penyelia Organisasi</label>
-                            <input @if($pelajarHasCompanyPelajar) value="{{$company->ojt_supervisor}}" @endif type="text" class="form-control border border-2 p-2" disabled>
-                        </div>
+                            <div class="mb-3 col-md-6">
 
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Alamat Emel</label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$company->email}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                            </div>
+            
+                            <div class="mb-3 col-md-6">
 
-                            <label class="form-label">Alamat Emel</label>
-                            <input @if($pelajarHasCompanyPelajar) value="{{$company->email}}" @endif type="text" class="form-control border border-2 p-2" disabled>
-                        </div>
-        
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Tarikh mula OJT</label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$pelajar_company->ojt_begin_date}}" @endif type="date" class="form-control border border-2 p-2" disabled>
+                            </div>
+                            
+                            <div class="mb-3 col-md-6">
 
-                            <label class="form-label">Tarikh mula OJT</label>
-                            <input @if($pelajarHasCompanyPelajar) value="{{$pelajar_company->ojt_begin_date}}" @endif type="date" class="form-control border border-2 p-2" disabled>
-                        </div>
-                        
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Tarikh akhir OJT</label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$pelajar_company->ojt_end_date}}" @endif type="date" class="form-control border border-2 p-2" disabled>
+                            </div>
 
-                            <label class="form-label">Tarikh akhir OJT</label>
-                            <input @if($pelajarHasCompanyPelajar) value="{{$pelajar_company->ojt_end_date}}" @endif type="date" class="form-control border border-2 p-2" disabled>
-                        </div>
+                            <div class="mb-3 col-md-6">
 
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Alamat Syarikat: </label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$company->address}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                            </div>
+                            
+                            <div class="mb-3 col-md-6">
 
-                            <label class="form-label">Alamat Syarikat: </label>
-                            <input @if($pelajarHasCompanyPelajar) value="{{$company->address}}" @endif type="text" class="form-control border border-2 p-2" disabled>
-                        </div>
-                        
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Jawatan Diperoleh</label>
+                                <input wire:model.lazy="pelajar_company.role" type="text" class="form-control border border-2 p-2">
+                                @error('pelajar_company.role')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror
+                            </div>
+                        @else
+                            <p class="text text-danger">Anda belum berdaftar dimana-mana syarikat</p>
+                        @endif
 
-                            <label class="form-label">Jawatan Diperoleh</label>
-                            <input wire:model.lazy="pelajar_company.role" type="text" class="form-control border border-2 p-2">
-                            @error('pelajar_company.role')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
                         
                         <div class="mb-3 col-md-12">
 

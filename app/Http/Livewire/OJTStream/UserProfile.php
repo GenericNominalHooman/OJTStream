@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire\OJTStream;
 
-use Log;
-use PDO;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Pelajar;
@@ -14,10 +12,8 @@ use Livewire\WithFileUploads;
 use App\Models\PelajarsCompany;
 use App\Models\Pensyarah_Penilai;
 use App\Models\Penyelaras_Program;
-use Illuminate\Support\Facades\File;
 use App\Models\Pensyarah_Penilai_OJT;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\ValidationException;
 
 class UserProfile extends Component
 {
@@ -61,8 +57,9 @@ class UserProfile extends Component
     public $pelajarHasJanjiTemu1 = false;
     public $pelajarHasJanjiTemu2 = false;
     
-    // PELAJAR PROEPRTIES ENDS
-
+    // 
+    // LIVEWIRE FUNCTIONS
+    // 
     protected function rules()
     {
         // PELAJAR SECTION BEGIN
@@ -106,18 +103,157 @@ class UserProfile extends Component
         }else if($this->activeTab == 'organisasi'){ // Biodata And Skop Kerja Update
             return [
                 // SKOP KERJA VALUE
-                'skop_kerja_input' => 'file|mimes:pdf|required', // READD MAX SIZE IN PRODUCTION
+                'skop_kerja_input' => 'file|mimes:pdf|nullable', // READD MAX SIZE IN PRODUCTION
 
-                // COMPANY VALUES
-                'company_input' => 'required',
+                'pelajar_company.id' => 'nullable',
 
                 // PELAJAR-COMPANY VALUES
-                'pelajar_company.role' => 'required',
+                'pelajar_company.role' => 'nullable',
             ];
         }
         // PELAJAR SECTION ENDS
     }
 
+    public function mount()
+    {
+        $this->user = auth()->user();
+        $this->roles = $this->user->getRoles();
+
+        // GET DATA TO BE USED
+        $this->getPelajar();
+        $this->getPelajarPenyelarasProgram();
+        $this->getPelajarPensyarahPenilai();
+        $this->getPelajarPensyarahPenilaiOJT();
+        $this->getPelajarSkopKerja();
+        $this->getPelajarJanjiTemu();
+        $this->getPelajarCompany();
+        $this->company_all = Company::get();
+
+        // Sets pelajar record to update instead of insertion
+        $this->pelajar->user_id = $this->user->id;
+    }
+
+    public function render()
+    {
+        // Rediret based on user roles    
+        return view('livewire.o-j-t-stream.user-profile');
+    }
+    
+    // 
+    // UPDATE FUNCTIONS
+    // 
+    public function updateBiodata(){
+        // UPDATE USER AND PELAJAR
+        $this->pelajar->save();
+        $this->user->save();
+
+        // MESSAGE
+        session()->flash("status", "Berjaya mengemaskini maklumat biodata profil");
+    }
+
+    public function updateOrganisasi(){        
+        // VALIDATE
+        $this->validate();
+
+        // UPDATE DB
+        if($this->skop_kerja_input != null){
+            $this->uploadAndSaveSkopKerja();
+            $this->pelajar->skop_kerja_id = $this->skop_kerja->id;
+        }
+        if($this->company_input != null){
+            $this->createAndSaveCompany();
+            $this->pelajar->pelajar_company_id = $this->pelajar_company->id;
+        }
+        if($this->pelajar_company->role != null){
+            $this->createAndSaveCompanyRole();
+            $this->pelajar->pelajar_company_id = $this->pelajar_company->id;
+        }
+        
+        // MESSAGE
+        session()->flash("status", "Maklumat organisasi anda telah berjaya dikemaskini");
+    }
+
+    // public function updateOrganisasi(){        
+    //     // SAVE FILE
+    //     if($this->skop_kerja_input != null){
+    //         // CREATE OR UPLOAD A SKOP KERJA
+    //         $this->uploadAndSaveSkopKerja();
+    //         $this->pelajar->update([
+    //             "skop_kerja_id" => $this->skop_kerja->id,
+    //         ]);    
+    //     }
+    //     if($this->company_input != null){
+
+    //         if($this->pelajarHasCompanyPelajar){
+    //         }
+
+    //         $this->pelajar->update([
+    //             "pelajar_company_id" => $this->skop_kerja->id,
+    //         ]);    
+    //         $this->pelajar_company->save();
+    //     }
+
+    //     // Dump the pelajar instance after the update attempt
+    //     dd($this->pelajar);
+        
+    //     if($this->company_input != null){
+    //         $this->pelajar_company->update([
+    //             "company_id" => $this->company_input,
+    //         ]);
+    //     }
+        
+    //     // MESSAGE
+    //     session()->flash("status", "Maklumat organisasi anda telah berjaya dikemaskini");
+    // }
+
+    public function uploadAndSaveSkopKerja(){
+        $file_extension = $this->skop_kerja_input->getClientOriginalExtension();
+        if($this->skop_kerja != null){
+            // UPDATE SKOP KERJA
+            $this->skop_kerja->document_name = "JOB_DESCRIPTION.".$file_extension;
+            $this->skop_kerja->document_path = $this->skop_kerja_input->storeAs($this->pelajar->getPelajarDirectory().'/ORGANISASI_LATIHAN', $this->skop_kerja->document_name, 'local');                
+            $this->skop_kerja->save();
+        }else{
+            // CREAET SKOP KERJA
+            $this->skop_kerja = $this->pelajar->Skop_Kerja()->create([
+                "document_name" => "JOB_DESCRIPTION.".$file_extension,
+                "document_path" => $this->skop_kerja_input->storeAs($this->pelajar->getPelajarDirectory().'/ORGANISASI_LATIHAN', "JOB_DESCRIPTION.".$file_extension, 'local'),
+            ]);
+        }
+    }
+
+    public function createAndSaveCompany(){ 
+        if($this->pelajar_company != null){
+            // UPDATE PELAJAR COMPANY
+            $this->pelajar_company->update([
+                "company_id" => $this->company_input,
+            ]);
+        }else{
+            // CREAET PELAJAR COMPANY
+            $this->pelajar->Pelajars_Company()->create([
+                "pelajar_id" => $this->pelajar->id,
+                "company_id" => $this->company_input,
+            ]);
+        }
+    }
+
+    public function createAndSaveCompanyRole(){ 
+        if($this->pelajar_company != null){
+            // UPDATE PELAJAR COMPANY
+            $this->pelajar_company->update([
+                "role" => $this->company->role,
+            ]);
+        }else{
+            // CREAET PELAJAR COMPANY
+            $this->pelajar->Pelajars_Company()->create([
+                "role" => $this->company->role,
+            ]);
+        }
+    }
+
+    // 
+    // GET FUNCTIONS
+    // 
     public function getPelajarCompany(){
         if($this->pelajar->Pelajars_Company == null){
             $this->pelajarHasCompanyPelajar = false;
@@ -189,100 +325,25 @@ class UserProfile extends Component
             $this->pelajar = $this->user->Pelajar;
         }
     }
-    
-    public function mount()
-    {
-        $this->user = auth()->user();
-        $this->roles = $this->user->getRoles();
 
-        // GET DATA TO BE USED
-        $this->getPelajar();
-        $this->getPelajarPenyelarasProgram();
-        $this->getPelajarPensyarahPenilai();
-        $this->getPelajarPensyarahPenilaiOJT();
-        $this->getPelajarSkopKerja();
-        $this->getPelajarJanjiTemu();
-        $this->getPelajarCompany();
-        $this->company_all = Company::get();
-
-        // Sets pelajar record to update instead of insertion
-        $this->pelajar->user_id = $this->user->id;
-    }
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-    public function uploadAndSaveSkopKerja(){
-        if($this->skop_kerja_input != null){
-            $file_extension = $this->skop_kerja_input->getClientOriginalExtension();
-            if($this->skop_kerja != null){
-                // UPDATE SKOP KERJA
-                $this->skop_kerja->document_name = "JOB_DESCRIPTION.".$file_extension;
-                $this->skop_kerja->document_path = $this->skop_kerja_input->storeAs($this->pelajar->getPelajarDirectory().'/ORGANISASI_LATIHAN', $this->skop_kerja->document_name, 'local');                
-                $this->skop_kerja->save();
-            }else{
-                // CREAET SKOP KERJA
-                $this->skop_kerja = $this->pelajar->Skop_Kerja()->create([
-                    "document_name" => "JOB_DESCRIPTION.".$file_extension,
-                    "document_path" => $this->skop_kerja_input->storeAs($this->pelajar->getPelajarDirectory().'/ORGANISASI_LATIHAN', "JOB_DESCRIPTION.".$file_extension, 'local'),
-                ]);
-            }
-        }
-    }
-
-    public function createPelajarsCompany(){
-        $this->pelajar->Pelajars_Company()->create([
-            "role" => $this->role_input,
-            "company_id" => $this->company->id,
-        ]);
-    }
-
-    public function updateBiodata(){
-        // UPDATE USER AND PELAJAR
-        $this->pelajar->save();
-        $this->user->save();
-
-        // MESSAGE
-        session()->flash("status", "Berjaya mengemaskini maklumat biodata profil");
-    }
-
-    public function updateOrganisasi(){        
-        // SAVE FILE
-        if($this->skop_kerja_input != null){
-            // CREATE OR UPLOAD A SKOP KERJA
-            $this->uploadAndSaveSkopKerja();
-            $this->pelajar->update([
-                "skop_kerja_id" => $this->skop_kerja->id,
-            ]);    
-        }
-        if($this->company_input != null){
-
-            if($this->pelajarHasCompanyPelajar){
-            }
-
-            $this->pelajar->update([
-                "pelajar_company_id" => $this->skop_kerja->id,
-            ]);    
-            $this->pelajar_company->save();
-        }
-
-        // Dump the pelajar instance after the update attempt
-        dd($this->pelajar);
-        
-        if($this->company_input != null){
-            $this->pelajar_company->update([
-                "company_id" => $this->company_input,
-            ]);
-        }
-        
-        // MESSAGE
-        session()->flash("status", "Maklumat organisasi anda telah berjaya dikemaskini");
+    // 
+    // MISC FUNCTIONS
+    // 
+    // Function for displaying appropiate tabs once clicked
+    public function switchTab($tabName){
+        $this->activeTab = $tabName;
     }
 
     public function onCompanyInputChange(){
         $this->company = Company::where("id", $this->company_input)->first();
+    }
+
+    public function downloadSkopKerja(){
+        if(Storage::disk("local")->exists($this->skop_kerja->document_path)){
+            return Storage::disk("local")->download($this->skop_kerja->document_path, $this->skop_kerja->document_name);
+        }else{
+            return redirect()->response("No file found", 404);
+        }
     }
 
     // public function update()
@@ -320,23 +381,4 @@ class UserProfile extends Component
     //         return back()->withStatus('Error occcured while updating the profile.');
     //     }
     // }
-
-    public function render()
-    {
-        // Rediret based on user roles    
-        return view('livewire.o-j-t-stream.user-profile');
-    }
-
-    // Function for displaying appropiate tabs once clicked
-    public function switchTab($tabName){
-        $this->activeTab = $tabName;
-    }
-
-    public function downloadSkopKerja(){
-        if(Storage::disk("local")->exists($this->skop_kerja->document_path)){
-            return Storage::disk("local")->download($this->skop_kerja->document_path, $this->skop_kerja->document_name);
-        }else{
-            return redirect()->response("No file found", 404);
-        }
-    }
 }

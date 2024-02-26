@@ -56,7 +56,7 @@ class SuntingPelajar extends Component
     // COMPANY PELAJAR
     public PelajarsCompany $pelajar_company;
     public Company $company;
-    public SkopKerja $skop_kerja;
+    public $skop_kerja;
     public $skop_kerja_input;
     public $penyelaras_program_all;
     public $pensyarah_penilai_all;
@@ -73,7 +73,7 @@ class SuntingPelajar extends Component
         // PELAJAR SECTION BEGIN
         // RETURN DIFFERENT RULES FOR DIFFERENT TYPE OF UPLOADS
         if($this->user->isPelajar()){
-            if($this->skop_kerja_input == null){ // Biodata Only Update
+            if($this->activeTab == "biodata"){ // Biodata Only Update
                 return [
                     // PELAJAR BIODATA VALUES
                     'user.name' => 'required',
@@ -99,7 +99,7 @@ class SuntingPelajar extends Component
                     'pelajar.cohort'=> 'required',
     
                     // COMPANY VALUES
-                    'company.comp_type' => 'required',
+                    'company.type' => 'required',
                     'company.name' => 'required',
                     'company.address' => 'required',
                     'company.telephone_number' => 'required',
@@ -198,7 +198,6 @@ class SuntingPelajar extends Component
         $this->pelajar_company = $this->pelajar->Pelajars_Company;
         $this->company = $this->pelajar_company->Company;
         $this->skop_kerja = $this->pelajar->Skop_Kerja;
-        dd($this->skop_kerja);
         
         // Sets pelajar record to update instead of insertion
         $this->pelajar->user_id = $this->user->id;
@@ -210,10 +209,21 @@ class SuntingPelajar extends Component
     }
 
     public function uploadSkopKerja(){
-        $file_extension = $this->skop_kerja_input->getClientOriginalExtension();
-        $this->skop_kerja->document_name = "JOB_DESCRIPTION.".$file_extension;
-        $this->skop_kerja->document_path = $this->skop_kerja_input->storeAs($this->pelajar->getPelajarDirectory().'/ORGANISASI_LATIHAN', $this->skop_kerja->document_name, 'local');        
-        $this->skop_kerja->updated_at = now();        
+        if($this->skop_kerja_input!=null){
+            $file_extension = $this->skop_kerja_input->getClientOriginalExtension();
+
+            if($this->skop_kerja != null){
+                // UPDATE SKOP KERJA
+                $this->skop_kerja->document_name = "JOB_DESCRIPTION.".$file_extension;
+                $this->skop_kerja->document_path = $this->skop_kerja_input->storeAs($this->pelajar->getPelajarDirectory().'/ORGANISASI_LATIHAN', $this->skop_kerja->document_name, 'local');        
+            }else{
+                // CREATE SKOP KERJA
+                $this->skop_kerja = $this->pelajar->Skop_Kerja([
+                    "document_name" => "JOB_DESCRIPTION.".$file_extension,
+                    "document_path" => $this->skop_kerja_input->storeAs($this->pelajar->getPelajarDirectory().'/ORGANISASI_LATIHAN', "JOB_DESCRIPTION.pdf", 'local'),
+                ]);
+            }
+        }
     }
 
     public function update()
@@ -222,8 +232,8 @@ class SuntingPelajar extends Component
         if($this->skop_kerja_input != null){
             $this->uploadSkopKerja();
         }
-        
-        $this->validate();
+
+        $result = $this->validate();
 
         $profileUpdated = false;
         for($i=0; $i<sizeof($this->roles); $i++){
@@ -235,7 +245,7 @@ class SuntingPelajar extends Component
                 $this->pelajar->save();
                                 
                 // SAVE FILE PATH TO DB
-                $this->skop_kerja->save();
+                $this->uploadSkopKerja();
 
                 // PELAJAR SECTION ENDS
             }elseif(in_array("Pensyarah Penilai OJT", $this->user->getRoles())){

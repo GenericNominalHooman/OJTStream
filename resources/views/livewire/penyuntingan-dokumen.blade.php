@@ -76,7 +76,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="mb-3 col-12">
-                        <div class="row">[Preview]</div>
+                        <div class="row"></div>
                     </div>
                     
                 </div>
@@ -132,7 +132,7 @@ use Carbon\Carbon;
                     </form>
 
                     <div class="mb-3 col-12">
-                        <div class="row">[Preview]</div>
+                        <div class="row"></div>
                     </div>
                     
                 </div>

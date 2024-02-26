@@ -321,13 +321,13 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Lawatan OJT 1</label>
-                            <input disabled value="{{$janji_temu_1->visit_at}}" type="datetime" class="form-control border border-2 p-2">
+                            <input disabled @if($janji_temu_1 != null) value="{{$janji_temu_1->visit_at}}" @endif type="datetime" class="form-control border border-2 p-2">
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Lawatan OJT 2</label>
-                            <input disabled value="{{$janji_temu_2->visit_at}}" type="datetime" class="form-control border border-2 p-2">
+                            <input disabled @if($janji_temu_2 != null) value="{{$janji_temu_2->visit_at}}" @endif type="datetime" class="form-control border border-2 p-2">
                         </div>
                         
                         <div class="row">
