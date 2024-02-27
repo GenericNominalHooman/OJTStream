@@ -16,5 +16,7 @@ class PelajarsCompany extends Model
 
     protected $fillable = [
         "company_id",
+        "pelajar_id",
+        "role",
     ];
 }

@@ -86,7 +86,7 @@
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">Maklumat Biodata</h6>
+                        <h6 class="mb-3">Biodata Pelajar</h6>
                     </div>
                 </div>
             </div>
@@ -118,6 +118,25 @@
 
                         <div class="mb-3 col-md-6">
 
+                            <label class="form-label">Nama</label>
+                            <input wire:model.lazy="user.name" type="text" class="form-control border border-2 p-2">
+                            @error('user.name')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+                        
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Nombor Kad Pengenalan</label>
+                            <input wire:model.lazy="pelajar.nric_number" type="text"
+                                class="form-control border border-2 p-2">
+                            @error('pelajar.nric_number')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+
                             <label class="form-label">Alamat Email</label>
                             <input wire:model.lazy="user.email" type="hidden" class="hidden">
                             <input wire:model.lazy="user.email" type="email" class="form-control border border-2 p-2">
@@ -127,10 +146,75 @@
                         </div>
 
                         <div class="mb-3 col-md-6">
+                            <label class="form-label">Nombor Telefon</label>
+                            <input wire:model.lazy="user.phone" type="text" class="form-control border border-2 p-2">
+                            @error('user.email_verified_at')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
 
-                            <label class="form-label">Nama</label>
-                            <input wire:model.lazy="user.name" type="text" class="form-control border border-2 p-2">
-                            @error('user.name')
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Jantina</label>
+                            <div>
+                                <input wire:model='user.gender' type="radio" name="gender_male" id="gender_male"
+                                    value="male" class="form-check-input">
+                                <label for="gender_male" class="form-check-label">Male</label>
+                            </div>
+                            <div>
+                                <input wire:model='user.gender' type="radio" name="gender_female" id="gender_female"
+                                    value="female" class="form-check-input">
+                                <label for="gender_female" class="form-check-label">Female</label>
+                            </div>
+                            @error('user.gender')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label>Penyakit Kronik</label>
+                            <div>
+                                <input type="checkbox" wire:model="pelajar.heart_disease" value="1" id="heartDisease">
+                                <label for="heartDisease">Heart Disease</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" wire:model="pelajar.asthma" value="1" id="asthma">
+                                <label for="asthma">Asthma</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" wire:model="pelajar.diabetes" value="1" id="diabetes">
+                                <label for="diabetes">Diabetes</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" wire:model="pelajar.osteoporosis" value="1" id="osteoporosis">
+                                <label for="osteoporosis">Osteoporosis</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" wire:model="pelajar.slipped_disc" value="1" id="slippedDisc">
+                                <label for="slippedDisc">Slipped Disc</label>
+                            </div>
+                            @error('pelajar.penyakit_kronik')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-12">
+
+                            <label for="floatingTextarea2">Alamat Pelajar</label>
+                            <textarea wire:model.lazy="user.location" class="form-control border border-2 p-2"
+                                placeholder=" Sila masukkan alamat kediaman anda" id="floatingTextarea2" rows="4"
+                                cols="50"></textarea>
+                            @error('user.location')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Program</label>
+                            <input wire:model.lazy="pelajar.program" type="text"
+                                class="form-control border border-2 p-2">
+                            @error('pelajar.program')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -162,23 +246,11 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Nombor Telefon</label>
-                            <input wire:model.lazy="user.phone" type="text" class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Kad Pengenalan</label>
-                            <input wire:model.lazy="pelajar.nric_number" type="text"
-                                class="form-control border border-2 p-2">
-                            @error('pelajar.nric_number')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
+                        <div class="row">
+                            <div class="col-md-8 d-flex align-items-center">
+                                <h6 class="mb-3">Maklumat Penjaga</h6>
+                            </div>
+                        </div>       
 
                         <div class="mb-3 col-md-6">
 
@@ -200,98 +272,13 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">LinkedIn URL</label>
-                            <input wire:model.lazy="pelajar.linkedin_url" type="url"
-                                class="form-control border border-2 p-2">
-                            @error('pelajar.linkedin_url')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Facebook URL</label>
-                            <input wire:model.lazy="pelajar.facebook_url" type="url"
-                                class="form-control border border-2 p-2">
-                            @error('pelajar.facebook_url')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Github URL</label>
-                            <input wire:model.lazy="pelajar.github_url" type="url"
-                                class="form-control border border-2 p-2">
-                            @error('pelajar.github_url')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Program</label>
-                            <input wire:model.lazy="pelajar.program" type="text"
-                                class="form-control border border-2 p-2">
-                            @error('pelajar.program')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Jantina</label>
-                            <div>
-                                <input wire:model='user.gender' type="radio" name="gender_male" id="gender_male"
-                                    value="male" class="form-check-input">
-                                <label for="gender_male" class="form-check-label">Male</label>
-                            </div>
-                            <div>
-                                <input wire:model='user.gender' type="radio" name="gender_female" id="gender_female"
-                                    value="female" class="form-check-input">
-                                <label for="gender_female" class="form-check-label">Female</label>
-                            </div>
-                            @error('user.gender')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
                         <div class="mb-3 col-md-12">
 
-                            <label for="floatingTextarea2">Alamat Kediaman</label>
+                            <label for="floatingTextarea2">Alamat Penjaga</label>
                             <textarea wire:model.lazy="user.location" class="form-control border border-2 p-2"
                                 placeholder=" Sila masukkan alamat kediaman anda" id="floatingTextarea2" rows="4"
                                 cols="50"></textarea>
                             @error('user.location')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-12">
-                            <label>Penyakit Kronik</label>
-                            <div>
-                                <input type="checkbox" wire:model="pelajar.heart_disease" value="1" id="heartDisease">
-                                <label for="heartDisease">Heart Disease</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" wire:model="pelajar.asthma" value="1" id="asthma">
-                                <label for="asthma">Asthma</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" wire:model="pelajar.diabetes" value="1" id="diabetes">
-                                <label for="diabetes">Diabetes</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" wire:model="pelajar.osteoporosis" value="1" id="osteoporosis">
-                                <label for="osteoporosis">Osteoporosis</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" wire:model="pelajar.slipped_disc" value="1" id="slippedDisc">
-                                <label for="slippedDisc">Slipped Disc</label>
-                            </div>
-                            @error('pelajar.penyakit_kronik')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -347,45 +334,23 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Lawatan OJT 1</label>
-                            <input disabled value="{{$janji_temu_1->visit_at}}" type="datetime" class="form-control border border-2 p-2">
+                            @if ($janji_temu_1)
+                                <input disabled value="{{$janji_temu_1->visit_at}}" type="datetime" class="form-control border border-2 p-2">
+                            @else
+                                <p class="text text-danger">Anda tidak mempunyai lawatan janji temu ke-1</p>
+                            @endif
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Lawatan OJT 2</label>
-                            <input disabled value="{{$janji_temu_2->visit_at}}" type="datetime" class="form-control border border-2 p-2">
+                            @if ($janji_temu_1)
+                                <input disabled value="{{$janji_temu_2->visit_at}}" type="datetime" class="form-control border border-2 p-2">
+                            @else
+                                <p class="text text-danger">Anda tidak mempunyai lawatan janji temu ke-2</p>
+                            @endif
                         </div>
                         
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Maklumat Pensyarah Penilai</h6>
-                            </div>
-                        </div>
-
-                        {{-- ADD TARIKH LAWATAN1/2 --}}
-
-                        {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
-                        {{-- PENSYARAH PENILAI SECTION BEGIN --}}
-        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai_user->name}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai_user->phone}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai_user->email}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        {{-- PENSYARAH PENILAI SECTION ENDS --}}
                         {{-- PENYELARAS PROGRAM SECTION BEGIN --}}
 
                         <div class="row">
@@ -413,6 +378,38 @@
                         </div>
 
                         {{-- PENYELARAS PROGRAM SECTION ENDS --}}
+
+                        <div class="row">
+                            <div class="col-md-8 d-flex align-items-center">
+                                <h6 class="mb-3">Maklumat Pensyarah Penilai/OJT</h6>
+                            </div>
+                        </div>
+
+                        {{-- ADD TARIKH LAWATAN1/2 --}}
+
+                        {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
+                        {{-- PENSYARAH PENILAI SECTION BEGIN --}}
+        
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Nama Pensyarah Penilai(PP)</label>
+                            <input disabled value="{{$pensyarah_penilai_user->name}}" type="text" class="form-control border border-2 p-2">
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
+                            <input disabled value="{{$pensyarah_penilai_user->phone}}" type="text" class="form-control border border-2 p-2">
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
+                            <input disabled value="{{$pensyarah_penilai_user->email}}" type="text" class="form-control border border-2 p-2">
+                        </div>
+
+                        {{-- PENSYARAH PENILAI SECTION ENDS --}}
+
                     </div>
                 </form>
             </div>
@@ -420,11 +417,6 @@
             
             {{-- PPO SECTION BEGIN --}}
             <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">Maklumat Pensyarah Penilai OJT</h6>
-                    </div>
-                </div>
                 @if (session('status'))
                 <div class="row">
                     <div class="alert alert-success alert-dismissible text-white" role="alert">
@@ -519,6 +511,18 @@
                         <div class="mb-3 col-12">
 
                             <label class="form-label">Organisasi</label>
+                            <select class="form-control" wire:model='pelajar_company.company_id' wire:change='onCompanyInputChange'>
+                                @foreach ($company_all as $company_iterate)
+                                    <option value="{{$company_iterate->id}}">{{$company_iterate->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('pelajar_company.company_id')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+                        {{-- <div class="mb-3 col-12">
+
+                            <label class="form-label">Organisasi</label>
                             <select class="form-control" wire:model='company_input' wire:change='onCompanyInputChange'>
                                 <option value="" selected disabled>Pilih...</option>
                                 @foreach ($company_all as $company_iterate)
@@ -529,8 +533,8 @@
                             @error('company_input')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
-                        </div>
-                        @if ($pelajarHasCompanyPelajar)
+                        </div> --}}
+                        @if ($company != null)
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Nama Organisasi Latihan</label>
@@ -539,14 +543,14 @@
 
                             <div class="mb-3 col-md-6">
 
-                                <label class="form-label">Nombor Telefon</label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$company->telephone_number}}" @endif type="text" class="form-control border border-2 p-2" disabled>
-                            </div>
-
-                            <div class="mb-3 col-md-6">
-
                                 <label class="form-label">Nama Penyelia Organisasi</label>
                                 <input @if($pelajarHasCompanyPelajar) value="{{$company->ojt_supervisor}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                            </div>
+                            
+                            <div class="mb-3 col-md-6">
+
+                                <label class="form-label">Nombor Telefon</label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$company->telephone_number}}" @endif type="text" class="form-control border border-2 p-2" disabled>
                             </div>
 
                             <div class="mb-3 col-md-6">
@@ -569,18 +573,19 @@
 
                             <div class="mb-3 col-md-6">
 
-                                <label class="form-label">Alamat Syarikat: </label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$company->address}}" @endif type="text" class="form-control border border-2 p-2" disabled>
-                            </div>
-                            
-                            <div class="mb-3 col-md-6">
-
                                 <label class="form-label">Jawatan Diperoleh</label>
                                 <input wire:model.lazy="pelajar_company.role" type="text" class="form-control border border-2 p-2">
                                 @error('pelajar_company.role')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
                             </div>
+                            
+                            <div class="mb-3 col-md-6">
+
+                                <label class="form-label">Alamat Syarikat: </label>
+                                <input @if($pelajarHasCompanyPelajar) value="{{$company->address}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                            </div>
+                            
                         @else
                             <p class="text text-danger">Anda belum berdaftar dimana-mana syarikat</p>
                         @endif
@@ -598,11 +603,11 @@
                         <div class="mb-3 col-md-12">
                             @if ($pelajarHasSkopKerja)
                             {{-- PELAJAR HAS UPLOADED SKOP KERJA --}}
-                                <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
+                                <p class="text text-success">Skop kerja sudah dimuat naik</p>
                                 <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()'>Muat Turun Skop Kerja</button>
                             @else
                                 {{-- PELAJAR HASNT UPLOADED SKOP KERJA --}}
-                                <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
+                                <p class="text text-danger">Skop kerja belum dimuat naik</p>
                                 <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()' disabled>Muat Turun Skop Kerja</button>
                             @endif
                         </div>

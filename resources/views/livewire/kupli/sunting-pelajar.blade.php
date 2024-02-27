@@ -53,6 +53,14 @@ use Carbon\Carbon;
                                 <span class="ms-1">Organisasi</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link mb-0 px-0 py-1 {{ $activeTab == 'dokumen' ? 'active' : '' }}"
+                                href="javascript:;" role="tab" wire:click="switchTab('dokumen')"
+                                aria-selected="{{ $activeTab == 'dokumen' ? 'true' : 'false' }}">
+                                <i class="fas fa-folder"></i>
+                                <span class="ms-1">Dokumen</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -685,6 +693,76 @@ use Carbon\Carbon;
         </div>
 
         {{-- ORGANISASI SECTION ENDS --}}
+        
+        {{-- PENGURUSAN DOKUMEN SECTION BEGINS --}}
+        
+        <div class="card card-plain h-100 {{ $activeTab == 'dokumen' ? 'd-block' : 'd-none' }}">
+            <div class="card-header pb-0 p-3">
+                <div class="row">
+                    <div class="col-md-8 d-flex align-items-center">
+                        <h6 class="mb-3">Maklumat Dokumen OJT Pelajar</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-3">
+                @if (session('status'))
+                <div class="row">
+                    <div class="alert alert-success alert-dismissible text-white" role="alert">
+                        <span class="text-sm">{{ Session::get('status') }}</span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+                @if (Session::has('demo'))
+                <div class="row">
+                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                        <span class="text-sm">{{ Session::get('demo') }}</span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+
+                {{-- ITERATE DOKUMEN OJT PELAJAR BEGIN --}}
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Nama Dokumen OJT</th>
+                                <th
+                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Jenis Dokumen(Pengisian/Infomasi)</th>
+                                <th
+                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    Tarikh Hantar</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Status Muat Naik</th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Dihantar Pada</th>
+                                <th class="text-secondary opacity-7"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($dokumen_ojt_all as $dokumen_ojt)
+                                <x-kupli.senarai-dokumen-pelajar :dokumen="$dokumen_ojt" :pelajar="$this->pelajar" />
+                            @endforeach
+                            {{-- ITERATE DOKUMEN OJT PELAJAR ENDS --}}
+                        </tbody>
+                    </table>
+            </div>
+            
+        </div>
+
+        {{-- PENGURUSAN DOKUMEN SECTION ENDS --}}
 
     </div>
 </div>

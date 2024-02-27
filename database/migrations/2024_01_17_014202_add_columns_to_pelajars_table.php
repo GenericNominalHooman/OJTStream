@@ -26,11 +26,11 @@ return new class extends Migration
             $table->date('cohort')->nullable(false);
 
             // Chronic illness
-            $table->boolean('heart_disease')->default(false);
-            $table->boolean('asthma')->default(false);
-            $table->boolean('diabetes')->default(false);
-            $table->boolean('osteoporosis')->default(false);
-            $table->boolean('slipped_disc')->default(false);
+            $table->boolean('heart_disease')->nullable(true);
+            $table->boolean('asthma')->nullable(true);
+            $table->boolean('diabetes')->nullable(true);
+            $table->boolean('osteoporosis')->nullable(true);
+            $table->boolean('slipped_disc')->nullable(true);
 
             // Pensyarah penilai
             $table->bigInteger('pensyarah_penilai_id')->unsigned()->nullable(true);

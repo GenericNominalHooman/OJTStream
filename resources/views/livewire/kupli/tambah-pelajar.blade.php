@@ -1,6 +1,6 @@
 @php
-    use Illuminate\Support\Facades\Storage;
-    use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 @endphp
 {{-- PELAJAR SECTION BEGIN --}}
 <div class="container-fluid px-2 px-md-4">
@@ -11,21 +11,10 @@
     <div class="card card-body mx-3 mx-md-4 mt-n6">
         <div class="row gx-4 mb-2">
             <div class="col-auto">
-                <div class="avatar avatar-xl position-relative">
-                    <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image"
-                        class="w-100 border-radius-lg shadow-sm">
-                </div>
+                <h4 class="p-4">Tambah rekod pelajar</h4>
             </div>
-            <div class="col-auto my-auto">
-                <div class="h-100">
-                    <h5 class="mb-1">
-                        {{ auth()->user()->name }}
-                    </h5>
-                    <p class="mb-0 font-weight-normal text-sm">
-                        User ROles | OJT STATUS(OJT BEGIN DATE - OJT END DATE)
-                    </p>
-                </div>
-            </div>
+
+            {{-- NAV BUTTON BEGIN --}}
             <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                 <div class="nav-wrapper position-relative end-0">
                     <ul class="nav nav-pills nav-fill p-1" role="tablist">
@@ -33,35 +22,31 @@
                             <a class="nav-link mb-0 px-0 py-1 {{ $activeTab == 'biodata' ? 'active' : '' }}"
                                 href="javascript:;" role="tab" wire:click="switchTab('biodata')"
                                 aria-selected="{{ $activeTab == 'biodata' ? 'true' : 'false' }}">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-pelajar_user"></i>
                                 <span class="ms-1">Biodata</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 {{ $activeTab == 'ojt' ? 'active' : '' }}"
-                                href="javascript:;" role="tab" wire:click="switchTab('ojt')"
-                                aria-selected="{{ $activeTab == 'ojt' ? 'true' : 'false' }}">
-                                <i class="fas fa-suitcase"></i>
-                                <span class="ms-1">OJT</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 {{ $activeTab == 'organisasi' ? 'active' : '' }}"
-                                href="javascript:;" role="tab" wire:click="switchTab('organisasi')"
-                                aria-selected="{{ $activeTab == 'organisasi' ? 'true' : 'false' }}">
-                                <i class="fas fa-users"></i>
-                                <span class="ms-1">Organisasi</span>
+                            <a class="nav-link mb-0 px-0 py-1 {{ $activeTab == 'dokumen' ? 'active' : '' }}"
+                                href="javascript:;" role="tab" wire:click="switchTab('dokumen')"
+                                aria-selected="{{ $activeTab == 'dokumen' ? 'true' : 'false' }}">
+                                <i class="fas fa-folder"></i>
+                                <span class="ms-1">Dokumen</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
+            {{-- NAV BUTTON ENDS --}}
+            
         </div>
+
+        {{-- BIODATA PELAJAR SECTION BEGIN --}}
         <div class="card card-plain h-100 {{ $activeTab == 'biodata' ? 'd-block' : 'd-none' }}">
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">Maklumat Biodata</h6>
+                        <h6 class="mb-3">Maklumat Biodata Pelajar</h6>
                     </div>
                 </div>
             </div>
@@ -88,23 +73,23 @@
                     </div>
                 </div>
                 @endif
-                <form wire:submit.prevent='update'>
+                <form wire:submit.prevent='create'>
                     <div class="row">
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Email</label>
-                            <input wire:model.lazy="user.email" type="email" class="form-control border border-2 p-2">
-                            @error('user.email')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
+                        
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Nama</label>
-                            <input wire:model.lazy="user.name" type="text" class="form-control border border-2 p-2">
-                            @error('user.name')
+                            <input wire:model.lazy="pelajar_user.name" type="text" class="form-control border border-2 p-2">
+                            @error('pelajar_user.name')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+                        
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Alamat Email</label>
+                            <input wire:model.lazy="pelajar_user.email" type="email" class="form-control border border-2 p-2">
+                            @error('pelajar_user.email')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -113,33 +98,53 @@
                             <label class="form-label">Nombor Matrik</label>
                             <input wire:model.lazy="pelajar.matrix_number" type="text"
                                 class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
+                            @error('pelajar.matrix_number')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
 
                         <div class="mb-3 col-md-6">
+
                             <label class="form-label">Semester</label>
-                            <input wire:model.lazy="pelajar.semester" type="text"
-                                class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
+                            <div>
+                                <input wire:model='pelajar.semester' type="radio" name="semester_1" id="semester_1"
+                                    value="1" class="form-check-input">
+                                <label for="semester_1" class="form-check-label">Semester 1</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.semester' type="radio" name="semester_2" id="semester_2"
+                                    value="2" class="form-check-input">
+                                <label for="semester_2" class="form-check-label">Semester 2</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.semester' type="radio" name="semester_3" id="semester_3"
+                                    value="3" class="form-check-input">
+                                <label for="semester_3" class="form-check-label">Semester 3</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.semester' type="radio" name="semester_4" id="semester_4"
+                                    value="4" class="form-check-input">
+                                <label for="semester_4" class="form-check-label">Semester 4</label>
+                            </div>
+                            @error('pelajar.semester')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
+
                         </div>
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Kohort</label>
                             <input wire:model.lazy="pelajar.cohort" type="date"
                                 class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
+                            @error('pelajar.cohort')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Nombor Telefon</label>
-                            <input wire:model.lazy="user.phone" type="text" class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
+                            <input wire:model.lazy="pelajar_user.phone" type="text" class="form-control border border-2 p-2">
+                            @error('pelajar_user.phone')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -207,27 +212,79 @@
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Program</label>
-                            <input wire:model.lazy="pelajar.program" type="text"
-                                class="form-control border border-2 p-2">
+                            <div>
+                                <input wire:model='pelajar.program' type="radio" name="program_kpd" id="program_kpd"
+                                    value="KPD" class="form-check-input">
+                                <label for="program_kpd" class="form-check-label">KPD</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.program' type="radio" name="program_ksk" id="program_ksk"
+                                    value="KSK" class="form-check-input">
+                                <label for="program_ksk" class="form-check-label">KSK</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.program' type="radio" name="program_hbp" id="program_hbp"
+                                    value="HBP" class="form-check-input">
+                                <label for="program_hbp" class="form-check-label">HBP</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.program' type="radio" name="program_bpp" id="program_bpp"
+                                    value="BPP" class="form-check-input">
+                                <label for="program_bpp" class="form-check-label">BPP</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.program' type="radio" name="program_mtk" id="program_mtk"
+                                    value="MTK" class="form-check-input">
+                                <label for="program_mtk" class="form-check-label">MTK</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.program' type="radio" name="program_wtp" id="program_wtp"
+                                    value="WTP" class="form-check-input">
+                                <label for="program_wtp" class="form-check-label">WTP</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.program' type="radio" name="program_bap" id="program_bap"
+                                    value="BAP" class="form-check-input">
+                                <label for="program_bap" class="form-check-label">BAP</label>
+                            </div>
                             @error('pelajar.program')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
+
                         </div>
 
                         <div class="mb-3 col-md-6">
 
                             <label class="form-label">Jantina</label>
                             <div>
-                                <input wire:model='user.gender' type="radio" name="gender_male" id="gender_male"
+                                <input wire:model='pelajar_user.gender' type="radio" name="gender_male" id="gender_male"
                                     value="male" class="form-check-input">
                                 <label for="gender_male" class="form-check-label">Male</label>
                             </div>
                             <div>
-                                <input wire:model='user.gender' type="radio" name="gender_female" id="gender_female"
+                                <input wire:model='pelajar_user.gender' type="radio" name="gender_female" id="gender_female"
                                     value="female" class="form-check-input">
                                 <label for="gender_female" class="form-check-label">Female</label>
                             </div>
-                            @error('user.gender')
+                            @error('pelajar_user.gender')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+
+                            <label class="form-label">Jenis pengajian</label>
+                            <div>
+                                <input wire:model='pelajar.study_type' type="radio" name="study_svm" id="study_svm"
+                                    value="SVM" class="form-check-input">
+                                <label for="study_svm" class="form-check-label">SVM</label>
+                            </div>
+                            <div>
+                                <input wire:model='pelajar.study_type' type="radio" name="study_dvm" id="study_dvm"
+                                    value="DVM" class="form-check-input">
+                                <label for="study_dvm" class="form-check-label">DVM</label>
+                            </div>
+                            @error('pelajar.study_type')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -235,10 +292,10 @@
                         <div class="mb-3 col-md-12">
 
                             <label for="floatingTextarea2">Alamat Kediaman</label>
-                            <textarea wire:model.lazy="user.location" class="form-control border border-2 p-2"
+                            <textarea wire:model.lazy="pelajar_user.location" class="form-control border border-2 p-2"
                                 placeholder=" Sila masukkan alamat kediaman anda" id="floatingTextarea2" rows="4"
                                 cols="50"></textarea>
-                            @error('user.location')
+                            @error('pelajar_user.location')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -276,21 +333,18 @@
 
             </div>
         </div>
-        <div class="card card-plain h-100 {{ $activeTab == 'ojt' ? 'd-block' : 'd-none' }}">
+        {{-- BIODATA PELAJAR SECTION ENDS --}}
+
+        {{-- PENGURUSAN DOKUMEN SECTION BEGINS --}}
+        <div class="card card-plain h-100 {{ $activeTab == 'dokumen' ? 'd-block' : 'd-none' }}">
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">Maklumat OJT</h6>
+                        <h6 class="mb-3">Maklumat Dokumen OJT Pelajar</h6>
                     </div>
                 </div>
             </div>
-            {{-- LAWATAN PPO SECTION BEGIN --}}
             <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">LAWATAN OJT</h6>
-                    </div>
-                </div>
                 @if (session('status'))
                 <div class="row">
                     <div class="alert alert-success alert-dismissible text-white" role="alert">
@@ -313,314 +367,19 @@
                     </div>
                 </div>
                 @endif
-                <form wire:submit.prevent='update'>
+                <p class="text font-weight-normal">Untuk menyunting dokumen OJT pelajar, boleh ke halaman Sunting Templat Dokumen Pelajar</p>
 
-                    {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
-
-                    <div class="row">
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Lawatan OJT 1</label>
-                            <input disabled @if($janji_temu_1 != null) value="{{$janji_temu_1->visit_at}}" @endif type="datetime" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Lawatan OJT 2</label>
-                            <input disabled @if($janji_temu_2 != null) value="{{$janji_temu_2->visit_at}}" @endif type="datetime" class="form-control border border-2 p-2">
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Maklumat Pensyarah Penilai</h6>
-                            </div>
-                        </div>
-
-                        {{-- ADD TARIKH LAWATAN1/2 --}}
-
-                        {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
-                        {{-- PENSYARAH PENILAI SECTION BEGIN --}}
-        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai_ojt->name}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->phone}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->email}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        {{-- PENSYARAH PENILAI SECTION ENDS --}}
-                        {{-- PENYELARAS PROGRAM SECTION BEGIN --}}
-
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Maklumat Penyelaras Program</h6>
-                            </div>
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Penyelaras Program</label>
-                            <input disabled value="{{$penyelaras_program_user->name}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Telefon Penyelaras Program</label>
-                            <input disabled value="{{$penyelaras_program_user->phone}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Emel Penyelaras Program</label>
-                            <input disabled value="{{$penyelaras_program_user->email}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        {{-- PENYELARAS PROGRAM SECTION ENDS --}}
-                    </div>
-                </form>
+                {{-- ITERATE DOKUMEN OJT PELAJAR BEGIN --}}
+                <div class="row">
+                    <a href="{{route("kupli pengurusan dokumen")}}" class="btn btn-primary">Sunting Templat Dokumen OJT</a>
+                </div>
             </div>
-            {{-- LAWATAN PPO SECTION END --}}
-            
-            {{-- PPO SECTION BEGIN --}}
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">Maklumat Pensyarah Penilai OJT</h6>
-                    </div>
-                </div>
-                @if (session('status'))
-                <div class="row">
-                    <div class="alert alert-success alert-dismissible text-white" role="alert">
-                        <span class="text-sm">{{ Session::get('status') }}</span>
-                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                            aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-                @endif
-                @if (Session::has('demo'))
-                <div class="row">
-                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                        <span class="text-sm">{{ Session::get('demo') }}</span>
-                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                            aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-                @endif
-                <form wire:submit.prevent='update'>
 
-                    {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
+            {{-- PENGURUSAN DOKUMEN SECTION ENDS --}}
 
-                    <div class="row">
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled value="{{$pensyarah_penilai_ojt->name}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Telefon Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled value="{{$pensyarah_penilai_ojt->phone}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Emel Pensyarah Penilai OJT(PPO)</label>
-                            <input disabled value="{{$pensyarah_penilai_ojt->email}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Maklumat Pensyarah Penilai</h6>
-                            </div>
-                        </div>
-
-                        {{-- ADD TARIKH LAWATAN1/2 --}}
-
-                        {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
-                        {{-- PENSYARAH PENILAI SECTION BEGIN --}}
-        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->name}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->phone}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai->email}}" type="text" class="form-control border border-2 p-2">
-                        </div>
-
-                        {{-- PENSYARAH PENILAI SECTION ENDS --}}
-                    </div>
-                </form>
-            </div>
-            {{-- PPO SECTION ENDS --}}
         </div>
-        <div class="card card-plain h-100 {{ $activeTab == 'organisasi' ? 'd-block' : 'd-none' }}">
-            <div class="card-header pb-0 p-3">
-                <div class="row">
-                    <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">Maklumat Organisasi</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body p-3">
-                @if (session('status'))
-                <div class="row">
-                    <div class="alert alert-success alert-dismissible text-white" role="alert">
-                        <span class="text-sm">{{ Session::get('status') }}</span>
-                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                            aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-                @endif
-                @if (Session::has('demo'))
-                <div class="row">
-                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                        <span class="text-sm">{{ Session::get('demo') }}</span>
-                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                            aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-                @endif
-                <form wire:submit.prevent='update'>
+        {{-- PENGURUSAN DOKUMEN SECTION ENDS --}}
 
-                    {{-- ORGANISASI LATIHAN BEGIN --}}
-                    
-                    <div class="row">
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Organisasi Latihan</label>
-                            <input wire:model.lazy="company.comp_name" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_name')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nombor Telefon</label>
-                            <input wire:model.lazy="company.comp_contact" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_contact')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Nama Penyelia Organisasi</label>
-                            <input wire:model.lazy="company.ojt_supervisor" type="text" class="form-control border border-2 p-2">
-                            @error('company.ojt_supervisor')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Emel</label>
-                            <input wire:model.lazy="company.comp_email" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_email')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Jawatan Diperoleh</label>
-                            <input wire:model.lazy="pelajar_company.role" type="text" class="form-control border border-2 p-2">
-                            @error('pelajar_company.role')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Alamat Syarikat</h6>
-                            </div>
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Syarikat: Negeri</label>
-                            <input wire:model.lazy="company.comp_address_province" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_address_province')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-                        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Syarikat: Jalan</label>
-                            <input wire:model.lazy="company.comp_address_street" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_address_street')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-                        
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Alamat Syarikat: Bandar</label>
-                            <input wire:model.lazy="company.comp_address_city" type="text" class="form-control border border-2 p-2">
-                            @error('company.comp_address_city')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-12">
-
-                            <label for="skop_kerja_input">Skop Kerja</label>
-                            <input wire:model="skop_kerja_input" type="file" class="form-control" id="skop_kerja_input">
-                            @error('skop_kerja_input')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-12">
-                            @if (Storage::disk("local")->exists($this->skop_kerja->document_path))
-                                <p class="text text-success">Skop Kerja Telah Dimuat Naik({{Carbon::parse($this->skop_kerja->updated_at)->format("d/m/Y - h:i")}})</p>
-                            @else
-                                <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
-                            @endif
-                            <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()' @if (!(Storage::disk("local")->exists($this->skop_kerja->document_path))) disabled @endif>Muat Turun Skop Kerja</button>
-                        </div>
-                    </div>
-
-                    {{-- ORGANISASI LATIHAN ENDS --}}
-
-                    <button type="submit" class="btn bg-gradient-dark">Simpan</button>
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 {{-- PELAJAR SECTION ENDS --}}

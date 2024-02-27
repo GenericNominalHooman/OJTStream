@@ -13,9 +13,19 @@ class DokumenOJTPelajarSeeder extends Seeder
      */
     public function run(): void
     {
+        // PELAJAR AKV0222KA009
         DokumenOJTPelajar::factory()->create();
         DokumenOJTPelajar::factory()->create([
             "dokumen_ojt_id" => 2,
+        ]);
+        
+        // PELAJAR AKV0222KA010
+        DokumenOJTPelajar::factory()->create([
+            "pelajar_id" => 106,
+        ]);
+        DokumenOJTPelajar::factory()->create([
+            "dokumen_ojt_id" => 2,
+            "pelajar_id" => 106,
         ]);
     }
 }

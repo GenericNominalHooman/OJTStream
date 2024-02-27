@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Kupli;
 
 use App\Models\User;
 use App\Models\Company;
+use App\Models\DokumenOJT;
+use App\Models\DokumenOJTPelajar;
 use App\Models\Pelajar;
 use Livewire\Component;
 use App\Models\JanjiTemu;
@@ -61,11 +63,18 @@ class SuntingPelajar extends Component
     public $penyelaras_program_all;
     public $pensyarah_penilai_all;
     public $pensyarah_penilai_ojt_all;
+
+    // DOKUMEN OJT PELAJAR
+    public $dokumen_ojt_all;
+
     // PELAJAR PROEPRTIES ENDS
 
     public function render()
     {
-        return view('livewire.kupli.sunting-pelajar', ["pensyarah_penilai_all" => $this->pensyarah_penilai_all]);
+        return view('livewire.kupli.sunting-pelajar', [
+            "pensyarah_penilai_all" => $this->pensyarah_penilai_all,
+            ""
+        ]);
     }
 
     protected function rules()
@@ -198,9 +207,16 @@ class SuntingPelajar extends Component
         $this->pelajar_company = $this->pelajar->Pelajars_Company;
         $this->company = $this->pelajar_company->Company;
         $this->skop_kerja = $this->pelajar->Skop_Kerja;
+
+        // DOKUMEN OJT
+        $this->getDokumenOJT();
         
         // Sets pelajar record to update instead of insertion
         $this->pelajar->user_id = $this->user->id;
+    }
+
+    public function getDokumenOJT(){
+        $this->dokumen_ojt_all = DokumenOJT::get();
     }
 
     public function updated($propertyName)
@@ -272,6 +288,20 @@ class SuntingPelajar extends Component
         }else{
             return redirect()->response("No file found", 404);
         }
+    }
+
+    public function downloadPelajarDokumenOJT($pelajar_dokumen_ojt_id){
+        $pelajar_dokumen_row = $this->pelajar->Dokumen_OJT_Pelajar->find($pelajar_dokumen_ojt_id);
+        // FETCH document_path FROM $dokumen_ojt_id
+        if($pelajar_dokumen_row){
+            if($pelajar_dokumen_row->document_path != null){
+                // VALID FILE
+                // DOWNLOAD THE FILE
+                return Storage::disk("local")->download($pelajar_dokumen_row->document_path, $pelajar_dokumen_row->document_name);
+            }
+        }
+
+        return response("No file was found", 404);
     }
 
     public function onPensyarahPenilaiOJTInputChange(){

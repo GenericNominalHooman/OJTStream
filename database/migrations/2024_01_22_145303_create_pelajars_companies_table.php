@@ -15,7 +15,7 @@ return new class extends Migration
             // PELAJAR
             $table->id('id');
             $table->bigInteger('pelajar_id')->unsigned()->nullable(false);
-            $table->string('role')->nullable(false);
+            $table->string('role')->nullable(true);
             $table->foreign('pelajar_id')->references('user_id')->on('pelajars')->onDelete('cascade');
 
             // COMPANY
