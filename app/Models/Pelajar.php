@@ -15,6 +15,8 @@ class Pelajar extends Model
     use HasFactory;
 
     protected $fillable = [
+        "user_id",
+        "matrix_number",
         "pensyarah_penilai_ojt_id",
         "pensyarah_penilai_id",
         "penyelaras_program_id",
@@ -53,7 +55,7 @@ class Pelajar extends Model
     }
 
     public function Pelajars_Company(){
-        return $this->hasOne(PelajarsCompany::class, "id", "pelajar_company_id");
+        return $this->hasOne(PelajarsCompany::class, "pelajar_id", "user_id");
     }
 
     public function Dokumen_OJT_Pelajar(){

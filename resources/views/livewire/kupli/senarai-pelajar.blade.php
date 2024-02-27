@@ -54,13 +54,16 @@
                                             Nama</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Pengajian(DVM/SVM)</th>
+                                            Kad Matrik</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Nombor Kad Pengenalan</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Program</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Dihasilkan pada</th>
+                                            Status OJT</th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>

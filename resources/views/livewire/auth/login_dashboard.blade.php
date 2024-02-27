@@ -10,11 +10,7 @@
                             </div>
                             <div class="card-body container">
                                 <div class="d-grid gap-2">
-                                    <a href="{{route('login', ['login_type'=>'pensyarah'])}}" class="btn btn-outline-secondary" type="button">Pensyarah Penilai OJT</a>
-                                    <a href="{{route('login', ['login_type'=>'pensyarah'])}}" class="btn btn-outline-secondary" type="button">Pensyarah Penilai</a>
                                     <a href="{{route('login', ['login_type'=>'kupli'])}}" class="btn btn-outline-secondary" type="button">Kupli</a>
-                                    <a href="{{route('login', ['login_type'=>'pensyarah'])}}" class="btn btn-outline-secondary" type="button">Penyelaras Program</a>
-                                    <a href="{{route('login', ['login_type'=>'pensyarah'])}}" class="btn btn-outline-secondary" type="button">Ketua Jabatan/Ketua Program</a>
                                     <a href="{{route('login', ['login_type'=>'pelajar'])}}" class="btn btn-outline-secondary" type="button">Pelajar</a>
                                 </div>
                             </div>

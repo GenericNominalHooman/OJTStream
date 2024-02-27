@@ -28,11 +28,11 @@
                                 <li>{{$user_role}}</li>    
                             @endforeach
                         </ul>
-                        @if ($pelajar_company != null)
-                           @if ($pelajar_company->ojt_begin_date != null)
+                        @if ($pelajar_pelajar_company != null)
+                           @if ($pelajar_pelajar_company->ojt_begin_date != null && $pelajar_pelajar_company->ojt_begin_date != null )
                                 @php
-                                    $ojt_begin_date = Carbon::parse($pelajar_company->ojt_begin_date);
-                                    $ojt_end_date = Carbon::parse($pelajar_company->ojt_end_date);
+                                    $ojt_begin_date = Carbon::parse($pelajar_pelajar_company->ojt_begin_date);
+                                    $ojt_end_date = Carbon::parse($pelajar_pelajar_company->ojt_end_date);
                                     $current_time = Carbon::parse(now());
                                 @endphp
                                 @if ($current_time->gt($ojt_begin_date))
@@ -159,12 +159,12 @@
                             <div>
                                 <input wire:model='user.gender' type="radio" name="gender_male" id="gender_male"
                                     value="male" class="form-check-input">
-                                <label for="gender_male" class="form-check-label">Male</label>
+                                <label for="gender_male" class="form-check-label">Lelaki</label>
                             </div>
                             <div>
                                 <input wire:model='user.gender' type="radio" name="gender_female" id="gender_female"
                                     value="female" class="form-check-input">
-                                <label for="gender_female" class="form-check-label">Female</label>
+                                <label for="gender_female" class="form-check-label">Perempuan</label>
                             </div>
                             @error('user.gender')
                             <p class='text-danger inputerror'>{{ $message }} </p>
@@ -326,7 +326,7 @@
                     </div>
                 </div>
                 @endif
-                <form wire:submit.prevent='update'>
+                <form wire:submit.prevent='updateOrganisasi'>
 
                     {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
 
@@ -353,29 +353,33 @@
                         
                         {{-- PENYELARAS PROGRAM SECTION BEGIN --}}
 
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-3">Maklumat Penyelaras Program</h6>
+                        @if ($penyelaras_program_user)
+                            <div class="row">
+                                <div class="col-md-8 d-flex align-items-center">
+                                    <h6 class="mb-3">Maklumat Penyelaras Program</h6>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-6">
 
-                            <label class="form-label">Nama Penyelaras Program</label>
-                            <input disabled value="{{$penyelaras_program_user->name}}" type="text" class="form-control border border-2 p-2">
-                        </div>
+                                <label class="form-label">Nama Penyelaras Program</label>
+                                <input disabled value="{{$penyelaras_program_user->name}}" type="text" class="form-control border border-2 p-2">
+                            </div>
 
-                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-6">
 
-                            <label class="form-label">Nombor Telefon Penyelaras Program</label>
-                            <input disabled value="{{$penyelaras_program_user->phone}}" type="text" class="form-control border border-2 p-2">
-                        </div>
+                                <label class="form-label">Nombor Telefon Penyelaras Program</label>
+                                <input disabled value="{{$penyelaras_program_user->phone}}" type="text" class="form-control border border-2 p-2">
+                            </div>
 
-                        <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-6">
 
-                            <label class="form-label">Alamat Emel Penyelaras Program</label>
-                            <input disabled value="{{$penyelaras_program_user->email}}" type="text" class="form-control border border-2 p-2">
-                        </div>
+                                <label class="form-label">Alamat Emel Penyelaras Program</label>
+                                <input disabled value="{{$penyelaras_program_user->email}}" type="text" class="form-control border border-2 p-2">
+                            </div>
+                        @else
+                            <p class="text text-danger">Anda tidak mempunyai Penyelaras Program</p>
+                        @endif
 
                         {{-- PENYELARAS PROGRAM SECTION ENDS --}}
 
@@ -384,29 +388,34 @@
                                 <h6 class="mb-3">Maklumat Pensyarah Penilai/OJT</h6>
                             </div>
                         </div>
-
-                        {{-- ADD TARIKH LAWATAN1/2 --}}
+                        
 
                         {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
                         {{-- PENSYARAH PENILAI SECTION BEGIN --}}
         
-                        <div class="mb-3 col-md-6">
+                        @if ($penyelaras_program_user)
 
-                            <label class="form-label">Nama Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai_user->name}}" type="text" class="form-control border border-2 p-2">
-                        </div>
+                            <div class="mb-3 col-md-6">
 
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Nama Pensyarah Penilai(PP)</label>
+                                <input disabled value="{{$pensyarah_penilai_user->name}}" type="text" class="form-control border border-2 p-2">
+                            </div>
 
-                            <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai_user->phone}}" type="text" class="form-control border border-2 p-2">
-                        </div>
+                            <div class="mb-3 col-md-6">
 
-                        <div class="mb-3 col-md-6">
+                                <label class="form-label">Nombor Telefon Pensyarah Penilai(PP)</label>
+                                <input disabled value="{{$pensyarah_penilai_user->phone}}" type="text" class="form-control border border-2 p-2">
+                            </div>
 
-                            <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
-                            <input disabled value="{{$pensyarah_penilai_user->email}}" type="text" class="form-control border border-2 p-2">
-                        </div>
+                            <div class="mb-3 col-md-6">
+
+                                <label class="form-label">Alamat Emel Pensyarah Penilai(PP)</label>
+                                <input disabled value="{{$pensyarah_penilai_user->email}}" type="text" class="form-control border border-2 p-2">
+                            </div>
+
+                        @else
+                            <p class="text text-danger">Anda tidak mempunyai Penyelaras Program</p>
+                        @endif
 
                         {{-- PENSYARAH PENILAI SECTION ENDS --}}
 
@@ -439,10 +448,8 @@
                     </div>
                 </div>
                 @endif
-                <form wire:submit.prevent='update'>
-
-                    {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
-
+                {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
+                @if ($pensyarah_penilai_ojt_user)
                     <div class="row">
 
                         <div class="mb-3 col-md-6">
@@ -463,13 +470,15 @@
                             <input disabled value="{{$pensyarah_penilai_ojt_user->email}}" type="text" class="form-control border border-2 p-2">
                         </div>
                         
-                        {{-- ADD TARIKH LAWATAN1/2 --}}
-
-                        {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
                     </div>
-                </form>
+                    @else
+
+                        <p class="text text-danger">Anda tidak mempunyai Pensyarah Penilai OJT(PPO)</p>
+
+                    </form>
+                @endif
+                {{-- PPO SECTION ENDS --}}
             </div>
-            {{-- PPO SECTION ENDS --}}
         </div>
         <div class="card card-plain h-100 {{ $activeTab == 'organisasi' ? 'd-block' : 'd-none' }}">
             <div class="card-header pb-0 p-3">
@@ -511,13 +520,13 @@
                         <div class="mb-3 col-12">
 
                             <label class="form-label">Organisasi</label>
-                            <select class="form-control" wire:model='pelajar_company.company_id' wire:change='onCompanyInputChange'>
+                            <select class="form-control" wire:model='company_input' wire:change='onCompanyInputChange'>
                                 @foreach ($company_all as $company_iterate)
                                     <option value="{{$company_iterate->id}}">{{$company_iterate->name}}</option>
                                 @endforeach
                             </select>
-                            @error('pelajar_company.company_id')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @error('company_input')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
                         {{-- <div class="mb-3 col-12">
@@ -534,60 +543,70 @@
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div> --}}
-                        @if ($company != null)
+                        @if ($company_selected != null)
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Nama Organisasi Latihan</label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$company->name}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                                <input value="{{$company_selected->name}}" type="text" class="form-control border border-2 p-2" disabled>
                             </div>
 
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Nama Penyelia Organisasi</label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$company->ojt_supervisor}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                                <input value="{{$company_selected->ojt_supervisor}}" type="text" class="form-control border border-2 p-2" disabled>
                             </div>
                             
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Nombor Telefon</label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$company->telephone_number}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                                <input value="{{$company_selected->telephone_number}}" type="text" class="form-control border border-2 p-2" disabled>
                             </div>
 
                             <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Alamat Emel</label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$company->email}}" @endif type="text" class="form-control border border-2 p-2" disabled>
+                                <input value="{{$company_selected->email}}" type="text" class="form-control border border-2 p-2" disabled>
                             </div>
             
                             <div class="mb-3 col-md-6">
 
+                                <label class="form-label">Alamat Syarikat: </label>
+                                <input value="{{$company_selected->address}}" type="text" class="form-control border border-2 p-2" disabled>
+                            </div>
+                            
+                            {{-- PELAJAR PELAJAR COMPANY FIELDS BEGIN --}}
+
+                            <div class="mb-3 col-md-6">
+
                                 <label class="form-label">Tarikh mula OJT</label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$pelajar_company->ojt_begin_date}}" @endif type="date" class="form-control border border-2 p-2" disabled>
+                                <input wire:model='tarikh_mula_ojt_input' type="date" class="form-control border border-2 p-2">
+                                @error('tarikh_mula_ojt_input')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror    
                             </div>
                             
                             <div class="mb-3 col-md-6">
 
-                                <label class="form-label">Tarikh akhir OJT</label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$pelajar_company->ojt_end_date}}" @endif type="date" class="form-control border border-2 p-2" disabled>
+                                <label class="form-label">Tarikh tamat OJT</label>
+                                <input wire:model='tarikh_tamat_ojt_input' type="date" class="form-control border border-2 p-2">
+                                @error('tarikh_tamat_ojt_input')
+                                <p class='text-danger inputerror'>{{ $message }} </p>
+                                @enderror
                             </div>
 
-                            <div class="mb-3 col-md-6">
+                            {{-- <div class="mb-3 col-md-6">
 
                                 <label class="form-label">Jawatan Diperoleh</label>
                                 <input wire:model.lazy="pelajar_company.role" type="text" class="form-control border border-2 p-2">
                                 @error('pelajar_company.role')
                                 <p class='text-danger inputerror'>{{ $message }} </p>
                                 @enderror
-                            </div>
+                            </div> --}}
                             
-                            <div class="mb-3 col-md-6">
-
-                                <label class="form-label">Alamat Syarikat: </label>
-                                <input @if($pelajarHasCompanyPelajar) value="{{$company->address}}" @endif type="text" class="form-control border border-2 p-2" disabled>
-                            </div>
+                            {{-- PELAJAR PELAJAR COMPANY FIELDS ENDS --}}
                             
                         @else
-                            <p class="text text-danger">Anda belum berdaftar dimana-mana syarikat</p>
+                            <p class="text text-danger">Anda belum berdaftar dimana-mana syarikat, sila pilih daripada senarai syarikat di atas</p>
                         @endif
 
                         
@@ -596,7 +615,7 @@
                             <label for="skop_kerja_input">Skop Kerja</label>
                             <input wire:model="skop_kerja_input" type="file" class="form-control" id="skop_kerja_input">
                             @error('skop_kerja_input')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
 

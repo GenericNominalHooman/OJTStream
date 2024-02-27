@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\OJTStream;
 
+use PDO;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Pelajar;
@@ -39,10 +41,13 @@ class UserProfile extends Component
     public ?JanjiTemu $janji_temu_2=null;
 
     // COMPANY VALUES
-    public ?Company $company=null;
-    public ?PelajarsCompany $pelajar_company=null;
-    public $company_all;
+    public ?PelajarsCompany $pelajar_pelajar_company=null;
+    public ?Company $pelajar_company=null;
+    public $company_selected;
     public $company_input;
+    public $company_all;
+    public $tarikh_mula_ojt_input;
+    public $tarikh_tamat_ojt_input;
 
     // SKOP KERJA VALUES
     public ?SkopKerja $skop_kerja=null;
@@ -102,15 +107,33 @@ class UserProfile extends Component
                 'pelajar_company.role' => 'required',
             ];
         }else if($this->activeTab == 'organisasi'){ // Biodata And Skop Kerja Update
-            return [
-                // SKOP KERJA VALUE
-                'skop_kerja_input' => 'file|mimes:pdf|nullable', // READD MAX SIZE IN PRODUCTION
+            if($this->pelajar_pelajar_company){
+                // ALLOWS UPDATE OF TARIKH MULA DAN TARIKH TAMAT TANPA PERLU UPLOAD SKOP KERJA
+                return [
+                    // SKOP KERJA VALUE
+                    'skop_kerja_input' => 'file|mimes:pdf|nullable', // READD MAX SIZE IN PRODUCTION
+    
+                    'company_input' => 'required',
+    
+                    // PELAJAR-COMPANY VALUES
+                    'pelajar_company.role' => 'nullable',
+                    'tarikh_mula_ojt_input' => 'required',
+                    'tarikh_tamat_ojt_input' => 'required',
+                ];
+            }else{
+                    // ALLOWS UPDATE OF TARIKH MULA DAN TARIKH TAMAT TANPA PERLU UPLOAD SKOP KERJA
+                    return [
+                    // SKOP KERJA VALUE
+                    'skop_kerja_input' => 'file|mimes:pdf|required', // READD MAX SIZE IN PRODUCTION
 
-                'pelajar_company.company_id' => 'required',
+                    'company_input' => 'required',
 
-                // PELAJAR-COMPANY VALUES
-                'pelajar_company.role' => 'required',
-            ];
+                    // PELAJAR-COMPANY VALUES
+                    'pelajar_company.role' => 'nullable',
+                    'tarikh_mula_ojt_input' => 'required',
+                    'tarikh_tamat_ojt_input' => 'required',
+                ];
+            }
         }
         // PELAJAR SECTION ENDS
     }
@@ -121,23 +144,30 @@ class UserProfile extends Component
         $this->roles = $this->user->getRoles();
 
         // GET DATA TO BE USED
+        $this->user = auth()->user();
         $this->getPelajar();
         $this->getPelajarPenyelarasProgram();
         $this->getPelajarPensyarahPenilai();
         $this->getPelajarPensyarahPenilaiOJT();
         $this->getPelajarSkopKerja();
         $this->getPelajarJanjiTemu();
-        $this->getPelajarCompany();
+        $this->getPelajarCompanyInformation();
         $this->company_all = Company::get();
 
         // Sets pelajar record to update instead of insertion
         $this->pelajar->user_id = $this->user->id;
     }
 
+    // public function update(){
+    //     dd("update");
+    // }
+    
     public function render()
     {
         // Rediret based on user roles    
-        return view('livewire.o-j-t-stream.user-profile');
+        return view('livewire.o-j-t-stream.user-profile', [
+            "company" => $this->pelajar_company,
+        ]);
     }
     
     // 
@@ -151,6 +181,30 @@ class UserProfile extends Component
         // MESSAGE
         session()->flash("status", "Berjaya mengemaskini maklumat biodata profil");
     }
+    
+    public function savePelajarCompanyInformation(){
+        if($this->company_input){
+            if($this->pelajar_pelajar_company){
+                // UPDATE PELAJAR COMPANY RECORD
+                if($this->pelajar_pelajar_company){
+                    $this->pelajar_pelajar_company->company_id = $this->company_selected->id;
+                    $this->pelajar_pelajar_company->ojt_begin_date = $this->tarikh_mula_ojt_input;
+                    $this->pelajar_pelajar_company->ojt_end_date = $this->tarikh_tamat_ojt_input;
+                    $this->pelajar_pelajar_company->save();
+                }
+            }else{
+                // CREATE PELAJAR COMPANY RECORD
+                // dd(Carbon::parse($this->tarikh_mula_ojt_input)->format("Y-m-d"));
+                PelajarsCompany::create([
+                    "pelajar_id" => $this->pelajar->user_id,
+                    "company_id" => $this->company_selected->id,
+                    "ojt_begin_date" => Carbon::parse($this->tarikh_mula_ojt_input)->format("Y-m-d"),
+                    "ojt_end_date" => Carbon::parse($this->tarikh_tamat_ojt_input)->format("Y-m-d"),
+                    "role" => "",
+                ]);
+            }
+        }
+    }
 
     public function updateOrganisasi(){        
         // VALIDATE
@@ -161,15 +215,7 @@ class UserProfile extends Component
             $this->uploadAndSaveSkopKerja();
             $this->pelajar->skop_kerja_id = $this->skop_kerja->id;
         }
-        if($this->company_input != null){
-            $this->createAndSaveCompany();
-            $this->pelajar->pelajar_company_id = $this->pelajar_company->id;
-        }
-        if($this->pelajar_company->role != null){
-            $this->createAndSaveCompanyRole();
-            $this->pelajar->pelajar_company_id = $this->pelajar_company->id;
-        }
-
+        $this->savePelajarCompanyInformation();
         $this->pelajar->save();
         
         // MESSAGE
@@ -193,14 +239,14 @@ class UserProfile extends Component
     //         $this->pelajar->update([
     //             "pelajar_company_id" => $this->skop_kerja->id,
     //         ]);    
-    //         $this->pelajar_company->save();
+    //         $this->pelajar_pelajar_company->save();
     //     }
 
     //     // Dump the pelajar instance after the update attempt
     //     dd($this->pelajar);
         
     //     if($this->company_input != null){
-    //         $this->pelajar_company->update([
+    //         $this->pelajar_pelajar_company->update([
     //             "company_id" => $this->company_input,
     //         ]);
     //     }
@@ -226,14 +272,13 @@ class UserProfile extends Component
     }
 
     public function createAndSaveCompany(){ 
-        if($this->pelajar_company != null){
+        if($this->pelajar_pelajar_company != null){
             // UPDATE PELAJAR COMPANY
-            $this->pelajar_company->update([
+            $this->pelajar_pelajar_company->update([
                 "company_id" => $this->company_input,
             ]);
         }else{
             // CREAET PELAJAR COMPANY
-            dd($this->pelajar->id);
             $this->pelajar->Pelajars_Company()->create([
                 "pelajar_id" => $this->pelajar->id,
                 "company_id" => $this->company_input,
@@ -242,10 +287,10 @@ class UserProfile extends Component
     }
 
     public function createAndSaveCompanyRole(){ 
-        if($this->pelajar_company != null){
+        if($this->pelajar_pelajar_company != null){
             // UPDATE PELAJAR COMPANY
-            $this->pelajar_company->update([
-                "role" => $this->pelajar_company->role,
+            $this->pelajar_pelajar_company->update([
+                "role" => $this->pelajar_pelajar_company->role,
             ]);
         }else{
             // CREAET PELAJAR COMPANY
@@ -256,13 +301,17 @@ class UserProfile extends Component
     // 
     // GET FUNCTIONS
     // 
-    public function getPelajarCompany(){
+    public function getPelajarCompanyInformation(){
         if($this->pelajar->Pelajars_Company == null){
             $this->pelajarHasCompanyPelajar = false;
         }else{
             $this->pelajarHasCompanyPelajar = true;
-            $this->pelajar_company = $this->pelajar->Pelajars_Company;
-            $this->company = $this->pelajar_company->Company;
+            $this->pelajar_pelajar_company = $this->pelajar->Pelajars_Company;
+            $this->pelajar_company = $this->pelajar_pelajar_company->Company;
+            $this->company_selected = $this->pelajar_company;
+            $this->tarikh_mula_ojt_input = $this->pelajar_pelajar_company->ojt_begin_date;
+            $this->tarikh_tamat_ojt_input = $this->pelajar_pelajar_company->ojt_end_date;
+            $this->company_input = $this->pelajar_pelajar_company->company_id;
         }
     }
 
@@ -337,7 +386,8 @@ class UserProfile extends Component
     }
 
     public function onCompanyInputChange(){
-        $this->company = Company::where("id", $this->pelajar_company->company_id)->first();
+        $this->company_selected = Company::where("id", $this->company_input)->first();
+
     }
 
     public function downloadSkopKerja(){

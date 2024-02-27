@@ -181,36 +181,6 @@ use Carbon\Carbon;
 
                         <div class="mb-3 col-md-6">
 
-                            <label class="form-label">LinkedIn URL</label>
-                            <input wire:model.lazy="pelajar.linkedin_url" type="url"
-                                class="form-control border border-2 p-2">
-                            @error('pelajar.linkedin_url')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Facebook URL</label>
-                            <input wire:model.lazy="pelajar.facebook_url" type="url"
-                                class="form-control border border-2 p-2">
-                            @error('pelajar.facebook_url')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
-                            <label class="form-label">Github URL</label>
-                            <input wire:model.lazy="pelajar.github_url" type="url"
-                                class="form-control border border-2 p-2">
-                            @error('pelajar.github_url')
-                            <p class='text-danger inputerror'>{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-
                             <label class="form-label">Program</label>
                             <div>
                                 <input wire:model='pelajar.program' type="radio" name="program_kpd" id="program_kpd"

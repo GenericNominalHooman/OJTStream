@@ -12,36 +12,36 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pelajars', function (Blueprint $table) {
-            $table->string('nric_number', 12)->nullable(false);
-            $table->string('guardian')->nullable(true);
-            $table->integer('guardian_telephone_number')->nullable(true);
+            $table->string('nric_number', 12)->nullable(true)->default(null);
+            $table->string('guardian')->nullable(true)->default(null);
+            $table->integer('guardian_telephone_number')->nullable(true)->default(null);
 
             // Social media link - to implement
-            $table->string('linkedin_url')->nullable(true);
-            $table->string('facebook_url')->nullable(true);
-            $table->string('github_url')->nullable(true);
+            $table->string('linkedin_url')->nullable(true)->default(null);
+            $table->string('facebook_url')->nullable(true)->default(null);
+            $table->string('github_url')->nullable(true)->default(null);
             // Social media link - to implement
             
-            $table->string('program')->nullable(false);
-            $table->date('cohort')->nullable(false);
+            $table->string('program')->nullable(true)->default(null);
+            $table->date('cohort')->nullable(true)->default(null);
 
             // Chronic illness
-            $table->boolean('heart_disease')->nullable(true);
-            $table->boolean('asthma')->nullable(true);
-            $table->boolean('diabetes')->nullable(true);
-            $table->boolean('osteoporosis')->nullable(true);
-            $table->boolean('slipped_disc')->nullable(true);
+            $table->boolean('heart_disease')->nullable(true)->default(null);
+            $table->boolean('asthma')->nullable(true)->default(null);
+            $table->boolean('diabetes')->nullable(true)->default(null);
+            $table->boolean('osteoporosis')->nullable(true)->default(null);
+            $table->boolean('slipped_disc')->nullable(true)->default(null);
 
             // Pensyarah penilai
-            $table->bigInteger('pensyarah_penilai_id')->unsigned()->nullable(true);
+            $table->bigInteger('pensyarah_penilai_id')->unsigned()->nullable(true)->default(null);
             $table->foreign('pensyarah_penilai_id')->references("id")->on("pensyarah_penilais")->nullOnDelete();
             
             // Pensyarah penilai ojt
-            $table->bigInteger('pensyarah_penilai_ojt_id')->unsigned()->nullable(true);
+            $table->bigInteger('pensyarah_penilai_ojt_id')->unsigned()->nullable(true)->default(null);
             $table->foreign('pensyarah_penilai_ojt_id')->references("id")->on("pensyarah_penilai_ojts")->nullOnDelete();
             
             // Penyeleras program
-            $table->bigInteger('penyelaras_program_id')->unsigned()->nullable(true);
+            $table->bigInteger('penyelaras_program_id')->unsigned()->nullable(true)->default(null);
             $table->foreign('penyelaras_program_id')->references("id")->on("penyelaras_programs")->nullOnDelete();
         });
     }

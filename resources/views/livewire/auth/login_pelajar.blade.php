@@ -8,24 +8,9 @@
                                     <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
                                     <div class="row mt-3">
                                         <h6 class='text-white text-center'>
-                                            <span class="font-weight-normal">Nombor Matrik:</span> admin@material.com
+                                            <span class="font-weight-normal">Nombor Matrik:</span> AKV0222KA009
                                             <br>
-                                            <span class="font-weight-normal">Password:</span> secret</h6>
-                                        <div class="col-2 text-center ms-auto">
-                                            <a class="btn btn-link px-3" href="javascript:;">
-                                                <i class="fa fa-facebook text-white text-lg"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-2 text-center px-1">
-                                            <a class="btn btn-link px-3" href="javascript:;">
-                                                <i class="fa fa-github text-white text-lg"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-2 text-center me-auto">
-                                            <a class="btn btn-link px-3" href="javascript:;">
-                                                <i class="fa fa-google text-white text-lg"></i>
-                                            </a>
-                                        </div>
+                                            <span class="font-weight-normal">Kata Kunci:</span> password</h6>
                                     </div>
                                 </div>
                             </div>
@@ -67,14 +52,9 @@
                                             in</button>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
-                                        Don't have an account?
+                                        Anda tidak mempunyai akaun?
                                         <a href="{{ route('register') }}"
-                                            class="text-primary text-gradient font-weight-bold">Sign up</a>
-                                    </p>
-                                    <p class="text-sm text-center">
-                                        Forgot your password? Reset your password
-                                        <a href="{{ route('password.forgot') }}"
-                                            class="text-primary text-gradient font-weight-bold">here</a>
+                                            class="text-primary text-gradient font-weight-bold">Daftar Masuk</a>
                                     </p>
                                 </form>
                             </div>

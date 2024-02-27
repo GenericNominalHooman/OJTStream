@@ -22,6 +22,7 @@ use App\Http\Livewire\Kupli\PenyuntinganDokumenTambah;
 use App\Http\Livewire\Kupli\SenaraiPelajar;
 use App\Http\Livewire\Kupli\SuntingPelajar;
 use App\Http\Livewire\Kupli\TambahPelajar;
+use App\Http\Livewire\Kupli\UserProfile as KupliUserProfile;
 use App\Http\Livewire\PenyuntinganDokumen;
 use App\Http\Livewire\OJTStream\UserProfile;
 use App\Http\Livewire\OJTStream\UserManagement;
@@ -72,6 +73,8 @@ Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDoku
 // PELAJAR ROUTES ENDS
 
 // KUPLI ROUTE BEGIN
+Route::get('kupli/user-profile', KupliUserProfile::class)->name('kupli profil');
+
 // PENGURUSAN DOKUMEN
 Route::get('kupli/pengurusan-dokumen', KupliPengurusanDokumen::class)->name('kupli pengurusan dokumen');
 Route::get('kupli/pengurusan-dokumen/tambah', PenyuntinganDokumenTambah::class)->name('kupli penyuntingan dokumen tambah');

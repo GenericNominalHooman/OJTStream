@@ -56,8 +56,8 @@ class SuntingPelajar extends Component
     public $company_all;
 
     // COMPANY PELAJAR
-    public PelajarsCompany $pelajar_company;
-    public Company $company;
+    public ?PelajarsCompany $pelajar_company;
+    public ?Company $company;
     public $skop_kerja;
     public $skop_kerja_input;
     public $penyelaras_program_all;
@@ -73,7 +73,6 @@ class SuntingPelajar extends Component
     {
         return view('livewire.kupli.sunting-pelajar', [
             "pensyarah_penilai_all" => $this->pensyarah_penilai_all,
-            ""
         ]);
     }
 
@@ -204,8 +203,8 @@ class SuntingPelajar extends Component
         
         // COMPANY
         $this->company_all = Company::get();
-        $this->pelajar_company = $this->pelajar->Pelajars_Company;
-        $this->company = $this->pelajar_company->Company;
+        $this->pelajar_company = $this->pelajar->Pelajars_Company ? $this->pelajar->Pelajars_Company : null;
+        $this->company = $this->pelajar_company ? $this->pelajar_company->Company : null;
         $this->skop_kerja = $this->pelajar->Skop_Kerja;
 
         // DOKUMEN OJT
@@ -213,6 +212,15 @@ class SuntingPelajar extends Component
         
         // Sets pelajar record to update instead of insertion
         $this->pelajar->user_id = $this->user->id;
+    }
+
+    public function updateBiodata(){
+        // UPDATE USER AND PELAJAR
+        $this->pelajar->save();
+        $this->user->save();
+
+        // MESSAGE
+        session()->flash("status", "Berjaya mengemaskini maklumat biodata profil");
     }
 
     public function getDokumenOJT(){

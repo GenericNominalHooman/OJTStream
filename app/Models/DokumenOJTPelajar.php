@@ -14,6 +14,8 @@ class DokumenOJTPelajar extends Model
     protected $fillable = [
         "document_path",
         "document_name",
+        "dokumen_ojt_id",
+        "deadline_date",
     ];
 
     public function DokumenOJT(){

@@ -17,14 +17,14 @@ return new class extends Migration
                      ->references('id')->on('users')
                      ->onDelete('cascade'); // set cascade deletion
             $table->string('matrix_number', 12)->nullable(false)->unique();
-            $table->enum('block', ['A', 'B', 'C', 'D', 'E', 'F', 'G']);
-            $table->enum('dorm', ['201', '202', '203', '204','301', '302', '303', '304']);
-            $table->enum('study_type', ['DVM', 'SVM'])->default('SVM')->nullable(false);
-            $table->integer('semester')->nullable(false);
+            $table->enum('block', ['A', 'B', 'C', 'D', 'E', 'F', 'G'])->nullable(true)->default(null);
+            $table->enum('dorm', ['201', '202', '203', '204','301', '302', '303', '304'])->nullable(true)->default(null);
+            $table->enum('study_type', ['DVM', 'SVM'])->default('SVM')->nullable(true)->default(null);
+            $table->integer('semester')->nullable(true)->default(null);
             
-            $table->enum('status', ['Belum_OJT', 'Sedang_OJT', 'Selesai_OJT'])->default('Belum_OJT');
-            $table->date('date_started')->nullable();
-            $table->date('date_completed')->nullable();
+            $table->enum('status', ['Belum_OJT', 'Sedang_OJT', 'Selesai_OJT'])->default('Belum_OJT')->nullable(true)->default(null);
+            $table->date('date_started')->nullable(true)->default(null);
+            $table->date('date_completed')->nullable(true)->default(null);
 
             $table->timestamps();
         });

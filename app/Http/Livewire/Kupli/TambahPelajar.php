@@ -5,12 +5,16 @@ namespace App\Http\Livewire\Kupli;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\DokumenOJT;
+use App\Models\DokumenOJTPelajar;
 use App\Models\Pelajar;
 use Livewire\Component;
 use App\Models\JanjiTemu;
 use App\Models\SkopKerja;
 use Livewire\WithFileUploads;
 use App\Models\PelajarsCompany;
+use Carbon\Carbon;
+use Database\Factories\DokumenOJTFactory;
 use Illuminate\Support\Facades\Storage;
 
 class TambahPelajar extends Component
@@ -26,7 +30,6 @@ class TambahPelajar extends Component
     public $pelajar_default_password = "password";
     
     // DOKUMEN OJT
-    public $dokumen_ojt_pelajar_model_array = [];
     public $dokumen_ojt_all;
 
     // 
@@ -68,11 +71,23 @@ class TambahPelajar extends Component
     {
         $this->pelajar = new Pelajar();
         $this->pelajar_user = new User();
+        $this->dokumen_ojt_all = DokumenOJT::get()  ;
 
         // DEBUGGING
         $this->fill([
-            "pelajar_user.name" => "Pelajar 12",
-            "password" => "password"
+            'pelajar_user.email' => 'pelajar21@email.com',
+            'pelajar_user.name' => 'Pelajar 21',
+            'pelajar.matrix_number'=> 'AKV0222KA021',
+            'pelajar.semester'=> '4',
+            'pelajar.cohort'=> "2024-02-27",
+            'pelajar.nric_number' => '040916080160',
+            'pelajar.guardian' => 'Guardian 21',
+            'pelajar_user.phone' => '0112713569',
+            'pelajar.guardian_telephone_number' => '0165190476',
+            'pelajar.program'=> 'KPD',
+            'pelajar_user.gender' => 'male',
+            'pelajar.study_type'=> 'DVM',
+            'pelajar_user.location' => 'Location 21',
         ]);
     }
 
@@ -89,10 +104,8 @@ class TambahPelajar extends Component
         // SAVE PELAJAR
         $this->savePelajar();
         
-        // POPULATE dokumen_ojt_pelajar_model_array
-
         // SAVE DOKUMEN OJT PELAJAR
-        // $this->saveDokumenOJTPelajar();
+        $this->saveDokumenOJTPelajar();
 
         // MESSAGE
         session()->flash("status", "Rekod pelajar berjaya dihasilkan");
@@ -106,7 +119,17 @@ class TambahPelajar extends Component
     }
 
     public function saveDokumenOJTPelajar(){
-
+        // ITERATE THROUGH $dokumen_ojt_all
+        $i=0;
+        foreach($this->dokumen_ojt_all as $dokumen_ojt){
+            $i++;
+            
+            $this->pelajar->Dokumen_OJT_Pelajar()->create([
+                "document_name" => $dokumen_ojt->document_name,
+                "deadline_date" => Carbon::parse(now())->addMonth($i),
+                "dokumen_ojt_id" => $dokumen_ojt->id,
+            ]);
+        }
     }
     
     // 

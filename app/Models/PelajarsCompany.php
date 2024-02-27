@@ -15,8 +15,10 @@ class PelajarsCompany extends Model
     }
 
     protected $fillable = [
-        "company_id",
         "pelajar_id",
+        "company_id",
         "role",
+        "ojt_begin_date",
+        "ojt_end_date",
     ];
 }

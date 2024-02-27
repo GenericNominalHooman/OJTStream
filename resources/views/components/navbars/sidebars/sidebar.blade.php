@@ -7,8 +7,9 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
             <img src="{{ asset('assets') }}/img/ojthub/logo_cropped.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-2 font-weight-bold text-white">{{auth()->user()->name}}</span>
-            <span class="ml-2 font-weight-light text-white">|
+            <span class="ms-2 font-weight-bold text-white p-0 m-0">{{auth()->user()->name}}</span>
+            <span class="ml-2 font-weight-light text-white p-0 m-0">
+                <p class="d-inline"></p>
                 <ul class="m-0">
                     @foreach (auth()->user()->getRoles() as $role)
                     <li>{{$role}}</li>
@@ -20,7 +21,9 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            {{-- GENERAL NAV FOR ALL USERS --}}
+
+            {{-- KUPLI SIDEBAR BEGIN --}}
+            @if (auth()->user()->isKupli())
             <section>
                 <li class="nav-item">
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
@@ -44,19 +47,14 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Profil</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'user-profile' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('user-profile') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli profil' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli profil') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i style="font-size: 1.2rem;" class="fas fa-user-circle ps-2 pe-2 text-center"></i>
                         </div>
                         <span class="nav-link-text ms-1">Profil Pengguna</span>
                     </a>
                 </li>
-            </section>
-
-            {{-- KUPLI SIDEBAR BEGIN --}}
-            @if (auth()->user()->isKupli())
-            <section>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
                         Pelajar
@@ -72,100 +70,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli tambah pelajar' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli tambah pelajar') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-user-plus"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Lantik Pelajar</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
-                        Pensyarah</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-list"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Senarai Pensyarah</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Lantik Pensyarah</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
-                        Pensyarah Penilai OJT</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-list"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Senarai Pensyarah Penilai OJT</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Lantik Pensyarah Penilai OJT</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
-                        Pensyarah Penilai</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-list"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Senarai Pensyarah Penilai</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Lantik Pensyarah Penilai</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
-                        Penyelaras Program</h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-list"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Senarai Penyelaras Program</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('tables') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Lantik Pensyarah Penilai</span>
+                        <span class="nav-link-text ms-1">Tambah Pelajar</span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
@@ -278,7 +188,8 @@
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan Janji Temu
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
+                        Janji Temu
                     </h6>
                 </li>
                 <li class="nav-item">
@@ -293,7 +204,7 @@
             </section>
             @endif
             {{-- PENYELARAS PROGRAM SIDEBAR END --}}
-            
+
             {{-- PENSYARAH PENILAI OJT SIDEBAR BEGIN --}}
             @if (auth()->user()->isPensyarahPenilaiOJT())
             <section>
@@ -321,7 +232,8 @@
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan Janji Temu
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
+                        Janji Temu
                     </h6>
                 </li>
                 <li class="nav-item">
@@ -342,39 +254,70 @@
             <section>
                 {{-- Prevent displaying pengurusan pelajar twice if user is also a PPO --}}
                 @if(!auth()->user()->isPensyarahPenilaiOJT())
-                    <li class="nav-item mt-3">
-                        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
-                            Pelajar
-                        </h6>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                            href="{{ route('tables') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-list"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Senarai Pelajar</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
-                            href="{{ route('tables') }}">
-                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-user-plus"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Lantik Pelajar</span>
-                        </a>
-                    </li>    
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
+                        Pelajar
+                    </h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('tables') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Senarai Pelajar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'tables' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('tables') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Lantik Pelajar</span>
+                    </a>
+                </li>
                 @endif
             </section>
             @endif
             {{-- PENSYARAH PENILAI SIDEBAR END --}}
-        
+
             {{-- Pelajar SIDEBAR BEGIN --}}
             @if (auth()->user()->isPelajar())
             <section>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('notifications') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">notifications</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Notifikasi</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('dashboard') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">dashboard</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan OJT</h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Profil</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'user-profile' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('user-profile') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1.2rem;" class="fas fa-user-circle ps-2 pe-2 text-center"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profil Pengguna</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan OJT
+                    </h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'pelajar pengurusan dokumen' ? ' active bg-gradient-primary' : '' }} "
@@ -385,16 +328,7 @@
                         <span class="nav-link-text ms-1">Pengurusan Dokumen OJT</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'lawatan ppo' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('lawatan ppo') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-calendar"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Lawatan PPO</span>
-                    </a>
-                </li>
-        
+
             </section>
             @endif
             {{-- Pelajar SIDEBAR ENDS --}}
@@ -402,9 +336,10 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
-            <a href="javascript:;" class="nav-link text-body font-weight-bold px-0 btn bg-gradient-primary w-100 text-white">
+            <a href="javascript:;"
+                class="nav-link text-body font-weight-bold px-0 btn bg-gradient-primary w-100 text-white">
                 <span class="m-2"><i class="fas fa-door-open"></i></span>
-                <livewire:auth.logout/>
+                <livewire:auth.logout />
             </a>
         </div>
     </div>
