@@ -46,7 +46,7 @@ use App\Http\Livewire\Pelajar\Notifikasi;
 */
 
 Route::get('/', function(){
-    return redirect('sign-in');
+    return redirect()->route('login');
 });
 
 Route::get('forgot-password', ForgotPassword::class)->middleware('guest')->name('password.forgot');

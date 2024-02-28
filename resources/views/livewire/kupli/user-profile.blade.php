@@ -24,7 +24,11 @@
                     <p class="mb-0 font-weight-normal text-sm">
                         <ul class="m-0 p-0">
                             @foreach ($kupli_user->getRoles() as $user_role)
-                                <li>{{$user_role}}</li>    
+                                @if ($user_role == "Kupli")
+                                    <li>Pensyarah</li>
+                                @else
+                                    <li>{{$user_role}}</li>
+                                @endif
                             @endforeach
                         </ul>
                     </p>

@@ -15,6 +15,7 @@ class Login extends Component
     public $password = '';
     public $no_matrik = '';
     public $login_type = '';
+    public $username_input = '';
 
     public function render()
     {
@@ -26,6 +27,8 @@ class Login extends Component
                 return view('livewire.auth.login_kupli');;
             case "pensyarah":
                 return view('livewire.auth.login_pensyarah');;
+            case "streamlined":
+                return view('livewire.auth.login_streamlined');;
             default:
                 return view('livewire.auth.login_dashboard');;
         }
@@ -42,6 +45,8 @@ class Login extends Component
                 $this->fill(["no_matrik" => "AKV0222KA009", "password" => "password"]);
             case "kupli":
                 $this->fill(["email" => "kupli_1@email.com", "password" => "password"]);
+            case "streamlined":
+                $this->fill(["username_input" => "", "password" => "password"]);
             case "pensyarah":
             default:
         }
@@ -62,7 +67,17 @@ class Login extends Component
                 ]);
 
                 // Authenthicate pelajar
-                $status = $this->pelajarLogin();;
+                $status = $this->pelajarLogin();
+            break;
+            case "streamlined":
+                // Validate user input
+                $this->validate([
+                    'username_input' => 'required',
+                    'password' => 'required',
+                ]);
+
+                // Authenthicate pelajar                
+                $status = $this->streamlinedLogin();
             break;
             case "kupli":
             case "pensyarah":
@@ -85,7 +100,14 @@ class Login extends Component
 
         // Redirect to dashboard or to the latest page with an error message
         if(empty($status)){
-            return redirect('/dashboard');
+            switch($this->login_type){
+                case "kupli":
+                    return redirect('kupli/dashboard');
+                break;
+                case "pelajar":
+                    return redirect('dashboard');
+                break;
+            }
         }else{
             return back()->with(["status" => $status]);
         }
@@ -117,6 +139,14 @@ class Login extends Component
     public function pensyarahLogin()
     {
         $credentials = ['email' => $this->email, 'password' => $this->password];
+
+        if (!auth()->attempt($credentials)) {
+            return 'Email atau kata laluan yang dimasukkan adalah salah';
+        }
+    }
+
+    public function streamlinedLogin(){
+        $credentials = ['username' => $this->username_input, 'password' => $this->password];
 
         if (!auth()->attempt($credentials)) {
             return 'Email atau kata laluan yang dimasukkan adalah salah';

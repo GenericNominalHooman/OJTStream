@@ -12,7 +12,11 @@
                 <p class="d-inline"></p>
                 <ul class="m-0">
                     @foreach (auth()->user()->getRoles() as $role)
-                    <li>{{$role}}</li>
+                        @if ($role == "Kupli")
+                            <li>Pensyarah</li>
+                        @else
+                            <li>{{$role}}</li>
+                        @endif
                     @endforeach
                 </ul>
             </span>
@@ -25,13 +29,22 @@
             {{-- KUPLI SIDEBAR BEGIN --}}
             @if (auth()->user()->isKupli())
             <section>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
                         href="{{ route('notifications') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">notifications</i>
                         </div>
                         <span class="nav-link-text ms-1">Notifikasi</span>
+                    </a>
+                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli penguguman' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli penguguman') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Penguguman</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -89,15 +102,6 @@
                             <i class="fas fa-folder"></i>
                         </div>
                         <span class="nav-link-text ms-1">Pengurusan Dokumen OJT</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli penguguman' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('kupli penguguman') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa-solid fa-bullhorn"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Penguguman</span>
                     </a>
                 </li>
             </section>
