@@ -682,11 +682,11 @@ video {
 .mt-5 {
   margin-top: 1.25rem;
 }
-.mt-8 {
-  margin-top: 2rem;
-}
 .mt-6 {
   margin-top: 1.5rem;
+}
+.mt-8 {
+  margin-top: 2rem;
 }
 .table {
   display: table;
@@ -735,6 +735,9 @@ video {
 }
 .text-wrap {
   text-wrap: wrap;
+}
+.text-nowrap {
+  text-wrap: nowrap;
 }
 .border {
   border-width: 1px;

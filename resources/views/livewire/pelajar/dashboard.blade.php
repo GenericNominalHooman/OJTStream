@@ -1,34 +1,12 @@
+@php
+use Carbon\Carbon;
+use App\Models\DokumenOJT;
+@endphp
 <div>
     <!-- Navbar -->
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div
-                            class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="fas fa-calendar text-white"></i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-4 text-capitalize">Lawatan PPO</p>
-                            <h4 class="mb-0 font-weight-bold text-dark">10/10/23(Lawatan 1)</h4>
-                            <h4 class="mb-0 font-weight-bold text-dark">10/10/23(Lawatan 2)</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0">
-                            <span class="text-success text-sm font-weight-bolder">3 hari </span>
-                            lagi(Lawatan 1)
-                        </p>
-                        <p class="mb-0">
-                            <span class="text-success text-sm font-weight-bolder">3 hari </span>
-                            lagi(Lawatan 2)
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="row d-flex justify-content-center">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
@@ -38,13 +16,46 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Status OJT</p>
-                            <h4 class="mb-0">Belum Dijalankan/Sedang Dijalankan/Tamat</h4>
+                            <h4 class="mb-0"><x-pelajar.status-ojt :company="$pelajar_pelajar_company" ></x-pelajar.status-ojt></h4>
+                         </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                    <div class="card-footer p-3">
+                        @php
+                            $ojt_begin_date = Carbon::parse($pelajar_pelajar_company->ojt_begin_date);
+                            $ojt_end_date = Carbon::parse($pelajar_pelajar_company->ojt_end_date);
+                            $current_time = Carbon::parse(now());
+                        @endphp
+                        @if ($current_time->gt($ojt_begin_date) && $current_time->gt($ojt_end_date))
+                            {{-- TAMAT BEROJT --}}
+                            <span class="d-block text-nowrap">Tamat OJT</span>
+                        @elseif ($current_time->gt($ojt_begin_date) && $current_time->lt($ojt_end_date))
+                            {{-- SEDANG BEROJT --}}
+                            <span class="text-nowrap">{{$ojt_end_date->diffInDays()}}</span>
+                            <span class="text-nowrap"> Hari Lagi Tamat OJT</span>
+                        @else
+                            {{-- BELUM BEROJT --}}
+                            <span class="text-nowrap">{{$ojt_begin_date->diffInDays()}}</span>
+                            <span class="text-nowrap"> Hari Lagi Mula OJT</span>
+                        @endif
+                </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div
+                            class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize">Dokumen KVOJT</p>
+                            <h4 class="mb-0">{{$this->dokumen_ojt_pelajar_uploaded_all->count()}} / {{$this->dokumen_ojt_pelajar_all->count()}} Fail Dimuat Naik</h4>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">120 hari</span> lagi
-                            sebelum tamat/mula OJT</p>
+                        <a href="{{route('pelajar pengurusan dokumen')}}" class="mb-0"><i class="m-2 fas fa-eye"></i>Lihat Pengurusan Dokumen OJT</a>
                     </div>
                 </div>
             </div>
@@ -53,418 +64,61 @@
                     <div class="card-header p-3 pt-2">
                         <div
                             class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="fas fa-bell"></i>
+                            <i class="fas fa-file"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Notifikasi</p>
-                            <h4 class="mb-0">3,462</h4>
+                            <p class="text-sm mb-0 text-capitalize">Skop Kerja</p>
+                            @if ($this->pelajar_skop_kerja)
+                                <h4 class="mb-0 text text-success">Sudah Dimuat Naik</h4>
+                            @else
+                                <h4 class="mb-0 text text-danger">Belum Dimuat Naik</h4>
+                            @endif
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-3">
-                        <a href="" class="mb-0"><i class="m-2 fas fa-eye"></i>Lihat Notifikasi</a>
+                        <a href="{{route('user-profile',[
+                            'active_tab' => 'organisasi'
+                        ])}}" class="mb-0"><i class="m-2 fas fa-eye"></i>Lihat Pengurusan Skop Kerja</a>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+
+            {{-- PENGUGUMAN(WIP) BEGIN --}}
+            {{-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
                         <div
-                            class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="fas fa-clipboard-check"></i>
+                            class="icon icon-lg icon-shape bg-gradient-secondary shadow-secondary text-center border-radius-xl mt-n4 position-absolute">
+                            <i class="fas fa-bullhorn"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Markah OJT</p>
-                            <h4 class="mb-0">3,462</h4>
+                            <p class="text-sm mb-0 text-capitalize">Penguguman(Belum Dibaca)</p>
+                            <h4 class="mb-0"></h4>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-3">
-                        <a href="" class="mb-0"><i class="m-2 fas fa-eye"></i>Lihat Slip Markah OJT</a>
+                        <a href="{{route("pelajar notifikasi")}}" class="mb-0"><i class="m-2 fas fa-eye"></i>Lihat Penguguman</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+            {{-- PENGUGUMAN(WIP) ENDS --}}
+
         </div>
         <div class="row mt-4">
-            <div class="col-lg-4 col-md-6 mt-4 mb-4">
-                <div class="card z-index-2 ">
-                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                            <div class="chart">
-                                <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="mb-0 ">Statistik Kehadiran OJT(Harian)</h6>
-                        <p class="text-sm ">Statistik harian kehadiran OJT dari dd/mm/yy ~ dd/mm/yy</p>
-                        <hr class="dark horizontal">
-                        <div class="d-flex ">
-                            <a class="mb-0 text-sm" href=""><i class="fas fa-pen m-2"></i>Urus Kehadiran</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mt-4 mb-4">
-                <div class="card z-index-2  ">
-                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                        <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-                            <div class="chart">
-                                <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="mb-0 "> Statistik Kehadiran OJT(Bulanan)</h6>
-                        <p class="text-sm "> Statistik bulanan kehadiran OJT dari dd/mm/yy ~ dd/mm/yy </p>
-                        <hr class="dark horizontal">
-                        <div class="d-flex ">
-                            <a class="mb-0 text-sm" href=""><i class="fas fa-pen m-2"></i>Urus Kehadiran</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="row mb-4">
-            <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <div class="row">
-                            <div class="col-lg-6 col-7">
-                                <h6>Penilaian OJT Terikini</h6>
-                                <p class="text-sm mb-0">
-                                    <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                    <span class="font-weight-bold ms-1">30 done</span> this month
-                                </p>
-                            </div>
-                            <div class="col-lg-6 col-5 my-auto text-end">
-                                <div class="dropdown float-lg-end pe-4">
-                                    <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v text-secondary"></i>
-                                    </a>
-                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                        </li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                action</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
-                                                else here</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-0 pb-2">
-                        <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Companies</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Members</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Budget</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Completion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
-                                                        class="avatar avatar-sm me-3" alt="xd">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Material XD Version</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="{{ asset('assets') }}/img/team-1.jpg" alt="team1">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="{{ asset('assets') }}/img/team-2.jpg" alt="team2">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Alexander Smith">
-                                                    <img src="{{ asset('assets') }}/img/team-3.jpg" alt="team3">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="team4">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $14,000 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">60%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-60" role="progressbar"
-                                                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-atlassian.svg"
-                                                        class="avatar avatar-sm me-3" alt="atlassian">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Add Progress Track</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="{{ asset('assets') }}/img/team-2.jpg" alt="team5">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="team6">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $3,000 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">10%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-10" role="progressbar"
-                                                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-slack.svg"
-                                                        class="avatar avatar-sm me-3" alt="team7">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="{{ asset('assets') }}/img/team-3.jpg" alt="team8">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-1.jpg" alt="team9">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> Not set </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">100%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success w-100"
-                                                        role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-spotify.svg"
-                                                        class="avatar avatar-sm me-3" alt="spotify">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="user1">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="{{ asset('assets') }}/img/team-3.jpg" alt="user2">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Alexander Smith">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="user3">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-1.jpg" alt="user4">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $20,500 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">100%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success w-100"
-                                                        role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-jira.svg"
-                                                        class="avatar avatar-sm me-3" alt="jira">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="user5">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $500 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">25%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-25" role="progressbar"
-                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="25"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-invision.svg"
-                                                        class="avatar avatar-sm me-3" alt="invision">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Redesign New Online Shop</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="{{ asset('assets') }}/img/team-1.jpg" alt="user6">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="user7">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $2,000 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">40%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-40" role="progressbar"
-                                                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="40"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
+        <div class="row mb-4 d-flex justify-content-center align-items-center">
+            <div class="col-lg-8 mb-md-0 mb-4">
                 <div class="card h-100">
                     <div class="card-header pb-0">
                         <h6>Proses OJT</h6>
                         <p class="text-sm">
                             <i class="fas fa-info" aria-hidden="true"></i>
-                            <span class="m-3 font-weight-bold">Maklumat Terkini</span>
+                            <span class="m-3 font-weight-bold">Fasa-fasa OJT</span>
                         </p>
                     </div>
-                    <div class="card-body p-3">
+                    <div class="card-body p-3 d-flex justify-content-center">
                         <div class="timeline timeline-one-side">
                             <div class="timeline-block mb-3">
                                 <span class="timeline-step">
@@ -534,333 +188,57 @@
                 </div>
             </div>
         </div>
-        <div class="row mb-4">
-            <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+        <div class="row mb-4 d-flex justify-content-center align-items-center">
+            <div class="col-lg-8 mb-md-0 mb-4">
                 <div class="card">
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-lg-6 col-7">
-                                <h6>Dokumen OJT Terikini</h6>
+                                <h6>Dokumen Perlu Dimuat Naik(Minggu Ini)</h6>
                                 <p class="text-sm mb-0">
-                                    <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                    <span class="font-weight-bold ms-1">30 done</span> this month
+                                    <i class="fas fa-file" aria-hidden="true"></i>
+                                    <span class="font-weight-bold ms-1">{{$dokumen_ojt_pelajar_all_week->count()}}</span> dokumen perlu dimuat naik pada minggu ini
                                 </p>
-                            </div>
-                            <div class="col-lg-6 col-5 my-auto text-end">
-                                <div class="dropdown float-lg-end pe-4">
-                                    <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v text-secondary"></i>
-                                    </a>
-                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                        </li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                action</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
-                                                else here</a></li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-body px-0 pb-2">
+                        @if ($dokumen_ojt_pelajar_all_week->count())
                         <div class="table-responsive">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Companies</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Members</th>
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Nama Dokumen OJT</th>
                                         <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Budget</th>
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Jenis Dokumen(Pengisian/Infomasi)</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Completion</th>
+                                            Tarikh Hantar</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Status Muat Naik</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Dihantar Pada</th>
+                                        <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
-                                                        class="avatar avatar-sm me-3" alt="xd">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Material XD Version</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="{{ asset('assets') }}/img/team-1.jpg" alt="team1">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="{{ asset('assets') }}/img/team-2.jpg" alt="team2">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Alexander Smith">
-                                                    <img src="{{ asset('assets') }}/img/team-3.jpg" alt="team3">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="team4">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $14,000 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">60%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-60" role="progressbar"
-                                                        aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-atlassian.svg"
-                                                        class="avatar avatar-sm me-3" alt="atlassian">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Add Progress Track</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="{{ asset('assets') }}/img/team-2.jpg" alt="team5">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="team6">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $3,000 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">10%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-10" role="progressbar"
-                                                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-slack.svg"
-                                                        class="avatar avatar-sm me-3" alt="team7">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="{{ asset('assets') }}/img/team-3.jpg" alt="team8">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-1.jpg" alt="team9">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> Not set </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">100%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success w-100"
-                                                        role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-spotify.svg"
-                                                        class="avatar avatar-sm me-3" alt="spotify">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="user1">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Romina Hadid">
-                                                    <img src="{{ asset('assets') }}/img/team-3.jpg" alt="user2">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Alexander Smith">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="user3">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-1.jpg" alt="user4">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $20,500 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">100%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-success w-100"
-                                                        role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-jira.svg"
-                                                        class="avatar avatar-sm me-3" alt="jira">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="user5">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $500 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">25%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-25" role="progressbar"
-                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="25"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="{{ asset('assets') }}/img/small-logos/logo-invision.svg"
-                                                        class="avatar avatar-sm me-3" alt="invision">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Redesign New Online Shop</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group mt-2">
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Ryan Tompson">
-                                                    <img src="{{ asset('assets') }}/img/team-1.jpg" alt="user6">
-                                                </a>
-                                                <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                    data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                    title="Jessica Doe">
-                                                    <img src="{{ asset('assets') }}/img/team-4.jpg" alt="user7">
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-xs font-weight-bold"> $2,000 </span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="progress-wrapper w-75 mx-auto">
-                                                <div class="progress-info">
-                                                    <div class="progress-percentage">
-                                                        <span class="text-xs font-weight-bold">40%</span>
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info w-40" role="progressbar"
-                                                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="40"></div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        @foreach ($dokumen_ojt_pelajar_all_week as $dokumen_ojt_pelajar_row)
+                                            @php
+                                                $jenis = DokumenOJT::find($dokumen_ojt_pelajar_row->dokumen_ojt_id)->document_type;
+                                            @endphp
+                                            <x-pengurusan-dokumen.senarai-dokumen-pelajar :jenis="$jenis" :dokumen="$dokumen_ojt_pelajar_row" ></x-pengurusan-dokumen.senarai-dokumen-pelajar> 
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
+                        @else
+                            <p class="text text-muted p-4">Tiada dokumen OJT yang perlu dimuat naik pada minggu ini</p>
+                        @endif
                     </div>
                 </div>
             </div>

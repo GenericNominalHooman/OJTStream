@@ -57,7 +57,6 @@ Route::get('reset-password/{id}', ResetPassword::class)->middleware('signed')->n
 Route::get('sign-up', Register::class)->middleware('guest')->name('register');
 Route::get('sign-in', Login::class)->middleware('guest')->name('login');
 
-Route::get('user-profile', UserProfile::class)->middleware('auth')->name('user-profile');
 Route::get('user-management', UserManagement::class)->middleware('auth')->name('user-management');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -72,7 +71,10 @@ Route::get('static-sign-in', StaticSignIn::class)->name('static-sign-in');
 Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
 Route::get('rtl', RTL::class)->name('rtl');
 
+// 
 // PELAJAR ROUTES BEGIN
+// 
+Route::get('user-profile', UserProfile::class)->middleware('auth')->name('user-profile');
 Route::get('notifikasi', Notifikasi::class)->name('pelajar notifikasi');
 Route::get('dashboard', PelajarDashboard::class)->name('pelajar dashboard');
 
@@ -84,7 +86,9 @@ Route::get('pengurusan-dokumen', PengurusanDokumen::class)->name('pelajar pengur
 Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDokumen::class)->name('pelajar penyuntingan dokumen');
 // PELAJAR ROUTES ENDS
 
+// 
 // KUPLI ROUTE BEGIN
+// 
 Route::get('kupli/user-profile', KupliUserProfile::class)->name('kupli profil');
 Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
 

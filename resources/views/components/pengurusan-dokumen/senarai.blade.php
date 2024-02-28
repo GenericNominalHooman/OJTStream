@@ -12,10 +12,7 @@ $dokumens_pelajar = auth()->user()->Pelajar->Dokumen_OJT_Pelajar->where("dokumen
             <td>
                 <div class="d-flex px-2 py-1">
                     <div>
-                        <img src="{{ asset('assets') }}/img/team-2.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user1">
-                    </div>
+                        <i class="fas fa-file p-2"></i>                    </div>
                     <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">{{ pathinfo($dokumen->document_name, PATHINFO_FILENAME) }}</h6>
                         <p class="text-xs text-secondary mb-0">{{ $dokumen->document_description }}
@@ -73,9 +70,7 @@ $dokumens_pelajar = auth()->user()->Pelajar->Dokumen_OJT_Pelajar->where("dokumen
             <td>
                 <div class="d-flex px-2 py-1">
                     <div>
-                        <img src="{{ asset('assets') }}/img/team-2.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user1">
+                        <i class="fas fa-file p-2"></i>
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">{{ pathinfo($dokumen->document_name, PATHINFO_FILENAME) }}</h6>

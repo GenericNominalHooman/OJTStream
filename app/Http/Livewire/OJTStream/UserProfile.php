@@ -140,6 +140,9 @@ class UserProfile extends Component
 
     public function mount()
     {
+        // REDIRECT HANDLER
+        request()->get('active_tab') ? $this->activeTab = request()->get('active_tab') : "biodata";
+        
         $this->user = auth()->user();
         $this->roles = $this->user->getRoles();
 

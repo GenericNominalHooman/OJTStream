@@ -14,9 +14,7 @@ $dokumens_pelajar = $pelajar->Dokumen_OJT_Pelajar->where("dokumen_ojt_id", $doku
             <td>
                 <div class="d-flex px-2 py-1">
                     <div>
-                        <img src="{{ asset('assets') }}/img/team-2.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user1">
+                        <i class="fas fa-file p-2"></i>
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">{{ pathinfo($dokumen->document_name, PATHINFO_FILENAME) }}</h6>
@@ -86,9 +84,7 @@ $dokumens_pelajar = $pelajar->Dokumen_OJT_Pelajar->where("dokumen_ojt_id", $doku
             <td>
                 <div class="d-flex px-2 py-1">
                     <div>
-                        <img src="{{ asset('assets') }}/img/team-2.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user1">
+                        <i class="fas fa-file p-2"></i>
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">{{ pathinfo($dokumen->document_name, PATHINFO_FILENAME) }}</h6>
