@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\PengurusanDokumen;
 use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Auth\ForgotPassword;
+use App\Http\Livewire\Kupli\KupliDashboard;
+use App\Http\Livewire\Kupli\Penguguman;
+use App\Http\Livewire\Kupli\PengugumanCreate;
+use App\Http\Livewire\Kupli\PengugumanEdit;
 use App\Http\Livewire\Kupli\PengurusanDokumen as KupliPengurusanDokumen;
 use App\Http\Livewire\Kupli\PenyuntinganDokumen as KupliPenyuntinganDokumen;
 use App\Http\Livewire\Kupli\PenyuntinganDokumenTambah;
@@ -26,7 +30,9 @@ use App\Http\Livewire\Kupli\UserProfile as KupliUserProfile;
 use App\Http\Livewire\PenyuntinganDokumen;
 use App\Http\Livewire\OJTStream\UserProfile;
 use App\Http\Livewire\OJTStream\UserManagement;
+use App\Http\Livewire\Pelajar\Dashboard as PelajarDashboard;
 use App\Http\Livewire\Pelajar\LawatanPPO;
+use App\Http\Livewire\Pelajar\Notifikasi;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +62,7 @@ Route::get('user-management', UserManagement::class)->middleware('auth')->name('
 
 Route::group(['middleware' => 'auth'], function () {
     // LOGINNED USER ONLY
-Route::get('dashboard', Dashboard::class)->name('dashboard');
+Route::get('dashboard2', Dashboard::class)->name('dashboard');
 Route::get('billing', Billing::class)->name('billing');
 Route::get('profile', Profile::class)->name('profile');
 Route::get('tables', Tables::class)->name('tables');
@@ -67,13 +73,25 @@ Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
 Route::get('rtl', RTL::class)->name('rtl');
 
 // PELAJAR ROUTES BEGIN
+Route::get('notifikasi', Notifikasi::class)->name('pelajar notifikasi');
+Route::get('dashboard', PelajarDashboard::class)->name('pelajar dashboard');
+
+// LAWATAN PPO(UNUSED)
 Route::get('lawatan-ppo', LawatanPPO::class)->name('lawatan ppo');
+
+// PENGURUSAN DOKUMEN
 Route::get('pengurusan-dokumen', PengurusanDokumen::class)->name('pelajar pengurusan dokumen');
 Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDokumen::class)->name('pelajar penyuntingan dokumen');
 // PELAJAR ROUTES ENDS
 
 // KUPLI ROUTE BEGIN
 Route::get('kupli/user-profile', KupliUserProfile::class)->name('kupli profil');
+Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
+
+// PENGUGUMAN
+Route::get('kupli/penguguman', Penguguman::class)->name('kupli penguguman');
+Route::get('kupli/penguguman/tambah', PengugumanCreate::class)->name('kupli penguguman tambah');
+Route::get('kupli/penguguman/{penguguman:id}/sunting', PengugumanEdit::class)->name('kupli penguguman sunting');
 
 // PENGURUSAN DOKUMEN
 Route::get('kupli/pengurusan-dokumen', KupliPengurusanDokumen::class)->name('kupli pengurusan dokumen');

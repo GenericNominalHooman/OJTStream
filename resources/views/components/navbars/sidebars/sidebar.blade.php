@@ -35,8 +35,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('dashboard') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli dashboard' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli dashboard') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
@@ -89,6 +89,15 @@
                             <i class="fas fa-folder"></i>
                         </div>
                         <span class="nav-link-text ms-1">Pengurusan Dokumen OJT</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli penguguman' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli penguguman') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Penguguman</span>
                     </a>
                 </li>
             </section>
@@ -286,17 +295,17 @@
             @if (auth()->user()->isPelajar())
             <section>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('notifications') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'pelajar notifikasi' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('pelajar notifikasi') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">notifications</i>
+                            <i class="fas fa-bullhorn"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Notifikasi</span>
+                        <span class="nav-link-text ms-1">Penguguman</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('dashboard') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'pelajar dashboard' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('pelajar dashboard') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>

@@ -12,4 +12,8 @@ class Kupli extends Model
     public function DokumenOJT(){
         return $this->hasMany(DokumenOJT::class, "kupli_id", "id");
     }
+
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
 }

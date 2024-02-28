@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
             PelajarsCompanySeeder::class,
             DokumenOJTSeeder::class,
             DokumenOJTPelajarSeeder::class,
+            PengugumanSeeder::class,
         ]);
     }
 }
