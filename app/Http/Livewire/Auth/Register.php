@@ -2,16 +2,18 @@
 
 namespace App\Http\Livewire\Auth;
 
-use App\Models\DokumenOJT;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Pelajar;
-use League\CommonMark\Node\Block\Document;
 use Livewire\Component;
+use App\Models\DokumenOJT;
+use Illuminate\Support\Facades\Hash;
+use League\CommonMark\Node\Block\Document;
 
 class Register extends Component
 {
 
+    public $username ='';
     public $name ='';
     public $email = '';
     public $password = '';
@@ -20,6 +22,7 @@ class Register extends Component
     public $pelajar;
 
     protected $rules=[
+    'username' => 'required|min:3|unique:users,username',
     'name' => 'required|min:3',
     'email' => 'required|email|unique:users,email',
     'password' => 'required|min:5',
@@ -47,8 +50,9 @@ class Register extends Component
 
     public function mount(){
         $this->fill([
-            'name' => 'Pelajar 20',
-            'email' => 'pelajar20@email.com',
+            'username' => 'Iskandar',
+            'name' => 'MUHAMMAD ISKANDAR LUQMAN BIN ZAHARI',
+            'email' => 'muhammadiskandarluqman@email.com',
             'password' => 'password',
             'no_matrik' => 'AKV0222KA020'
         ]);    

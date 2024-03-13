@@ -13,7 +13,7 @@
                             </div>
                             <div
                                 class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
-                                <div class="card card-plain">
+                                <div class="card card-plain mt-8">
                                     <div class="card-header">
                                         <h4 class="font-weight-bolder">Daftar Pelajar</h4>
                                         <p class="mb-0">Masukkan nama, email, nombor matrik dan kata laluan anda</p>
@@ -21,7 +21,15 @@
                                     <div class="card-body">
                                         <form wire:submit.prevent ="store">
 
-                                            <div class="input-group input-group-outline @if(strlen($name?? '') > 0) is-filled @endif">
+                                            <div class="input-group input-group-outline @if(strlen($username?? '') > 0) is-filled @endif">
+                                                <label class="form-label">Nama Pengguna</label>
+                                                <input wire:model="username" type="text" class="form-control">
+                                            </div>
+                                            @error('username')
+                                            <p class='text-danger inputerror'>{{ $message }} </p>
+                                            @enderror
+                                            
+                                            <div class="input-group input-group-outline mt-3 @if(strlen($name?? '') > 0) is-filled @endif">
                                                 <label class="form-label">Nama</label>
                                                 <input wire:model="name" type="text" class="form-control" 
                                                 >

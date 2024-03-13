@@ -6,7 +6,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
-            <img src="{{ asset('assets') }}/img/ojthub/logo_cropped.png" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="{{ asset('assets') }}/img/ojthub/logo_cropped.png" class="navbar-brand-img h-100 d-block" alt="main_logo">
             <span class="ms-2 font-weight-bold text-white p-0 m-0">{{auth()->user()->name}}</span>
             <span class="ml-2 font-weight-light text-white p-0 m-0">
                 <p class="d-inline"></p>
@@ -47,7 +47,7 @@
                         <span class="nav-link-text ms-1">Penguguman</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli dashboard' ? ' active bg-gradient-primary' : '' }} "
                         href="{{ route('kupli dashboard') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -55,7 +55,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Profil</h6>
                 </li>
@@ -219,7 +219,7 @@
             {{-- PENYELARAS PROGRAM SIDEBAR END --}}
 
             {{-- PENSYARAH PENILAI OJT SIDEBAR BEGIN --}}
-            @if (auth()->user()->isPensyarahPenilaiOJT())
+            {{-- @if (auth()->user()->isPensyarahPenilaiOJT())
             <section>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
@@ -259,7 +259,7 @@
                     </a>
                 </li>
             </section>
-            @endif
+            @endif --}}
             {{-- PENSYARAH PENILAI OJT SIDEBAR END --}}
 
             {{-- PENSYARAH PENILAI SIDEBAR BEGIN --}}
@@ -267,7 +267,7 @@
             <section>
                 {{-- Prevent displaying pengurusan pelajar twice if user is also a PPO --}}
                 @if(!auth()->user()->isPensyarahPenilaiOJT())
-                <li class="nav-item mt-3">
+                {{-- <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
                         Pelajar
                     </h6>
@@ -289,7 +289,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Lantik Pelajar</span>
                     </a>
-                </li>
+                </li> --}}
                 @endif
             </section>
             @endif

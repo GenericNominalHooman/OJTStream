@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use App\Models\Pelajar;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,8 +23,9 @@ class PelajarsCompanyFactory extends Factory
             "updated_at" => now(),
             "ojt_begin_date" => now(),
             "ojt_end_date" => now()->addMonths(6),
-            "role" => $this->faker->sentence(1)." Internship",
-            "pelajar_id" => 105,
+            'pelajar_id' => Pelajar::factory(),
+            'company_id' => Company::factory(),
+            'role' => $this->faker->word(),        
         ];
     }
 }

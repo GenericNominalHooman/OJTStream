@@ -90,7 +90,10 @@ Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDoku
 // KUPLI ROUTE BEGIN
 // 
 Route::get('kupli/user-profile', KupliUserProfile::class)->name('kupli profil');
-Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
+Route::get('kupli/dashboard', function(){
+    return redirect()->route("kupli profil");
+})->name('kupli dashboard');
+// Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
 
 // PENGUGUMAN
 Route::get('kupli/penguguman', Penguguman::class)->name('kupli penguguman');

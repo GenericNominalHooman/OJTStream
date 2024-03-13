@@ -21,12 +21,13 @@ use App\Models\DokumenOJT;
                     </div>
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-3">
+                    @if($pelajar_pelajar_company)
                         @php
                             $ojt_begin_date = Carbon::parse($pelajar_pelajar_company->ojt_begin_date);
                             $ojt_end_date = Carbon::parse($pelajar_pelajar_company->ojt_end_date);
                             $current_time = Carbon::parse(now());
                         @endphp
-                        @if ($current_time->gt($ojt_begin_date) && $current_time->gt($ojt_end_date))
+                        @if ($current_time->lt($ojt_begin_date) && $current_time->lt($ojt_end_date))
                             {{-- TAMAT BEROJT --}}
                             <span class="d-block text-nowrap">Tamat OJT</span>
                         @elseif ($current_time->gt($ojt_begin_date) && $current_time->lt($ojt_end_date))
@@ -38,7 +39,32 @@ use App\Models\DokumenOJT;
                             <span class="text-nowrap">{{$ojt_begin_date->diffInDays()}}</span>
                             <span class="text-nowrap"> Hari Lagi Mula OJT</span>
                         @endif
+                    @else
+                        -
+                    @endif
                 </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div
+                            class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="text-end pt-1">
+                            <p class="text-sm mb-0 text-capitalize">Markah Penilaian OJT</p>
+                            @if ($pelajar->ojt_marks)
+                                <h4 class="mb-0 text text-success">{{ $pelajar->ojt_marks }}</h4>
+                            @else
+                                <h4 class="mb-0 text text-secondary">Belum Dinilai</h4>
+                            @endif
+                        </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                    <div class="card-footer p-3">
+                        <p class="mb-0">Dikemaskini pada: {{ Carbon::parse($pelajar->updated_at)->format("d/m/Y") }}</p>
+                    </div>
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -68,10 +94,15 @@ use App\Models\DokumenOJT;
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Skop Kerja</p>
+                            
                             @if ($this->pelajar_skop_kerja)
-                                <h4 class="mb-0 text text-success">Sudah Dimuat Naik</h4>
+                                @if ($this->pelajar_skop_kerja->document_path)
+                                    <h4 class="mb-0 text text-success">Sudah Dimuat Naik</h4>
+                                @else
+                                    <h4 class="mb-0 text text-danger">Belum Dimuat Naik</h4>
+                                @endif
                             @else
-                                <h4 class="mb-0 text text-danger">Belum Dimuat Naik</h4>
+                                    <h4 class="mb-0 text text-danger">Belum Dimuat Naik</h4>
                             @endif
                         </div>
                     </div>
@@ -109,7 +140,7 @@ use App\Models\DokumenOJT;
         <div class="row mt-4">
         </div>
         <div class="row mb-4 d-flex justify-content-center align-items-center">
-            <div class="col-lg-8 mb-md-0 mb-4">
+            {{-- <div class="col-lg-8 mb-md-0 mb-4">
                 <div class="card h-100">
                     <div class="card-header pb-0">
                         <h6>Proses OJT</h6>
@@ -125,9 +156,31 @@ use App\Models\DokumenOJT;
                                     <i class="material-icons text-success text-gradient">notifications</i>
                                 </span>
                                 <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes
+                                    <h6 class="text-success text-sm font-weight-bold mb-0">Mula OJT
                                     </h6>
-                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM
+                                    <p class="text-success font-weight-bold text-xs mt-1 mb-0">asdasd
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-block mb-3">
+                                <span class="timeline-step">
+                                    <i class="material-icons text-success text-gradient">notifications</i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-success text-sm font-weight-bold mb-0">Pendaftaran OJT
+                                    </h6>
+                                    <p class="text-success font-weight-bold text-xs mt-1 mb-0">Sudah Muat Naik KVOJT01 dan KVOJT02
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-block mb-3">
+                                <span class="timeline-step">
+                                    <i class="material-icons text-success text-gradient">notifications</i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-success text-sm font-weight-bold mb-0">Pendaftaran OL
+                                    </h6>
+                                    <p class="text-success font-weight-bold text-xs mt-1 mb-0">Test
                                     </p>
                                 </div>
                             </div>
@@ -136,7 +189,7 @@ use App\Models\DokumenOJT;
                                     <i class="material-icons text-danger text-gradient">code</i>
                                 </span>
                                 <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0">New order #1832412</h6>
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0">Perlaksanaan OJT</h6>
                                     <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM
                                     </p>
                                 </div>
@@ -146,8 +199,7 @@ use App\Models\DokumenOJT;
                                     <i class="material-icons text-info text-gradient">shopping_cart</i>
                                 </span>
                                 <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0">Server payments for
-                                        April</h6>
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0">Penilaian OJT</h6>
                                     <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 9:34 PM
                                     </p>
                                 </div>
@@ -157,36 +209,15 @@ use App\Models\DokumenOJT;
                                     <i class="material-icons text-warning text-gradient">credit_card</i>
                                 </span>
                                 <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0">New card added for order
-                                        #4395133</h6>
+                                    <h6 class="text-dark text-sm font-weight-bold mb-0">Tamat OJT</h6>
                                     <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">20 DEC 2:20 AM
                                     </p>
-                                </div>
-                            </div>
-                            <div class="timeline-block mb-3">
-                                <span class="timeline-step">
-                                    <i class="material-icons text-primary text-gradient">key</i>
-                                </span>
-                                <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0">Unlock packages for
-                                        development</h6>
-                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">18 DEC 4:54 AM
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="timeline-block">
-                                <span class="timeline-step">
-                                    <i class="material-icons text-dark text-gradient">payments</i>
-                                </span>
-                                <div class="timeline-content">
-                                    <h6 class="text-dark text-sm font-weight-bold mb-0">New order #9583120</h6>
-                                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="row mb-4 d-flex justify-content-center align-items-center">
             <div class="col-lg-8 mb-md-0 mb-4">

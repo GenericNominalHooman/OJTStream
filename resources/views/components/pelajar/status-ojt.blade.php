@@ -9,7 +9,7 @@
             $ojt_end_date = Carbon::parse($company->ojt_end_date);
             $current_time = Carbon::parse(now());
         @endphp
-        @if ($current_time->gt($ojt_begin_date) && $current_time->gt($ojt_end_date))
+        @if ($current_time->lt($ojt_begin_date) && $current_time->lt($ojt_end_date))
             {{-- TAMAT BEROJT --}}
             <span class="d-block">Tamat OJT</span>
             <span class="d-block text-nowrap">({{$ojt_begin_date->format("d/m/Y")}} - {{$ojt_end_date->format("d/m/Y")}})</span>

@@ -22,5 +22,10 @@ class SkopKerjaSeeder extends Seeder
             "document_name" => "JOB_DESCRIPTION.pdf",
             "document_path" => "Pelajar_AKV0222KA010/ORGANISASI_LATIHAN/JOB_DESCRIPTION.pdf",
         ]);
+
+        SkopKerja::factory()->create([
+            "document_name" => "JOB_DESCRIPTION.pdf",
+            "document_path" => "Pelajar_AKV0222KA011/ORGANISASI_LATIHAN/JOB_DESCRIPTION.pdf",
+        ]);
     }
 }

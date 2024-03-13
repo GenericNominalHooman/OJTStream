@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('skop_kerjas', function (Blueprint $table) {
             $table->id();
-            $table->text("document_path")->nullable(false);
+            $table->text("document_path")->nullable(true)->default(null);
             $table->text("document_name")->nullable(false);
             $table->timestamps();
         });

@@ -18,7 +18,7 @@ class UserProfile extends Component
     public function rules(){
         return[
             'kupli_user.name' => 'required',
-            'kupli_user.email' => 'required|email|unique:kuplis,email',
+            'kupli_user.email' => 'required|email|unique:users,email,'.$this->kupli_user->id,
             'kupli_user.phone' => 'required|max:10',
             'kupli_user.gender' => 'required',
             'kupli_user.location' => 'required',
@@ -34,7 +34,6 @@ class UserProfile extends Component
         $this->validate();
         
         $this->kupli_user->save();
-        // $this->kupli->save();
 
         session()->flash("status", "Profil anda telah berjaya dikemaskini");
     }

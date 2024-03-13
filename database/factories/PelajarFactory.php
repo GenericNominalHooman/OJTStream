@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,7 +30,7 @@ class PelajarFactory extends Factory
             'nric_number' => $this->faker->randomNumber(9),
             'program' => $this->faker->randomElement(['KPD', 'KSK', 'MTK', 'BPP', 'BAP', 'HBP', 'WTP']),
 
-            "user_id" => 105,
+            'user_id' => User::factory(),
             "block" =>	"A",
             "dorm" => "201",	
             "study_type" =>	"DVM",

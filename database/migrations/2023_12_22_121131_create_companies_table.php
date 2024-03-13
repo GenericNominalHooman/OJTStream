@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             
             $table->enum('type', ['public', 'private'])->default('private');
-            $table->string('name', 32);
+            $table->string('name', 255);
             $table->string('address')->nullable();
             $table->string('telephone_number', 32);
             $table->string('email');

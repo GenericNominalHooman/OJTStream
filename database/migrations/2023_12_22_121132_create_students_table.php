@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('status', ['Belum_OJT', 'Sedang_OJT', 'Selesai_OJT'])->default('Belum_OJT')->nullable(true)->default(null);
             $table->date('date_started')->nullable(true)->default(null);
             $table->date('date_completed')->nullable(true)->default(null);
+            $table->integer('ojt_marks')->nullable(true)->default(null);
 
             $table->timestamps();
         });

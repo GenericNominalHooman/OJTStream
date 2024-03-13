@@ -85,10 +85,83 @@ use Carbon\Carbon;
                                 <span class="ms-1">Dokumen</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link mb-0 px-0 py-1 {{ $activeTab == 'penilaian' ? 'active' : '' }}"
+                                href="javascript:;" role="tab" wire:click="switchTab('penilaian')"
+                                aria-selected="{{ $activeTab == 'penilaian' ? 'true' : 'false' }}">
+                                <i class="fas fa-clipboard-check"></i>
+                                <span class="ms-1">Penilaian</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mb-0 px-0 py-1"
+                                href="javascript:;" role="tab" wire:click="deletePelajar()">
+                                <i class="fas fa-clipboard-check"></i>
+                                <span class="ms-1">Hapus</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        {{-- PENILAIN OJT SECTION BEGINS --}}
+
+        <div class="card card-plain h-100 {{ $activeTab == 'penilaian' ? 'd-block' : 'd-none' }}">
+            <div class="card-header pb-0 p-3">
+                <div class="row">
+                    <div class="col-md-8 d-flex align-items-center">
+                        <h6 class="mb-3">Penilain Akhir OJT</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-3">
+                @if (session('status'))
+                <div class="row">
+                    <div class="alert alert-success alert-dismissible text-white" role="alert">
+                        <span class="text-sm">{{ Session::get('status') }}</span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+                @if (Session::has('demo'))
+                <div class="row">
+                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                        <span class="text-sm">{{ Session::get('demo') }}</span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+                <form wire:submit.prevent='updatePenilaian'>
+                    <div class="row">
+
+                        <div class="mb-3 col-md-12">
+
+                            <label class="form-label">Penilaian Akhir OJT(%)</label>
+                            <input wire:model.lazy="pelajar.ojt_marks" placeholder="Masukkan markah penilaian pelajar/100" type="text" class="form-control border border-2 p-2">
+                            @error('pelajar.ojt_marks')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn bg-gradient-dark">Simpan</button>
+                </form>
+
+            </div>
+        </div>
+
+        {{-- PENILAIN OJT SECTION ENDS --}}
+        
+
+        {{-- BIODATA SECTION BEGIN --}}
+        
         <div class="card card-plain h-100 {{ $activeTab == 'biodata' ? 'd-block' : 'd-none' }}">
             <div class="card-header pb-0 p-3">
                 <div class="row">
@@ -278,6 +351,11 @@ use Carbon\Carbon;
 
             </div>
         </div>
+
+        {{-- BIODATA SECTION ENDS --}}
+        
+        {{-- OJT SECTION BEGINS --}}
+
         <div class="card card-plain h-100 {{ $activeTab == 'ojt' ? 'd-block' : 'd-none' }}">
             <div class="card-header pb-0 p-3">
                 <div class="row">
@@ -574,6 +652,7 @@ use Carbon\Carbon;
 
             </div>
         </div>
+        {{-- OJT SECTION ENDS --}}
         
         {{-- ORGANISASI SECTION BEGINS --}}
         
@@ -661,12 +740,15 @@ use Carbon\Carbon;
                             
                             @if ($this->skop_kerja!=null)
                                 <div class="mb-3 col-md-12">
-                                    @if (Storage::disk("local")->exists($this->skop_kerja->document_path))
-                                        <p class="text text-success">Skop Kerja Telah Dimuat Naik({{Carbon::parse($this->skop_kerja->updated_at)->format("d/m/Y - h:i")}})</p>
+                                    @if ($this->skop_kerja->document_path)
+                                        @if (Storage::disk("local")->exists($this->skop_kerja->document_path))
+                                            <p class="text text-success">Skop Kerja Telah Dimuat Naik({{Carbon::parse($this->skop_kerja->updated_at)->format("d/m/Y - h:i")}})</p>
+                                            <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()'>Muat Turun Skop Kerja</button>
+                                        @endif
                                     @else
                                         <p class="text text-danger">Skop Kerja Belum Dimuat Naik</p>
+                                        <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()' disabled>Muat Turun Skop Kerja</button>
                                     @endif
-                                    <button type="button" class="btn btn-success" wire:click='downloadSkopKerja()' @if (!(Storage::disk("local")->exists($this->skop_kerja->document_path))) disabled @endif>Muat Turun Skop Kerja</button>
                                 </div>
                             @endif
                         </div>
@@ -751,6 +833,7 @@ use Carbon\Carbon;
         </div>
 
         {{-- PENGURUSAN DOKUMEN SECTION ENDS --}}
+
 
     </div>
 </div>

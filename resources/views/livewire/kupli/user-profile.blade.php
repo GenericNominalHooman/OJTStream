@@ -91,7 +91,7 @@
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Nombor Telefon</label>
                             <input wire:model.lazy="kupli_user.phone" type="text" class="form-control border border-2 p-2">
-                            @error('kupli_user.email_verified_at')
+                            @error('kupli_user.phone')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>

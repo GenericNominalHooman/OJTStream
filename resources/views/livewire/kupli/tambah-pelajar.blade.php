@@ -78,6 +78,14 @@ use Carbon\Carbon;
                         
                         <div class="mb-3 col-md-6">
 
+                            <label class="form-label">Username</label>
+                            <input wire:model.lazy="pelajar_user.username" type="text" class="form-control border border-2 p-2">
+                            @error('pelajar_user.username')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+                        <div class="mb-3 col-md-6">
+
                             <label class="form-label">Nama</label>
                             <input wire:model.lazy="pelajar_user.name" type="text" class="form-control border border-2 p-2">
                             @error('pelajar_user.name')

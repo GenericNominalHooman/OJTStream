@@ -16,6 +16,7 @@ use App\Models\Pensyarah_Penilai;
 use App\Models\Pensyarah_Penilai_OJT;
 use App\Models\Penyelaras_Program;
 use Illuminate\Support\Facades\Storage;
+use ProtoneMedia\Splade\Components\Flash;
 
 class SuntingPelajar extends Component
 {
@@ -118,6 +119,10 @@ class SuntingPelajar extends Component
                     // PELAJAR-COMPANY VALUES
                     'pelajar_company.role' => 'required',
                 ];
+            }elseif($this->activeTab == "penilaian"){
+                return [
+                    "pelajar.ojt_marks" => "nullable|integer|min:0|max:100",
+                ];
             }else{ // Biodata And Skop Kerja Update
                 return [
                     // PELAJAR BIODATA VALUES
@@ -212,6 +217,14 @@ class SuntingPelajar extends Component
         
         // Sets pelajar record to update instead of insertion
         $this->pelajar->user_id = $this->user->id;
+    }
+
+    public function updatePenilaian(){
+        $this->validate();
+        
+        $this->pelajar->save();
+
+        session()->flash("status", "Berjaya mengemaskini penilaian pelajar ".$this->user->name);
     }
 
     public function updateBiodata(){
@@ -414,5 +427,21 @@ class SuntingPelajar extends Component
 
         // REFRESH PAGE
         return redirect()->back()->with("status", "Maklumat OJT pelajar ".$this->user->name." berjaya dikemaskini");
+    }
+
+    public function deletePelajar()
+    {
+        // Delete associated records
+        $this->pelajar->JanjiTemusPelajar()->delete();
+        $this->pelajar->Dokumen_OJT_Pelajar()->delete();
+        $this->pelajar->Pelajars_Company()->delete();
+        $this->pelajar->Skop_Kerja()->delete();
+    
+        // Delete the pelajar record
+        $this->user->delete();
+        $this->pelajar->delete();
+    
+        // Redirect with success message
+        return redirect()->route('kupli senarai pelajar')->with('status', 'Pelajar deleted successfully.');
     }
 }

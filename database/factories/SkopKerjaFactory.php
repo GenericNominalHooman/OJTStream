@@ -18,7 +18,7 @@ class SkopKerjaFactory extends Factory
     {
         return [
             "document_name" => $this->faker->company()." - Job Description",
-            "document_path" => $this->faker->url(),
+            "document_path" => null,
         ];
     }
 }

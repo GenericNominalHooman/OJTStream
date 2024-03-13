@@ -66,5 +66,87 @@ class PelajarSeeder extends Seeder
             "penyelaras_program_id" => 1,
             "skop_kerja_id" => 2,
         ]);
+
+        Pelajar::factory()->create([
+            "user_id" => 111,
+            "matrix_number" => "AKV0222KA011",
+            "block" =>	"A",
+            "dorm" => "201",	
+            "study_type" =>	"DVM",
+            "semester" =>	4,
+            "status" =>	"Belum_OJT",
+            "nric_number" => "040916080159",
+            "guardian" => "NUR ZHAFIRAH AQILAH BINTI MUHAMMAD",
+            "guardian_telephone_number" => "0165190476",
+            "linkedin_url" => "",
+            "facebook_url" => "",
+            "github_url" => "",
+            "program" => "KPD",
+            "heart_disease" => false,
+            "asthma" => false,
+            "diabetes" => false,
+            "osteoporosis" => false,
+            "ojt_marks" => 100,
+
+            // Foreign keys
+            "pensyarah_penilai_id" => 1,
+            "pensyarah_penilai_ojt_id" => 1,
+            "penyelaras_program_id" => 1,
+            "skop_kerja_id" => 2,
+        ]);
+
+        Pelajar::factory()->create([
+            "user_id" => 108,
+            "matrix_number" => "AKV0222KA012",
+            "block" =>	"A",
+            "dorm" => "201",	
+            "study_type" =>	"DVM",
+            "semester" =>	4,
+            "status" =>	"Belum_OJT",
+            "nric_number" => "040916080159",
+            "guardian" => "NUR ZHAFIRAH AQILAH BINTI MUHAMMAD",
+            "guardian_telephone_number" => "0165190476",
+            "linkedin_url" => "",
+            "facebook_url" => "",
+            "github_url" => "",
+            "program" => "KPD",
+            "heart_disease" => false,
+            "asthma" => false,
+            "diabetes" => false,
+            "osteoporosis" => false,
+
+            // Foreign keys
+            "pensyarah_penilai_id" => 1,
+            "pensyarah_penilai_ojt_id" => 1,
+            "penyelaras_program_id" => 1,
+            "skop_kerja_id" => 2,
+        ]);
+
+        Pelajar::factory()->create([
+            "user_id" => 109,
+            "matrix_number" => "AKV0222KA013",
+            "block" =>	"A",
+            "dorm" => "201",	
+            "study_type" =>	"DVM",
+            "semester" =>	4,
+            "status" =>	"Belum_OJT",
+            "nric_number" => "040916080159",
+            "guardian" => "NUR ZHAFIRAH AQILAH BINTI MUHAMMAD",
+            "guardian_telephone_number" => "0165190476",
+            "linkedin_url" => "",
+            "facebook_url" => "",
+            "github_url" => "",
+            "program" => "KPD",
+            "heart_disease" => false,
+            "asthma" => false,
+            "diabetes" => false,
+            "osteoporosis" => false,
+
+            // Foreign keys
+            "pensyarah_penilai_id" => 1,
+            "pensyarah_penilai_ojt_id" => 1,
+            "penyelaras_program_id" => 1,
+            "skop_kerja_id" => 2,
+        ]);
     }
 }

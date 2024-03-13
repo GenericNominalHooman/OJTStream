@@ -21,7 +21,7 @@ class PenyuntinganDokumen extends Component
             "dokumen_ojt.document_name" => "required",
             "dokumen_ojt.document_type" => "required|in:pengisian,infomasi",
             "dokumen_ojt.document_description" => "required",
-            "dokumen_ojt_input" => "nullable|file|mimes:pdf",
+            "dokumen_ojt_input" => "nullable|file|mimes:pdf|max:10000",
         ];
     }
 

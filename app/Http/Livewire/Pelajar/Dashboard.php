@@ -34,7 +34,10 @@ class Dashboard extends Component
     public function mount(){
         $this->pelajar_user = auth()->user();
         $this->pelajar = $this->pelajar_user->Pelajar;
+        $this->pelajar_skop_kerja = $this->pelajar->Skop_Kerja;
         $this->pelajar_pelajar_company = $this->pelajar->Pelajars_Company;
+
+        // dd($this->pelajar_user->ojt_marks);
 
         // Calculate the start and end dates of the current week
         $startOfWeek = Carbon::now()->startOfWeek();

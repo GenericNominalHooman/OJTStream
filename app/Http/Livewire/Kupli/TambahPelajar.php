@@ -38,6 +38,7 @@ class TambahPelajar extends Component
     public function rules(){
         return [
         // PELAJAR BIODATA VALUES
+        'pelajar_user.username' => 'required',
         'pelajar_user.email' => 'required|email|unique:users,email',
         'pelajar_user.name' => 'required',
         'pelajar.matrix_number'=> 'required|unique:pelajars,matrix_number',
@@ -75,6 +76,7 @@ class TambahPelajar extends Component
 
         // DEBUGGING
         $this->fill([
+            'pelajar_user.username' => 'pelajar21',
             'pelajar_user.email' => 'pelajar21@email.com',
             'pelajar_user.name' => 'Pelajar 21',
             'pelajar.matrix_number'=> 'AKV0222KA021',
@@ -96,7 +98,8 @@ class TambahPelajar extends Component
     // 
     public function create(){
         // SET DEFAULT PELAJAR PASSWORD
-        $this->pelajar_user->password = Hash::make($this->pelajar_default_password);    
+        dd(Hash::check($this->pelajar_default_password, $this->pelajar_default_password));
+        $this->pelajar_user->password = Hash::make($this->pelajar_default_password);  
         
         // VALIDATE
         $this->validate();
