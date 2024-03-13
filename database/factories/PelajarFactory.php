@@ -46,10 +46,10 @@ class PelajarFactory extends Factory
             "osteoporosis" => false,
 
             // Foreign keys
-            "pensyarah_penilai_id" => 1,
-            "pensyarah_penilai_ojt_id" => 1,
-            "penyelaras_program_id" => 1,
-            "skop_kerja_id" => 1,
+            // "pensyarah_penilai_id" => 1,
+            // "pensyarah_penilai_ojt_id" => 1,
+            // "penyelaras_program_id" => 1,
+            // "skop_kerja_id" => 1,
         ];
     }
 }

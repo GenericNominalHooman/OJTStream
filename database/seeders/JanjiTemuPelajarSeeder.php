@@ -25,10 +25,10 @@ class JanjiTemuPelajarSeeder extends Seeder
             "visit_type" => "Lawatan PPO 2",
         ]);
 
-        JanjiTemusPelajar::factory()->create([
-            "pelajar_id" => 106,
-            "janji_temu_id" => 2,
-            "visit_type" => "Lawatan PPO 2",
-        ]);
+        // JanjiTemusPelajar::factory()->create([
+        //     "pelajar_id" => 106,
+        //     "janji_temu_id" => 2,
+        //     "visit_type" => "Lawatan PPO 2",
+        // ]);
     }
 }

@@ -24,12 +24,12 @@ class PelajarJanjiTemusSeeder extends Seeder
         }
 
         // LINK JANJI_TEMUS_PELAJARS TO AKV0222KA010
-        $pelajar_akv0222ka010 = Pelajar::find(106);
+        // $pelajar_akv0222ka010 = Pelajar::find(106);
 
-        if($pelajar_akv0222ka010){
-            $pelajar_akv0222ka010->update([
-                "janji_temu_2" => 2,
-            ]);
-        }
+        // if($pelajar_akv0222ka010){
+        //     $pelajar_akv0222ka010->update([
+        //         "janji_temu_2" => 2,
+        //     ]);
+        // }
     }
 }
