@@ -74,7 +74,7 @@ Route::get('rtl', RTL::class)->name('rtl');
 // 
 // PELAJAR ROUTES BEGIN
 // 
-Route::get('user-profile', UserProfile::class)->middleware('auth')->name('user-profile');
+Route::get('user-profile', UserProfile::class)->name('user-profile');
 Route::get('notifikasi', Notifikasi::class)->name('pelajar notifikasi');
 Route::get('dashboard', PelajarDashboard::class)->name('pelajar dashboard');
 

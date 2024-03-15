@@ -125,6 +125,8 @@ class Login extends Component
 
         // Check student password
         if ($student) {
+            // dd($student->password);
+            // dd(Hash::check($this->password, $student->password));
             if (Hash::check($this->password, $student->password)) {
                 // Loging in the user
                 auth()->loginUsingId($student->user_id);
