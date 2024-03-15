@@ -53,7 +53,7 @@ use App\Models\DokumenOJT;
                             <i class="fas fa-clipboard-check"></i>
                         </div>
                         <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Markah Penilaian OJT</p>
+                            <p class="text-sm mb-0 text-capitalize">Markah Penilaian Akhir OJT</p>
                             @if ($pelajar->ojt_marks)
                                 <h4 class="mb-0 text text-success">{{ $pelajar->ojt_marks }}</h4>
                             @else

@@ -78,6 +78,14 @@
                                 <span class="ms-1">Organisasi</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link mb-0 px-0 py-1 {{ $activeTab == 'password' ? 'active' : '' }}"
+                                href="javascript:;" role="tab" wire:click="switchTab('password')"
+                                aria-selected="{{ $activeTab == 'password' ? 'true' : 'false' }}">
+                                <i class="fas fa-key"></i>
+                                <span class="ms-1">Ubah Kata Kunci</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -590,6 +598,54 @@
 
                     {{-- ORGANISASI LATIHAN ENDS --}}
 
+                    <button type="submit" class="btn bg-gradient-dark">Simpan</button>
+                </form>
+            </div>
+        </div>
+        <div class="card card-plain h-100 {{ $activeTab == 'password' ? 'd-block' : 'd-none' }}">
+            <div class="card-header pb-0 p-3">
+                <div class="row">
+                    <div class="col-md-8 d-flex align-items-center">
+                        <h6 class="mb-3">Kata Kunci</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-3">
+                @if (session('status'))
+                <div class="row">
+                    <div class="alert alert-success alert-dismissible text-white" role="alert">
+                        <span class="text-sm">{{ Session::get('status') }}</span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+                <form wire:submit.prevent='updatePassword'>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Kata Kunci Lama</label>
+                            <input wire:model="old_password" type="password" class="form-control border border-2 p-2">
+                            @error('old_password')
+                            <p class='text-danger inputerror'>{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Kata Kunci Baharu</label>
+                            <input wire:model.lazy="new_password" type="password" class="form-control border border-2 p-2">
+                            @error('new_password')
+                            <p class='text-danger inputerror'>{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Kata Kunci Baharu</label>
+                            <input wire:model.lazy="new_password_confirmation" type="password" class="form-control border border-2 p-2">
+                            @error('new_password_confirmation')
+                            <p class='text-danger inputerror'>{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
                     <button type="submit" class="btn bg-gradient-dark">Simpan</button>
                 </form>
             </div>

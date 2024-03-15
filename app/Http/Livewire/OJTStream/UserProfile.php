@@ -14,6 +14,7 @@ use Livewire\WithFileUploads;
 use App\Models\PelajarsCompany;
 use App\Models\Pensyarah_Penilai;
 use App\Models\Penyelaras_Program;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Pensyarah_Penilai_OJT;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -62,6 +63,11 @@ class UserProfile extends Component
     public $pelajarHasSkopKerja = false;
     public $pelajarHasJanjiTemu1 = false;
     public $pelajarHasJanjiTemu2 = false;
+
+    // UPDATE PASSWORD FIELD VALUES
+    public $old_password;
+    public $new_password;
+    public $new_password_confirmation;
     
     // 
     // LIVEWIRE FUNCTIONS
@@ -299,6 +305,36 @@ class UserProfile extends Component
             // CREAET PELAJAR COMPANY
             $this->pelajar->Pelajars_Company->save();
         }
+    }
+
+    public function updatePassword()
+    {
+        $this->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+            'new_password_confirmation' => 'required|same:new_password',
+        ]);
+    
+        // Verify the old password
+        if (!Hash::check($this->old_password, $this->user->password)) {
+            $this->addError('old_password', 'The old password is incorrect.');
+            return;
+        }
+    
+        // Update the user's password only if the new password is different from the current password
+        if (!Hash::check($this->new_password, $this->user->password)) {
+            $this->user->password = Hash::make($this->new_password);
+            $this->user->save();
+
+            session()->flash('status', 'Kata kunci berjaya dikemaskini.');
+        } else {
+            $this->addError('new_password', 'The new password must be different from the current password.');
+        }
+    
+        // Reset the input fields
+        $this->old_password = '';
+        $this->new_password = '';
+        $this->new_password_confirmation = '';
     }
 
     // 
