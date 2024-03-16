@@ -102,8 +102,6 @@ class TambahPelajar extends Component
         
         // SAVE PELAJAR
         $this->savePelajar();
-        $pelajar21 = User::where("id", 125)->first();
-        // dd(Hash::check($this->pelajar_default_password, Hash::make($this->pelajar_default_password)));
         
         // SAVE DOKUMEN OJT PELAJAR
         $this->saveDokumenOJTPelajar();
@@ -116,9 +114,7 @@ class TambahPelajar extends Component
         $this->pelajar->user_id = $this->pelajar_user->id;
 
         // SETS DEFAULT PASSWORD FOR PELAJAR
-        // Hash the default password and assign it to $this->pelajar_user->password
-        $this->pelajar_user->password = Hash::make($this->pelajar_default_password);
-        dd(Hash::check($this->pelajar_default_password, $this->pelajar_user->password));
+        $this->pelajar_user->password = $this->pelajar_default_password;
 
         $this->pelajar_user->save();
         $this->pelajar->save();

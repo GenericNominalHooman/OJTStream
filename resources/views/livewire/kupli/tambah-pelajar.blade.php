@@ -22,7 +22,7 @@ use Carbon\Carbon;
                             <a class="nav-link mb-0 px-0 py-1 {{ $activeTab == 'biodata' ? 'active' : '' }}"
                                 href="javascript:;" role="tab" wire:click="switchTab('biodata')"
                                 aria-selected="{{ $activeTab == 'biodata' ? 'true' : 'false' }}">
-                                <i class="fas fa-pelajar_user"></i>
+                                <i class="fas fa-user"></i>
                                 <span class="ms-1">Biodata</span>
                             </a>
                         </li>
