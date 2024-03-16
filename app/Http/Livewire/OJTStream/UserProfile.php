@@ -323,7 +323,7 @@ class UserProfile extends Component
     
         // Update the user's password only if the new password is different from the current password
         if (!Hash::check($this->new_password, $this->user->password)) {
-            $this->user->password = Hash::make($this->new_password);
+            $this->user->password = $this->new_password;
             $this->user->save();
 
             session()->flash('status', 'Kata kunci berjaya dikemaskini.');
