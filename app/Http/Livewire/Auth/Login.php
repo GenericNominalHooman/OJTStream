@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Models\User;
 use App\Models\Pelajar;
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -17,6 +18,9 @@ class Login extends Component
     public $login_type = '';
     public $username_input = '';
 
+    // 
+    // COMPONENT FUCNTIONS
+    // 
     public function render()
     {
         // Display login page based on user type
@@ -86,9 +90,6 @@ class Login extends Component
                     'email' => 'required|email',
                     'password' => 'required',
                 ]);
-
-                // Authenthicate pensyarah
-                $status = $this->pensyarahLogin();
             break;
             default:
                 // Invalid user login type
@@ -102,10 +103,14 @@ class Login extends Component
         if(empty($status)){
             switch($this->login_type){
                 case "kupli":
-                    return redirect('kupli/dashboard');
+                    return redirect()->route('kupli dashboard');
                 break;
                 case "pelajar":
-                    return redirect('dashboard');
+                    return redirect()->route('pelajar dashboard');
+                break;
+                default:
+                    // Invalid user login type
+                    return view('livewire.auth.login')->with(["status" => "Jenis pengguna tidak wujud"]);
                 break;
             }
         }else{
@@ -125,8 +130,6 @@ class Login extends Component
 
         // Check student password
         if ($student) {
-            // dd($student->password);
-            // dd(Hash::check($this->password, $student->password));
             if (Hash::check($this->password, $student->password)) {
                 // Loging in the user
                 auth()->loginUsingId($student->user_id);
@@ -149,10 +152,34 @@ class Login extends Component
 
     public function streamlinedLogin(){
         $credentials = ['username' => $this->username_input, 'password' => $this->password];
+        $status = $this->getLoginTypeFromStreamlined();
 
-        if (!auth()->attempt($credentials)) {
-            return 'Email atau kata laluan yang dimasukkan adalah salah';
+        if($status == null){
+            // VALID USER
+            if (!auth()->attempt($credentials)) {
+                return $status = 'Username atau kata laluan yang dimasukkan adalah salah';
+            }
         }
+        return $status;
     }
 
+    // 
+    // MISC FUNCTIONS
+    // 
+    public function getLoginTypeFromStreamlined(){
+        // CHECK WHETHER USERNAME RECORDS EXIST IN EACH USER TYPE TABLES
+        if($login_user = User::where("username", $this->username_input)->first()){
+            if($login_user->Kupli != null){
+                $this->login_type = "kupli";
+            }elseif($login_user->Pelajar != null){
+                $this->login_type = "pelajar";
+            }elseif(($login_user->KetuaProgramJabatan != null)){
+                $this->login_type = "ketua program jabatan";
+            }else{
+                $this->login_type = "invalid";
+            }
+        }else{
+            return 'Username yang dimasukkan tidak wujud';
+        }
+    }
 }

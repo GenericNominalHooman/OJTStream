@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
         // KUPLI
         User::factory()->create([
             "id" => 101,
+            "username" => "Kupli 1",
             "name" => "MUHD SYAHIR BIN MANSOR",
             "email" => "kupli_1@email.com",
             "password" => ("password"),
@@ -62,6 +63,7 @@ class UserSeeder extends Seeder
         // Pelajar AKV0222KA009
         User::factory()->create([
             "id" => 105,
+            "username" => "Pelajar 1",
             "name" => "Iskandar Luqman",
             "email" => "iskandar_luqman@email.com",
             "password" => ("password"),

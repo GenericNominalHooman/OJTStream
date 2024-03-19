@@ -10,9 +10,9 @@
                             </div>
                             <div class="card-body container">
                                 <div class="d-grid gap-2">
-                                    <a href="{{route('login', ['login_type'=>'kupli'])}}" class="btn btn-outline-secondary" type="button">Pensyarah</a>
-                                    <a href="{{route('login', ['login_type'=>'pelajar'])}}" class="btn btn-outline-secondary" type="button">Pelajar</a>
-                                    {{-- <a href="{{route('login', ['login_type'=>'streamlined'])}}" class="btn btn-outline-secondary" type="button">Log Masuk</a> --}}
+                                    {{-- <a href="{{route('login', ['login_type'=>'kupli'])}}" class="btn btn-outline-secondary" type="button">Pensyarah</a>
+                                    <a href="{{route('login', ['login_type'=>'pelajar'])}}" class="btn btn-outline-secondary" type="button">Pelajar</a> --}}
+                                    <a href="{{route('login', ['login_type'=>'streamlined'])}}" class="btn btn-outline-secondary" type="button">Log Masuk</a>
                                 </div>
                             </div>
                         </div>
