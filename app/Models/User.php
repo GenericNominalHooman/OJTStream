@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\Models\Kupli;
-use App\Models\Penyelaras_Program;
 use App\Models\Pensyarah_Penilai;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Penyelaras_Program;
 use Illuminate\Notifications\Notifiable;
+use App\Models\KetuaJabatanDanKetuaProgram;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,6 +57,10 @@ class User extends Authenticatable
 
     public function Kupli(){
         return $this->hasOne(Kupli::class);
+    }
+
+    public function KetuaJabatanDanKetuaProgram(){
+        return $this->hasOne(KetuaJabatanDanKetuaProgram::class);
     }
 
     public function Penyelaras_Program(){

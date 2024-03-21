@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\PengurusanDokumen;
 use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Auth\ForgotPassword;
+use App\Http\Livewire\Kpkj\KpkjUserProfile;
 use App\Http\Livewire\Kupli\KupliDashboard;
 use App\Http\Livewire\Kupli\Penguguman;
 use App\Http\Livewire\Kupli\PengugumanCreate;
@@ -110,4 +111,14 @@ Route::get('kupli/pelajar/senarai', SenaraiPelajar::class)->name('kupli senarai 
 Route::get('kupli/pelajar/tambah', TambahPelajar::class)->name('kupli tambah pelajar');
 Route::get('kupli/pelajar/{pelajar:user_id}/sunting', SuntingPelajar::class)->name('kupli sunting pelajar');
 // KUPLI ROUTE ENDS
+
+// 
+// KPKJ ROUTE BEGIN
+// 
+Route::get('kpkj/user-profile', KpkjUserProfile::class)->name('kpkj profil');
+Route::get('kupli/dashboard', function(){
+    return redirect()->route("kupli profil");
+})->name('kpkj dashboard');
+// Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
+// KPKJ ROUTE ENDS
 });

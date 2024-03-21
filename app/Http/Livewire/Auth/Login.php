@@ -80,7 +80,7 @@ class Login extends Component
                     'password' => 'required',
                 ]);
 
-                // Authenthicate pelajar                
+                // Authenthicate user                
                 $status = $this->streamlinedLogin();
             break;
             case "kupli":
@@ -107,6 +107,9 @@ class Login extends Component
                 break;
                 case "pelajar":
                     return redirect()->route('pelajar dashboard');
+                break;
+                case "ketua jabatan dan ketua program":
+                    return redirect()->route('kjkp dashboard');
                 break;
                 default:
                     // Invalid user login type
@@ -173,8 +176,8 @@ class Login extends Component
                 $this->login_type = "kupli";
             }elseif($login_user->Pelajar != null){
                 $this->login_type = "pelajar";
-            }elseif(($login_user->KetuaProgramJabatan != null)){
-                $this->login_type = "ketua program jabatan";
+            }elseif($login_user->KetuaJabatanDanKetuaProgram != null){
+                $this->login_type = "ketua jabatan dan ketua program";
             }else{
                 $this->login_type = "invalid";
             }

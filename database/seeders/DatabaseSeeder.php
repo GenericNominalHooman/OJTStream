@@ -15,6 +15,7 @@ use Database\Seeders\DokumenOJTPelajarSeeder;
 use Database\Seeders\PelajarJanjiTemusSeeder;
 use Database\Seeders\PenyelarasProgramSeeder;
 use Database\Seeders\PensyarahPenilaiOJTSeeder;
+use Database\Seeders\KetuaJabatanDanKetuaProgramSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -47,6 +48,7 @@ class DatabaseSeeder extends Seeder
             DokumenOJTSeeder::class,
             DokumenOJTPelajarSeeder::class,
             PengugumanSeeder::class,
+            KetuaJabatanDanKetuaProgramSeeder::class,
         ]);
     }
 }
