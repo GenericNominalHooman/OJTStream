@@ -62,63 +62,63 @@ Route::get('user-management', UserManagement::class)->middleware('auth')->name('
 
 Route::group(['middleware' => 'auth'], function () {
     // LOGINNED USER ONLY
-Route::get('dashboard2', Dashboard::class)->name('dashboard');
-Route::get('billing', Billing::class)->name('billing');
-Route::get('profile', Profile::class)->name('profile');
-Route::get('tables', Tables::class)->name('tables');
-Route::get('notifications', Notifications::class)->name("notifications");
-Route::get('virtual-reality', VirtualReality::class)->name('virtual-reality');
-Route::get('static-sign-in', StaticSignIn::class)->name('static-sign-in');
-Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
-Route::get('rtl', RTL::class)->name('rtl');
+    Route::get('dashboard2', Dashboard::class)->name('dashboard');
+    Route::get('billing', Billing::class)->name('billing');
+    Route::get('profile', Profile::class)->name('profile');
+    Route::get('tables', Tables::class)->name('tables');
+    Route::get('notifications', Notifications::class)->name("notifications");
+    Route::get('virtual-reality', VirtualReality::class)->name('virtual-reality');
+    Route::get('static-sign-in', StaticSignIn::class)->name('static-sign-in');
+    Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
+    Route::get('rtl', RTL::class)->name('rtl');
 
-// 
-// PELAJAR ROUTES BEGIN
-// 
-Route::get('user-profile', UserProfile::class)->name('user-profile');
-Route::get('notifikasi', Notifikasi::class)->name('pelajar notifikasi');
-Route::get('dashboard', PelajarDashboard::class)->name('pelajar dashboard');
+    // 
+    // PELAJAR ROUTES BEGIN
+    // 
+    Route::get('user-profile', UserProfile::class)->name('user-profile');
+    Route::get('notifikasi', Notifikasi::class)->name('pelajar notifikasi');
+    Route::get('dashboard', PelajarDashboard::class)->name('pelajar dashboard');
 
-// LAWATAN PPO(UNUSED)
-Route::get('lawatan-ppo', LawatanPPO::class)->name('lawatan ppo');
+    // LAWATAN PPO(UNUSED)
+    Route::get('lawatan-ppo', LawatanPPO::class)->name('lawatan ppo');
 
-// PENGURUSAN DOKUMEN
-Route::get('pengurusan-dokumen', PengurusanDokumen::class)->name('pelajar pengurusan dokumen');
-Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDokumen::class)->name('pelajar penyuntingan dokumen');
-// PELAJAR ROUTES ENDS
+    // PENGURUSAN DOKUMEN
+    Route::get('pengurusan-dokumen', PengurusanDokumen::class)->name('pelajar pengurusan dokumen');
+    Route::get('pengurusan-dokumen/{dokumenOJTPelajar:id}/sunting', PenyuntinganDokumen::class)->name('pelajar penyuntingan dokumen');
+    // PELAJAR ROUTES ENDS
 
-// 
-// KUPLI ROUTE BEGIN
-// 
-Route::get('kupli/user-profile', KupliUserProfile::class)->name('kupli profil');
-Route::get('kupli/dashboard', function(){
-    return redirect()->route("kupli profil");
-})->name('kupli dashboard');
-// Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
+    // 
+    // KUPLI ROUTE BEGIN
+    // 
+    Route::get('kupli/user-profile', KupliUserProfile::class)->name('kupli profil');
+    Route::get('kupli/dashboard', function(){
+        return redirect()->route("kupli profil");
+    })->name('kupli dashboard');
+    // Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
 
-// PENGUGUMAN
-Route::get('kupli/penguguman', Penguguman::class)->name('kupli penguguman');
-Route::get('kupli/penguguman/tambah', PengugumanCreate::class)->name('kupli penguguman tambah');
-Route::get('kupli/penguguman/{penguguman:id}/sunting', PengugumanEdit::class)->name('kupli penguguman sunting');
+    // PENGUGUMAN
+    Route::get('kupli/penguguman', Penguguman::class)->name('kupli penguguman');
+    Route::get('kupli/penguguman/tambah', PengugumanCreate::class)->name('kupli penguguman tambah');
+    Route::get('kupli/penguguman/{penguguman:id}/sunting', PengugumanEdit::class)->name('kupli penguguman sunting');
 
-// PENGURUSAN DOKUMEN
-Route::get('kupli/pengurusan-dokumen', KupliPengurusanDokumen::class)->name('kupli pengurusan dokumen');
-Route::get('kupli/pengurusan-dokumen/tambah', PenyuntinganDokumenTambah::class)->name('kupli penyuntingan dokumen tambah');
-Route::get('kupli/pengurusan-dokumen/{dokumen_ojt:id}/sunting', KupliPenyuntinganDokumen::class)->name('kupli penyuntingan dokumen');
+    // PENGURUSAN DOKUMEN
+    Route::get('kupli/pengurusan-dokumen', KupliPengurusanDokumen::class)->name('kupli pengurusan dokumen');
+    Route::get('kupli/pengurusan-dokumen/tambah', PenyuntinganDokumenTambah::class)->name('kupli penyuntingan dokumen tambah');
+    Route::get('kupli/pengurusan-dokumen/{dokumen_ojt:id}/sunting', KupliPenyuntinganDokumen::class)->name('kupli penyuntingan dokumen');
 
-// PENGURUSAN PELAJAR
-Route::get('kupli/pelajar/senarai', SenaraiPelajar::class)->name('kupli senarai pelajar');
-Route::get('kupli/pelajar/tambah', TambahPelajar::class)->name('kupli tambah pelajar');
-Route::get('kupli/pelajar/{pelajar:user_id}/sunting', SuntingPelajar::class)->name('kupli sunting pelajar');
-// KUPLI ROUTE ENDS
+    // PENGURUSAN PELAJAR
+    Route::get('kupli/pelajar/senarai', SenaraiPelajar::class)->name('kupli senarai pelajar');
+    Route::get('kupli/pelajar/tambah', TambahPelajar::class)->name('kupli tambah pelajar');
+    Route::get('kupli/pelajar/{pelajar:user_id}/sunting', SuntingPelajar::class)->name('kupli sunting pelajar');
+    // KUPLI ROUTE ENDS
 
-// 
-// KPKJ ROUTE BEGIN
-// 
-Route::get('kpkj/user-profile', KpkjUserProfile::class)->name('kpkj profil');
-Route::get('kupli/dashboard', function(){
-    return redirect()->route("kupli profil");
-})->name('kpkj dashboard');
-// Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
-// KPKJ ROUTE ENDS
+    // 
+    // KPKJ ROUTE BEGIN
+    // 
+    Route::get('kpkj/user-profile', KpkjUserProfile::class)->name('kpkj profil');
+    Route::get('kupli/dashboard', function(){
+        return redirect()->route("kpkj profil");
+    })->name('kpkj dashboard');
+    // Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');
+    // KPKJ ROUTE ENDS
 });

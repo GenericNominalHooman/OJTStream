@@ -9,6 +9,16 @@
                                 </div>
                             </div>
                             <div class="card-body container">
+                                @if (Session::has('status'))
+                                <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                                    <span class="text-sm">{{ Session::get('status') }}</span>
+                                    <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                        data-bs-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                @endif
+                                
                                 <div class="d-grid gap-2">
                                     {{-- <a href="{{route('login', ['login_type'=>'kupli'])}}" class="btn btn-outline-secondary" type="button">Pensyarah</a>
                                     <a href="{{route('login', ['login_type'=>'pelajar'])}}" class="btn btn-outline-secondary" type="button">Pelajar</a> --}}

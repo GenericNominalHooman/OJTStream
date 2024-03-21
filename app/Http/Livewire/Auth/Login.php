@@ -109,7 +109,7 @@ class Login extends Component
                     return redirect()->route('pelajar dashboard');
                 break;
                 case "ketua jabatan dan ketua program":
-                    return redirect()->route('kjkp dashboard');
+                    return redirect()->route('kpkj dashboard');
                 break;
                 default:
                     // Invalid user login type

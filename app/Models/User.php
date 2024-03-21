@@ -86,6 +86,9 @@ class User extends Authenticatable
         if($this->isKupli()){
             $roles[] = 'Kupli';
         }
+        if($this->isKetuaJabatanDanKetuaProgram()){
+            $roles[] = 'Ketua Jabatan Dan Ketua Program';
+        }
         if($this->isPenyelarasProgram()){
             $roles[] = 'Penyelaras Program';
         }
@@ -121,5 +124,9 @@ class User extends Authenticatable
 
     public function isPensyarahPenilai(){
         return $this->Pensyarah_Penilai;
+    }
+
+    public function isKetuaJabatanDanKetuaProgram(){
+        return $this->KetuaJabatanDanKetuaProgram;
     }
 }

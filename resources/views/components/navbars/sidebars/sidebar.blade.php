@@ -26,7 +26,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
 
-            {{-- KUPLI SIDEBAR BEGIN --}}
+            {{-- KUPLI/PENSYARAH SIDEBAR BEGIN --}}
             @if (auth()->user()->isKupli())
             <section>
                 {{-- <li class="nav-item">
@@ -106,7 +106,89 @@
                 </li>
             </section>
             @endif
-            {{-- KUPLI SIDEBAR END --}}
+            {{-- KUPLI/PENSYARAH SIDEBAR END --}}
+
+            {{-- KPKJ BEGIN --}}
+            @if (auth()->user()->isKetuaJabatanDanKetuaProgram())
+            <section>
+                {{-- <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'notifications' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('notifications') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">notifications</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Notifikasi</span>
+                    </a>
+                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli penguguman' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli penguguman') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Penguguman</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kpkj dashboard' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kpkj dashboard') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">dashboard</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Profil</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kpkj profil' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kpkj profil') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1.2rem;" class="fas fa-user-circle ps-2 pe-2 text-center"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profil Pengguna</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan
+                        Pelajar
+                    </h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli senarai pelajar' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli senarai pelajar') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Senarai Permintaan Organisasi Latihan</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pengurusan Organisasi Latihan
+                    </h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli pengurusan dokumen' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli pengurusan dokumen') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Senarai Organisasi Latihan</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli pengurusan dokumen' ? ' active bg-gradient-primary' : '' }} "
+                        href="{{ route('kupli pengurusan dokumen') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Tambah Organisasi Latihan</span>
+                    </a>
+                </li>
+            </section>
+            @endif
+            {{-- KPKJ END --}}
 
             {{-- PENYELARAS PROGRAM SIDEBAR BEGIN --}}
             @if (auth()->user()->isPenyelarasProgram())

@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Illuminate\Database\Seeder;
 use App\Models\KetuaJabatanDanKetuaProgram;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 
 class KetuaJabatanDanKetuaProgramSeeder extends Seeder
 {
@@ -13,6 +14,6 @@ class KetuaJabatanDanKetuaProgramSeeder extends Seeder
      */
     public function run(): void
     {
-        KetuaJabatanDanKetuaProgram::factory()->times(5)->create();
+        KetuaJabatanDanKetuaProgram::factory()->times(10)->create();
     }
 }
