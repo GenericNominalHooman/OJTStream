@@ -116,7 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
     // KPKJ ROUTE BEGIN
     // 
     Route::get('kpkj/user-profile', KpkjUserProfile::class)->name('kpkj profil');
-    Route::get('kupli/dashboard', function(){
+    Route::get('kpkj/dashboard', function(){
         return redirect()->route("kpkj profil");
     })->name('kpkj dashboard');
     // Route::get('kupli/dashboard', KupliDashboard::class)->name('kupli dashboard');

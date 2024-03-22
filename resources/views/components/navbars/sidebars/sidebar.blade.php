@@ -181,7 +181,7 @@
                     <a class="nav-link text-white {{ Route::currentRouteName() == 'kupli pengurusan dokumen' ? ' active bg-gradient-primary' : '' }} "
                         href="{{ route('kupli pengurusan dokumen') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-folder"></i>
+                            <i class="fas fa-plus"></i>
                         </div>
                         <span class="nav-link-text ms-1">Tambah Organisasi Latihan</span>
                     </a>
