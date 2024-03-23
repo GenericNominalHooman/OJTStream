@@ -50,7 +50,7 @@
                                 href="javascript:;" role="tab" wire:click="switchTab('password')"
                                 aria-selected="{{ $activeTab == 'password' ? 'true' : 'false' }}">
                                 <i class="fas fa-key"></i>
-                                <span class="ms-1">Ubah Kata Kunci</span>
+                                <span class="ms-1">Ubah Kata Laluan</span>
                             </a>
                         </li>
                     </ul>
@@ -146,7 +146,7 @@
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="mb-3">Kata Kunci</h6>
+                        <h6 class="mb-3">Kata laluan</h6>
                     </div>
                 </div>
             </div>
@@ -165,21 +165,21 @@
                 <form wire:submit.prevent='updatePassword'>
                     <div class="row">
                         <div class="mb-3 col-md-6">
-                            <label class="form-label">Kata Kunci Lama</label>
+                            <label class="form-label">Kata laluan Lama</label>
                             <input wire:model="old_password" type="password" class="form-control border border-2 p-2">
                             @error('old_password')
                             <p class='text-danger inputerror'>{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label class="form-label">Kata Kunci Baharu</label>
+                            <label class="form-label">Kata laluan Baharu</label>
                             <input wire:model.lazy="new_password" type="password" class="form-control border border-2 p-2">
                             @error('new_password')
                             <p class='text-danger inputerror'>{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label class="form-label">Kata Kunci Baharu</label>
+                            <label class="form-label">Kata laluan Baharu</label>
                             <input wire:model.lazy="new_password_confirmation" type="password" class="form-control border border-2 p-2">
                             @error('new_password_confirmation')
                             <p class='text-danger inputerror'>{{ $message }}</p>

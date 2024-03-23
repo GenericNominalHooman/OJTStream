@@ -137,7 +137,7 @@ class Login extends Component
                 // Loging in the user
                 auth()->loginUsingId($student->user_id);
             } else {
-                return 'Kata kunci yang dimasukkan adalah salah';
+                return 'Kata laluan yang dimasukkan adalah salah';
             }
         } else {
             return 'Nombor matrik yang dimasukkan tidak wujud';

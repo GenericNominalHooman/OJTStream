@@ -10,7 +10,7 @@
                                         <h6 class='text-white text-center'>
                                             <span class="font-weight-normal">Nombor Matrik:</span> AKV0222KA009
                                             <br>
-                                            <span class="font-weight-normal">Kata Kunci:</span> password</h6>
+                                            <span class="font-weight-normal">Kata laluan:</span> password</h6>
                                     </div>
                                 </div>
                             </div>

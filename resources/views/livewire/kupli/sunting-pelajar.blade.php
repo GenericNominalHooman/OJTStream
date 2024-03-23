@@ -96,7 +96,7 @@ use Carbon\Carbon;
                         <li class="nav-item">
                             <a class="nav-link mb-0 px-0 py-1"
                                 href="javascript:;" role="tab" wire:click="deletePelajar()">
-                                <i class="fas fa-clipboard-check"></i>
+                                <i class="fas fa-trash"></i>
                                 <span class="ms-1">Hapus</span>
                             </a>
                         </li>

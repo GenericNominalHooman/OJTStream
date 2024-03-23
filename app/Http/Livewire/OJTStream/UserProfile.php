@@ -326,7 +326,7 @@ class UserProfile extends Component
             $this->user->password = $this->new_password;
             $this->user->save();
 
-            session()->flash('status', 'Kata kunci berjaya dikemaskini.');
+            session()->flash('status', 'Kata laluan berjaya dikemaskini.');
         } else {
             $this->addError('new_password', 'The new password must be different from the current password.');
         }

@@ -10,7 +10,7 @@
                                         <h6 class='text-white text-center'>
                                             <span class="font-weight-normal">Email:</span> kupli_1@email.com
                                             <br>
-                                            <span class="font-weight-normal">Kata Kunci:</span> password</h6>
+                                            <span class="font-weight-normal">Kata laluan:</span> password</h6>
                                     </div>
                                 </div>
                             </div>
