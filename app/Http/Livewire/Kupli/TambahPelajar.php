@@ -43,7 +43,7 @@ class TambahPelajar extends Component
         'pelajar_user.name' => 'required',
         'pelajar.matrix_number'=> 'required|unique:pelajars,matrix_number',
         'pelajar.semester'=> 'required',
-        'pelajar.cohort'=> 'required',
+        'pelajar.cohort'=> 'required|integer',
         'pelajar.nric_number' => 'required',
         'pelajar.guardian' => 'required',
         'pelajar_user.phone' => 'required|max:10',
@@ -76,12 +76,12 @@ class TambahPelajar extends Component
 
         // DEBUGGING
         $this->fill([
-            'pelajar_user.username' => 'pelajar21',
-            'pelajar_user.email' => 'pelajar21@email.com',
-            'pelajar_user.name' => 'Pelajar 21',
-            'pelajar.matrix_number'=> 'AKV0222KA021',
+            'pelajar_user.username' => 'pelajar 100',
+            'pelajar_user.email' => 'pelajar100@email.com',
+            'pelajar_user.name' => 'Pelajar 100',
+            'pelajar.matrix_number'=> 'AKV0222KA100',
             'pelajar.semester'=> '4',
-            'pelajar.cohort'=> "2024-02-27",
+            'pelajar.cohort'=> "2024",
             'pelajar.nric_number' => '040916080160',
             'pelajar.guardian' => 'Guardian 21',
             'pelajar_user.phone' => '0112713569',

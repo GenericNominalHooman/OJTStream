@@ -145,7 +145,7 @@
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Nombor Telefon</label>
                             <input wire:model.lazy="user.phone" type="text" class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
+                            @error('user.user.phone')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -220,7 +220,7 @@
                             <label class="form-label">Nombor Matrik</label>
                             <input wire:model.lazy="pelajar.matrix_number" type="text"
                                 class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
+                            @error('pelajar.matrix_number')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
@@ -229,16 +229,16 @@
                             <label class="form-label">Semester</label>
                             <input wire:model.lazy="pelajar.semester" type="text"
                                 class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
+                            @error('pelajar.semester')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Kohort</label>
-                            <input wire:model.lazy="pelajar.cohort" type="date"
+                            <input wire:model.lazy="pelajar.cohort" type="text"
                                 class="form-control border border-2 p-2">
-                            @error('user.email_verified_at')
+                            @error('pelajar.cohort')
                             <p class='text-danger inputerror'>{{ $message }} </p>
                             @enderror
                         </div>

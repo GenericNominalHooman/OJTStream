@@ -30,20 +30,21 @@ $pelajar_user = $pelajar->User;
                         $ojt_end_date = Carbon::parse($pelajar_pelajar_company->ojt_end_date);
                         $current_time = Carbon::parse(now());
                     @endphp
-                    @if ($current_time->gt($ojt_begin_date))
-                        @if ($current_time->gt($ojt_end_date))
-                            {{-- TAMAT BEROJT --}}
-                            <p>Tamat OJT({{$ojt_begin_date->format("d/m/Y")}} - {{$ojt_end_date->format("d/m/Y")}})</p>
-                        @else
-                            {{-- SEDANG BEROJT --}}
-                            <p class="text text-primary">Sedang Ber-OJT({{$ojt_begin_date->format("d/m/Y")}} - {{$ojt_end_date->format("d/m/Y")}})</p>
-                        @endif
+                    @if ($current_time->lt($ojt_begin_date) && $current_time->lt($ojt_end_date))
+                        {{-- TAMAT BEROJT --}}
+                        <span class="d-block text-nowrap text-muted">Tamat OJT</span>
+                    @elseif ($current_time->gt($ojt_begin_date) && $current_time->lt($ojt_end_date))
+                        {{-- SEDANG BEROJT --}}
+                        <span class="text-nowrap text-primary">{{$ojt_end_date->diffInDays()}}</span>
+                        <span class="text-nowrap text-primary"> Hari Lagi Tamat OJT</span>
                     @else
-                        <p>Belum Ber-OJT({{$ojt_begin_date->format("d/m/Y")}} - {{$ojt_end_date->format("d/m/Y")}})</p>
+                        {{-- BELUM BEROJT --}}
+                        <span class="text-nowrap">{{$ojt_begin_date->diffInDays()}}</span>
+                        <span class="text-nowrap"> Hari Lagi Mula OJT</span>
                     @endif
                 @endif
             @else
-                -
+                <p class="text text-muted">Tarikh OJT Belum Ditentukan</p>
             @endif
         </h6>
     </td>

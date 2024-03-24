@@ -98,7 +98,7 @@ class UserProfile extends Component
                 'pelajar.slipped_disc'=> 'nullable',
                 'pelajar.matrix_number'=> 'required',
                 'pelajar.semester'=> 'required',
-                'pelajar.cohort'=> 'required',
+                'pelajar.cohort'=> 'required|integer|max:4|min:4',
 
                 // COMPANY VALUES
                 'company.type' => 'required',

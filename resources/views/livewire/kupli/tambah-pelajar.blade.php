@@ -142,7 +142,7 @@ use Carbon\Carbon;
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Kohort</label>
-                            <input wire:model.lazy="pelajar.cohort" type="date"
+                            <input wire:model.lazy="pelajar.cohort" type="text"
                                 class="form-control border border-2 p-2">
                             @error('pelajar.cohort')
                             <p class='text-danger inputerror'>{{ $message }} </p>
