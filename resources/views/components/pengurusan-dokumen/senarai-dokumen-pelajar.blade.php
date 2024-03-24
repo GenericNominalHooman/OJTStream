@@ -57,7 +57,7 @@ use Illuminate\Support\Carbon;
                     'dokumenOJTPelajar' => $dokumen,
                 ])}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
             data-original-title="Edit user">
-            Sunting
+            Kemaskini
         </a>
     </td>
 </tr>
@@ -113,7 +113,7 @@ use Illuminate\Support\Carbon;
                     'dokumenOJTPelajar' => $dokumen,
                 ])}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
             data-original-title="Edit user">
-            Sunting
+            Kemaskini
         </a>
     </td>
 </tr>

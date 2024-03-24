@@ -7,7 +7,6 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0 d-flex text-wrap align-items-center" href=" {{ route('dashboard') }} ">
             <img src="{{ asset('assets') }}/img/ojthub/logo_cropped.png" class="navbar-brand-img h-100 d-block" alt="main_logo">
-            <span class="ms-2 font-weight-bold text-white p-0 m-0">{{auth()->user()->name}}</span>
             <span class="ml-2 font-weight-light text-white p-0 m-0">
                 <p class="d-inline"></p>
                 <ul class="m-0">
@@ -20,7 +19,11 @@
                     @endforeach
                 </ul>
             </span>
+            <br>
         </a>
+    </div>
+    <div class="ms-2 font-weight-bold text-white p-2 m-0">
+        {{auth()->user()->username}}
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
@@ -101,7 +104,7 @@
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-folder"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Pengurusan Dokumen OJT</span>
+                        <span class="nav-link-text ms-1">Senarai Dokumen OJT</span>
                     </a>
                 </li>
             </section>
@@ -420,7 +423,7 @@
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-folder"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Pengurusan Dokumen OJT</span>
+                        <span class="nav-link-text ms-1">Senarai Dokumen OJT</span>
                     </a>
                 </li>
 

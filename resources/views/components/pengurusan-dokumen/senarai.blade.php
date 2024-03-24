@@ -60,7 +60,7 @@ $dokumens_pelajar = auth()->user()->Pelajar->Dokumen_OJT_Pelajar->where("dokumen
                     ])}}"
                     class="text-secondary font-weight-bold text-xs"
                     data-toggle="tooltip" data-original-title="Edit user">
-                    Sunting
+                    Kemaskini
                 </a>
             </td>
         </tr>    
@@ -116,7 +116,7 @@ $dokumens_pelajar = auth()->user()->Pelajar->Dokumen_OJT_Pelajar->where("dokumen
                     ])}}"
                     class="text-secondary font-weight-bold text-xs"
                     data-toggle="tooltip" data-original-title="Edit user">
-                    Sunting
+                    Kemaskini
                 </a>
             </td>
         </tr>    

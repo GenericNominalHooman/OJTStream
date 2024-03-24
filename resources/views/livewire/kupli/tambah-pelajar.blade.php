@@ -345,11 +345,11 @@ use Carbon\Carbon;
                     </div>
                 </div>
                 @endif
-                <p class="text font-weight-normal">Untuk menyunting dokumen OJT pelajar, boleh ke halaman Sunting Templat Dokumen Pelajar</p>
+                <p class="text font-weight-normal">Untuk menyunting dokumen OJT pelajar, boleh ke halaman Senarai Dokumen OJT</p>
 
                 {{-- ITERATE DOKUMEN OJT PELAJAR BEGIN --}}
                 <div class="row">
-                    <a href="{{route("kupli pengurusan dokumen")}}" class="btn btn-primary">Sunting Templat Dokumen OJT</a>
+                    <a href="{{route("kupli pengurusan dokumen")}}" class="btn btn-primary">Senarai Dokumen OJT</a>
                 </div>
             </div>
 

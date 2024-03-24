@@ -12,10 +12,7 @@ use Carbon\Carbon;
     <div class="card card-body mx-3 mx-md-4 mt-n6">
         <div class="row gx-4 mb-2">
             <div class="col-auto">
-                <div class="avatar avatar-xl position-relative">
-                    <img src="{{ asset('assets') }}/img/bruce-mars.jpg" alt="profile_image"
-                        class="w-100 border-radius-lg shadow-sm">
-                </div>
+                <i class="fas fa-file" style="font-size: 3em; padding-left: 0.5em;"></i>
             </div>
             <div class="col-auto my-auto">
                 <div class="h-100">
@@ -48,17 +45,6 @@ use Carbon\Carbon;
                 <div class="row">
                     <div class="alert alert-success alert-dismissible text-white" role="alert">
                         <span class="text-sm">{{ Session::get('status') }}</span>
-                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
-                            aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-                @endif
-                @if (Session::has('demo'))
-                <div class="row">
-                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                        <span class="text-sm">{{ Session::get('demo') }}</span>
                         <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
                             aria-label="Close">
                             <span aria-hidden="true">&times;</span>

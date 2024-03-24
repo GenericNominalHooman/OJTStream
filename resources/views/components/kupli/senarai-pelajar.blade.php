@@ -49,7 +49,7 @@ $pelajar_user = $pelajar->User;
     </td>
     <td class="align-middle text-center">
         <a href="{{route("kupli sunting pelajar", ["pelajar"=>$pelajar])}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-            Urus
+            Kemaskini
         </a>
     </td>
 </tr>

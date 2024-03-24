@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Illuminate\Database\Seeder;
 use App\Models\Penyelaras_Program;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 
 class PenyelarasProgramSeeder extends Seeder
 {
@@ -14,7 +15,14 @@ class PenyelarasProgramSeeder extends Seeder
     public function run(): void
     {
         Penyelaras_Program::factory()->create([
-            "user_id" => 102,
+            "id" => 1,
+            "user_id" => User::factory()->create([
+                "id" => 200,
+                "name" => "SYAHIR BIN MANSOR",
+                "username" => "CG SYAHIR",
+            ])
         ]);
+
+        Penyelaras_Program::factory()->times(10)->create();
     }
 }

@@ -5,16 +5,24 @@
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
-                                    <div class="row mt-3">
+                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Log Masuk</h4>
+                                    <div class="row mt-3 p-4">
                                         <h6 class='text-white text-center'>
-                                            <span class="font-weight-normal">Username:</span> Kupli 1
+                                            <span class="font-weight-normal">Username:</span> KAMASURIATI
                                             <br>
-                                            <span class="font-weight-normal">Kata laluan:</span> password</h6>
+                                            <span class="font-weight-normal">Kata Laluan:</span> password</h6>
                                         <h6 class='text-white text-center'>
-                                            <span class="font-weight-normal">Username:</span> Pelajar 1
+                                            <span class="font-weight-normal">Username:</span> MUHAMMAD ISKANDAR LUQMAN BIN ZAHARI(Belum OJT)
                                             <br>
-                                            <span class="font-weight-normal">Kata laluan:</span> password</h6>
+                                            <span class="font-weight-normal">Kata Laluan:</span> password</h6>
+                                        <h6 class='text-white text-center'>
+                                            <span class="font-weight-normal">Username:</span> KAMARUL ABRAR BIN NORDIN(Sedang OJT)
+                                            <br>
+                                            <span class="font-weight-normal">Kata Laluan:</span> password</h6>
+                                        <h6 class='text-white text-center'>
+                                            <span class="font-weight-normal">Username:</span> AHMAD AKID BIN ABD RAHMAN(Tamat OJT)
+                                            <br>
+                                            <span class="font-weight-normal">Kata Laluan:</span> password</h6>
                                         {{-- <h6 class='text-white text-center'>
                                             <span class="font-weight-normal">Username:</span> KPKJ 1
                                             <br>

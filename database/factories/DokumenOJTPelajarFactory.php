@@ -24,7 +24,7 @@ class DokumenOJTPelajarFactory extends Factory
              "updated_at" => now(),
              "deadline_date" => now()->addDays($i),
              "submitted_at" => now(),
-             "pelajar_id" => 105,
+             "pelajar_id" => 502,
              "document_name" => "KVOJT0".($i++).".pdf",
              "document_path" => "/Pelajar_".Pelajar::factory()->create()->no_matrik."/",
              "dokumen_ojt_id" => 1,

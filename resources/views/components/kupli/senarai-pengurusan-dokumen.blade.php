@@ -31,7 +31,7 @@ use Illuminate\Support\Carbon;
                         'dokumen_ojt' => $dokumen,
                     ])}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
             data-original-title="Edit user">
-            Sunting
+            Kemaskini
         </a>
     </td>
 </tr>

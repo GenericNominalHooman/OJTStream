@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('pelajars', function (Blueprint $table) {
             $table->string('nric_number', 12)->nullable(true)->default(null);
             $table->string('guardian')->nullable(true)->default(null);
-            $table->integer('guardian_telephone_number')->nullable(true)->default(null);
+            $table->string('guardian_telephone_number')->nullable(true)->default(null);
 
             // Social media link - to implement
             $table->string('linkedin_url')->nullable(true)->default(null);
@@ -23,7 +23,7 @@ return new class extends Migration
             // Social media link - to implement
             
             $table->string('program')->nullable(true)->default(null);
-            $table->date('cohort')->nullable(true)->default(null);
+            $table->integer('cohort')->nullable(true)->default(null);
 
             // Chronic illness
             $table->boolean('heart_disease')->nullable(true)->default(null);

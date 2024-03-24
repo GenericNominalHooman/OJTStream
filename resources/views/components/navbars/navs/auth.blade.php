@@ -8,19 +8,83 @@
                 <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">{{ str_replace('-', ' ', Route::currentRouteName()) }}</li> --}}
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
                 <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">
-                    @if(Route::currentRouteName() == "pelajar notifikasi")
-                        Penguguman
-                    @else
-                        {{ str_replace('-', ' ', Route::currentRouteName()) }}
-                    @endif
+                    @switch(Route::currentRouteName())
+                        @case("pelajar notifikasi")
+                            Penguguman
+                            @break
+                        @case("pelajar pengurusan dokumen")
+                            Senarai Dokumen
+                            @break
+                        @case("user-profile")
+                            Profil Pengguna
+                            @break
+                        @case("kupli penguguman")
+                            Penguguman
+                            @break
+                        @case("kupli profil")
+                            Profil Pengguna
+                            @break
+                        @case("kupli senarai pelajar")
+                            Senarai Pelajar
+                            @break
+                        @case("kupli tambah pelajar")
+                            Tambah Rekod Pelajar
+                            @break
+                        @case("kupli pengurusan dokumen")
+                            Senarai Dokumen
+                            @break
+                        @case("kupli penyuntingan dokumen")
+                            Kemaskini Dokumen OJT
+                            @break
+                        @case("kupli sunting pelajar")
+                            Kemaskini Rekod Pelajar
+                            @break
+                        @case("pelajar penyuntingan dokumen")
+                            Kemaskini Dokumen OJT
+                            @break
+                        @default
+                            {{ str_replace('-', ' ', Route::currentRouteName()) }}
+                    @endswitch
                 </li>
             </ol>
             <h6 class="font-weight-bolder mb-0 text-capitalize">
-                @if(Route::currentRouteName() == "pelajar notifikasi")
-                    Penguguman
-                @else
-                    {{ str_replace('-', ' ', Route::currentRouteName()) }}
-                @endif
+                @switch(Route::currentRouteName())
+                    @case("pelajar notifikasi")
+                        Penguguman
+                        @break
+                    @case("pelajar pengurusan dokumen")
+                        Senarai Dokumen
+                        @break
+                    @case("user-profile")
+                        Profil Pengguna
+                        @break
+                    @case("kupli penguguman")
+                        Penguguman
+                        @break
+                    @case("kupli profil")
+                        Profil Pengguna
+                        @break
+                    @case("kupli senarai pelajar")
+                        Senarai Pelajar
+                        @break
+                    @case("kupli tambah pelajar")
+                        Tambah Rekod Pelajar
+                        @break
+                    @case("kupli pengurusan dokumen")
+                        Senarai Dokumen
+                        @break
+                    @case("kupli penyuntingan dokumen")
+                        Kemaskini Dokumen OJT
+                        @break
+                    @case("kupli sunting pelajar")
+                        Kemaskini Rekod Pelajar
+                        @break
+                    @case("pelajar penyuntingan dokumen")
+                        Kemaskini Dokumen OJT
+                        @break
+                    @default
+                        {{ str_replace('-', ' ', Route::currentRouteName()) }}
+                @endswitch
                 {{-- {{ str_replace('-', ' ', Route::currentRouteName()) }} --}}
             </h6>
         </nav>

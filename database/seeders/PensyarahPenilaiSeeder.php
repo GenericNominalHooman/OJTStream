@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Illuminate\Database\Seeder;
 use App\Models\Pensyarah_Penilai;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 
 class PensyarahPenilaiSeeder extends Seeder
 {
@@ -15,7 +16,13 @@ class PensyarahPenilaiSeeder extends Seeder
     {
         Pensyarah_Penilai::factory()->create([
             "id" => 1,
-            "user_id" => 104,
-        ]);
+            "user_id" => User::factory()->create([
+                "id" => 400,
+                "username" => "CG FAIZAH",
+                "name" => "FAIZAH",
+            ]),
+       ]);
+
+       Pensyarah_Penilai::factory()->times(10)->create();
     }
 }

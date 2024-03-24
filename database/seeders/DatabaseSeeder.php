@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pensyarah_Penilai;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\CompanySeeder;
@@ -32,23 +33,49 @@ class DatabaseSeeder extends Seeder
             'password' => ('secret')
         ]);
 
+        // $this->call([
+        //     UserSeeder::class,
+        //     CompanySeeder::class,
+        //     PensyarahPenilaiOJTSeeder::class,
+        //     PensyarahPenilaiSeeder::class,
+        //     PenyelarasProgramSeeder::class,
+        //     KupliSeeder::class,
+        //     SkopKerjaSeeder::class,
+        //     PelajarSeeder::class,
+        //     JanjiTemusSeeder::class,
+        //     JanjiTemuPelajarSeeder::class,
+        //     PelajarJanjiTemusSeeder::class,
+        //     PelajarsCompanySeeder::class,
+        //     DokumenOJTSeeder::class,
+        //     DokumenOJTPelajarSeeder::class,
+        //     PengugumanSeeder::class,
+        //     KetuaJabatanDanKetuaProgramSeeder::class,
+        // ]);
+
+        // $this->call([
+        //     DokumenOJTPelajarSeeder::class,
+        // ]);
         $this->call([
-            UserSeeder::class,
-            CompanySeeder::class,
-            PensyarahPenilaiOJTSeeder::class,
-            PensyarahPenilaiSeeder::class,
-            PenyelarasProgramSeeder::class,
+            // Users seeder
             KupliSeeder::class,
-            SkopKerjaSeeder::class,
+            KetuaJabatanDanKetuaProgramSeeder::class,
+            PenyelarasProgramSeeder::class,   
+            PensyarahPenilaiOJTSeeder::class,   
+            PensyarahPenilaiSeeder::class,
             PelajarSeeder::class,
+
+            // OJT seeder
+            CompanySeeder::class,
+            PelajarsCompanySeeder::class,
             JanjiTemusSeeder::class,
             JanjiTemuPelajarSeeder::class,
-            PelajarJanjiTemusSeeder::class,
-            PelajarsCompanySeeder::class,
             DokumenOJTSeeder::class,
             DokumenOJTPelajarSeeder::class,
+            // DokumenOJTPelajarSeeder2::class,
+            // DokumenOJTPelajarSeeder3::class,
+
+            // Penguguman
             PengugumanSeeder::class,
-            KetuaJabatanDanKetuaProgramSeeder::class,
         ]);
     }
 }

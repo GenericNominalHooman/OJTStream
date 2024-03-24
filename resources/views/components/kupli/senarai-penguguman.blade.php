@@ -28,7 +28,7 @@ $penguguman_user = $penguguman->Kupli;
                         'penguguman' => $penguguman,
                     ])}}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
             data-original-title="Edit user">
-            Sunting
+            DKemaskini
         </a>
     </td>
 </tr>

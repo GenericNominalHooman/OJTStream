@@ -379,7 +379,7 @@
                         {{-- PENSYARAH PENILAI OJT SECTION ENDS --}}
                         {{-- PENSYARAH PENILAI SECTION BEGIN --}}
         
-                        @if ($penyelaras_program_user)
+                        @if ($pensyarah_penilai_user != null)
 
                             <div class="mb-3 col-md-6">
 
@@ -400,7 +400,7 @@
                             </div>
 
                         @else
-                            <p class="text text-danger">Anda tidak mempunyai Penyelaras Program</p>
+                            <p class="text text-danger">Anda tidak mempunyai Pensyarah Penilai</p>
                         @endif
 
                         {{-- PENSYARAH PENILAI SECTION ENDS --}}

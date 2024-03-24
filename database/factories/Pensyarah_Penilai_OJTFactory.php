@@ -2,11 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pensyarah_Penilai_OJT>
- */
 class Pensyarah_Penilai_OJTFactory extends Factory
 {
     /**
@@ -16,7 +13,14 @@ class Pensyarah_Penilai_OJTFactory extends Factory
      */
     public function definition(): array
     {
+        static $user_id = 302; // 300 is reserved for CG RIDZUAN, 301 is reserved for CG FARAHANA
+        static $i = 1;
+        
         return [
+            "user_id" => User::factory()->create([
+                "id" => $user_id++,
+                "username" => "Pesyarah Penilai OJT ".$i++,
+            ]),
             "created_at" => now(),
             "updated_at" => now(),
         ];

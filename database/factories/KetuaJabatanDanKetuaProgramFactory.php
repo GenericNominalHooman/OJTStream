@@ -17,7 +17,7 @@ class KetuaJabatanDanKetuaProgramFactory extends Factory
      */
     public function definition(): array
     {
-        static $user_id = 1000;
+        static $user_id = 102; // 100 is reserved for CG MUHAMMAD, 101 is reserved for CG SHAFINA
         static $i = 1;
         
         return [
@@ -25,6 +25,8 @@ class KetuaJabatanDanKetuaProgramFactory extends Factory
                 "id" => $user_id++,
                 "username" => "KPKJ ".$i++,
             ]),
+            "created_at" => now(),
+            "updated_at" => now(),
         ];
     }
 }

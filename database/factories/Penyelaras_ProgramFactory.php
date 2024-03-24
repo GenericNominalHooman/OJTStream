@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,7 +17,14 @@ class Penyelaras_ProgramFactory extends Factory
      */
     public function definition(): array
     {
+        static $user_id = 201; // 200 is reserved for CG SYAHIR
+        static $i = 1;
+
         return [
+            "user_id" => User::factory()->create([
+                "id" => $user_id++,
+                "username" => "Penyelaras Program ".$i++,
+            ]),
             "created_at" => now(),
             "updated_at" => now(),
         ];

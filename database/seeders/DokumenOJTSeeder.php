@@ -28,6 +28,7 @@ class DokumenOJTSeeder extends Seeder
         DokumenOJT::factory()->create([
             "document_name" => "Buku Panduan.pdf",
             "document_path" => "KVOJT/Buku Panduan.pdf",
+            "document_type" => "infomasi",
             "document_description" => "Buku Panduan OJT",
         ]);
 

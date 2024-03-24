@@ -15,53 +15,39 @@ class PelajarsCompanySeeder extends Seeder
     public function run(): void
     {
         // BIND ON PELAJARS COMPANY
+        // KAMARUL ABRAR BIN NORDIN
         PelajarsCompany::factory()->create([
             "role" => "IT Department Internship",
-            "pelajar_id" => 105,
+            "pelajar_id" => 501,
             "company_id" => 1,
-            "ojt_begin_date" => now()->subDays(2),
-            "ojt_end_date" => now()->subDays(1),
+            "ojt_begin_date" => now()->subMonths(1),
+            "ojt_end_date" => now()->addMonths(5),
         ]);
 
-        // PelajarsCompany::factory()->create([
-        //     "role" => "Media Department Internship",
-        //     "pelajar_id" => 106,
-        //     "company_id" => 2,
-        //     "ojt_begin_date" => now()->subMonths(3),
-        //     "ojt_end_date" => now()->addMonths(3),
-        // ]);
-
-        // PelajarsCompany::factory()->create([
-        //     "role" => "Software Development Internship",
-        //     "pelajar_id" => 111,
-        //     "company_id" => 3,
-        //     "ojt_begin_date" => now()->addMonths(1),
-        //     "ojt_end_date" => now()->addMonths(7),
-        // ]);
+        // AHMAD AKID BIN ADB RAHMAN
+        PelajarsCompany::factory()->create([
+            "role" => "IT Department Internship",
+            "pelajar_id" => 502,
+            "company_id" => 1,
+            "ojt_begin_date" => now()->addMonths(7),
+            "ojt_end_date" => now()->addMonths(1),
+        ]);
 
         // BIND ON PELAJAR TABLE
-        $pelajar_akv0222ka009 = Pelajar::find(105);
+        $pelajar_akv0222ka002 = Pelajar::find(501);
 
-        if($pelajar_akv0222ka009){
-            $pelajar_akv0222ka009->update([
+        if($pelajar_akv0222ka002){
+            $pelajar_akv0222ka002->update([
                 "pelajar_company_id" => 1,
             ]);
         }
 
-        // $pelajar_akv0222ka010 = Pelajar::find(106);
+        $pelajar_akv0222ka003 = Pelajar::find(502);
 
-        // if($pelajar_akv0222ka010){
-        //     $pelajar_akv0222ka010->update([
-        //         "pelajar_company_id" => 2,
-        //     ]);
-        // }
-
-        // $pelajar_akv0222ka011 = Pelajar::find(111);
-
-        // if($pelajar_akv0222ka011){
-        //     $pelajar_akv0222ka011->update([
-        //         "pelajar_company_id" => 3,
-        //     ]);
-        // }
+        if($pelajar_akv0222ka003){
+            $pelajar_akv0222ka003->update([
+                "pelajar_company_id" => 2,
+            ]);
+        }
     }
 }

@@ -17,39 +17,47 @@ class PelajarFactory extends Factory
      */
     public function definition(): array
     {
-        static $i = 0;
+        // Default pelajar is sebelum ojt pelajar
+        
+        static $user_id = 503; // 500 is reserved for MUHAMMAD ISKANDAR LUQMAN, 501 is reserved for KAMARUL ABRAR BIN NORDIN, 502 is reserved for AHMAD AKID BIN ABD RAHMAN
+        static $i = 4; // 1 is reserved for MUHAMMAD ISKANDAR LUQMAN, 2 is reserved for KAMARUL ABRAR BIN NORDIN, 3 is reserved for AHMAD AKID BIN ABD RAHMAN
 
+        $i++;
+
+        if($i < 10){
+            $i = "0"."$i";
+        }
+        
         return [
-            "date_started" => now(),
-            "date_completed" => now(),
+            "date_started" => now()->addMonth(),
+            "date_completed" => now()->addMonths(7),
             "created_at" => now(),
             "updated_at" => now(),
-            "cohort" => now(),
-            "matrix_number" => "AKV0222KA0".($i++),
-            'semester' => $this->faker->randomDigit, // Or any other logic to generate a semester value
-            'nric_number' => $this->faker->randomNumber(9),
+            "cohort" => now()->format("Y"),
+            "matrix_number" => "AKV0222KA0".($i),
+            'semester' => $this->faker->randomElement([1,2,3,4,5,6,6,7,8]), // Or any other logic to generate a semester value
+            'nric_number' => $this->faker->randomNumber(9).$this->faker->randomNumber(3),
             'program' => $this->faker->randomElement(['KPD', 'KSK', 'MTK', 'BPP', 'BAP', 'HBP', 'WTP']),
 
-            'user_id' => User::factory(),
-            "block" =>	"A",
-            "dorm" => "201",	
-            "study_type" =>	"DVM",
-            "status" =>	"Belum_OJT",
-            "guardian" => "NUR ZHAFIRAH AQILAH BINTI MUHAMMAD",
-            "guardian_telephone_number" => "0165190476",
+            'user_id' => User::factory([
+                "username" => "Pelajar ".$i, 
+                "name" => $this->faker->name(),
+            ]),
+
+            "block" =>	$this->faker->randomElement(["A", "B", "C", "D", "E", "F", "G"]),
+            "dorm" => $this->faker->randomElement(['201','202','203','204','301','302','303','304']),	
+            "study_type" =>	$this->faker->randomElement(["DVM", "SVM"]),
+            "status" =>	'Belum_OJT',
+            // "status" =>	$this->faker->randomElement(['Belum_OJT', 'Sedang_OJT', 'Selesai_OJT']),
+            "guardian" => $this->faker->name(),
+            "guardian_telephone_number" => $this->faker->phoneNumber(),
             "linkedin_url" => "",
             "facebook_url" => "",
             "github_url" => "",
-            "heart_disease" => false,
-            "asthma" => false,
-            "diabetes" => false,
-            "osteoporosis" => false,
-
-            // Foreign keys
-            // "pensyarah_penilai_id" => 1,
-            // "pensyarah_penilai_ojt_id" => 1,
-            // "penyelaras_program_id" => 1,
-            // "skop_kerja_id" => 1,
+            "heart_disease" => $this->faker->randomElement([false, true]),
+            "asthma" => $this->faker->randomElement([false, true]),
+            "diabetes" => $this->faker->randomElement([false, true]),
+            "osteoporosis" => $this->faker->randomElement([false, true]),
         ];
     }
 }
