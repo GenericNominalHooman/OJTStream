@@ -36,8 +36,12 @@
                         @endif
 
                         <div class="row">
-                            <div class="col-md-4 ps-4">
-                                <a type="button" class="btn btn-primary" href="{{route('kupli tambah pelajar')}}">+ TAMBAH PELAJAR</a>
+                            <div class="col-12 col-sm-4 col-md-2 ps-4">
+                                <a type="button" class="btn btn-primary w-100" href="{{route('kupli tambah pelajar')}}">+ TAMBAH PELAJAR</a>
+                            </div>
+                            <div class="col-12 col-sm-4 col-md-2 ps-4">
+                                <input class="form-control w-100 border border-secondary p-2" type="text" wire:model="search" wire:model.debounce.500ms placeholder="Cari nama...">
+                                {{-- <input type="text" wire:model="search" wire:model.debounce.500ms class="form-control w-100 border border-secondary p-2" placeholder="Cari nama..."></input> --}}
                             </div>
                         </div>
                         {{-- TABLE BEGIN --}}
